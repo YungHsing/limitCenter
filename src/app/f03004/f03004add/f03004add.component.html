@@ -1,0 +1,57 @@
+<div class="container">
+    <h2 mat-dialog-title>系統代碼維護-新增</h2>
+  
+    <form class="mat-dialog-content" (ngSubmit)="submit()" #formControl="ngForm">
+  
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput #input class="form-control" placeholder="類別" [(ngModel)]="data.codeType" name="codeType" disabled >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!--Textarea for demo purposes-->
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput #input class="form-control" placeholder="代碼" [(ngModel)]="data.codeNo" name="codeNo" required>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!--Contains mat-hint for characters count and has maxLengt set-->
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput #inputstate class="form-control" placeholder="描述" [(ngModel)]="data.codeDesc" name="codeDesc" required >
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="form">
+          <mat-form-field color="accent">
+            <input matInput placeholder="排序" [(ngModel)]="data.codeSort" name="codeSort" required>
+          </mat-form-field>
+      </div>
+  
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="備註" [(ngModel)]="data.codeTag" name="codeTag">
+        </mat-form-field>
+      </div>
+  
+      <div class="form">
+        <mat-form-field color="accent">
+          <mat-select [(ngModel)]="data.codeFlag" name="codeFlag" placeholder="是否停用" >
+            <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+              {{yn.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <div mat-dialog-actions>
+        <button mat-button [type]="submit" [disabled]="!formControl.valid" (click)="confirmAdd()">Save</button>
+        <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+      </div>
+    </form>
+  </div>
+  

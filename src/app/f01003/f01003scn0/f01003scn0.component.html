@@ -1,0 +1,44 @@
+<div class="container" style="margin-left: 15px;">
+  <th class="f01_th">個人額度維護</th>
+  <table>
+    <br>
+    <mat-card class="matCard">
+      <mat-card-content>
+        <tr>
+          <th nowrap="nowrap">客戶編號 CID：</th>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" [(ngModel)]="this.NATIONAL_ID" readonly>
+            </mat-form-field>
+          </td>
+          <th nowrap="nowrap">身分證字號 NID：</th>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" [(ngModel)]="this.CUSTOMER_ID" readonly>
+            </mat-form-field>
+          </td>
+          <th nowrap="nowrap">額度建立日期：</th>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" [(ngModel)]="this.LIMIT_START_DATE" readonly>
+            </mat-form-field>
+          </td>
+          <th nowrap="nowrap">歸戶額度：</th>
+          <td>
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" [(ngModel)]="this.CREDIT_LIMIT" readonly>
+            </mat-form-field>
+          </td>
+        </tr>
+      </mat-card-content>
+    </mat-card>
+  </table>
+</div>
+
+<div style="margin-top: 30px; margin-left: 30px;">
+  <button mat-raised-button color="primary" routerLinkActive="activeFirst" routerLink="./F01003SCN1"  [queryParams]="{ NATIONAL_ID: this.NATIONAL_ID, CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }" id="firstBtn">額度資料</button>
+  <button mat-raised-button color="primary" routerLinkActive="activeFirst" routerLink="./F01003SCN2"  [queryParams]="{ NATIONAL_ID: this.NATIONAL_ID, CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }">動用&釋放額度明細</button>
+  <button mat-raised-button color="primary" routerLinkActive="activeFirst" routerLink="./F01003SCN3"  [queryParams]="{ NATIONAL_ID: this.NATIONAL_ID, CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }">凍結&解凍額度明細</button>
+  <button mat-raised-button color="primary" routerLinkActive="activeFirst" routerLink="./F01003SCN4"  [queryParams]="{ NATIONAL_ID: this.NATIONAL_ID, CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }">額度欄位修改明細</button>
+</div>
+<router-outlet></router-outlet>

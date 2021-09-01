@@ -1,0 +1,31 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  /* row border */
+  border-bottom: 1px solid #ffa600;
+}
+
+td.mat-cell {
+  /* row padding */
+  padding: 20px 20px 0px 0px;
+  border: none;
+  text-align: left;
+}
+
+tr.mat-row {
+  /* row border */
+  border: 1px solid #ffa600;
+}
+
+.mat-header-cell {
+  padding: 20px 20px 0px 0px;
+  text-align: left;
+ }
+
+.mat-success {
+  background-color: green;
+  color: #fff;
+}

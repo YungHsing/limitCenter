@@ -1,0 +1,24 @@
+.f02_th{
+  font-size: 20px;
+  padding: 20px 20px;
+}
+
+th{
+  font-size: 15px;
+}
+
+td{
+  font-size: 15px;
+}
+
+.matCard{
+  box-shadow: 5px 5px 5px 5px dimgray;
+}
+
+mat-card-content{
+  background-color: linen;
+}
+
+button{
+  margin-right: 5px;
+}

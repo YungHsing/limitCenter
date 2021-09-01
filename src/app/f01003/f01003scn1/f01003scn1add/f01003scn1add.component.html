@@ -1,0 +1,167 @@
+<div class="container">
+  <h2 mat-dialog-title>個人額度維護-新增子額度</h2>
+
+  <form [formGroup]="addForm" class="mat-dialog-content" (ngSubmit)="submit()">
+    <table>
+      <tr>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" placeholder="身分證字號" formControlName="NATIONAL_ID" readonly >
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" placeholder="客戶編號" formControlName="CUSTOMER_ID" readonly >
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" placeholder="層級" formControlName="LEVEL_NO" readonly >
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <mat-select placeholder="額度類別代碼" formControlName="LIMIT_TYPE_CODE" >
+                <mat-option *ngFor="let yn of limitTypeOption" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent" class="example-form-field">
+              <mat-date-range-input [rangePicker]="rangePicker">
+                <input matStartDate formControlName="LIMIT_START_DATE" value="" placeholder="額度起日">
+                <input matEndDate formControlName="LIMIT_END_DATE" placeholder="額度訖日">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+              <mat-date-range-picker #rangePicker>
+                <mat-date-range-picker-actions>
+                  <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
+                  <button mat-button matDateRangePickerCancel>取消</button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" type="number" placeholder="額度" formControlName="CREDIT_LIMIT" >
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <mat-select placeholder="幣別" formControlName="CURRENCY_TYPE" readonly>
+                <mat-option *ngFor="let type of CurrencyOption" [value]="type.value">
+                  {{type.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <mat-select placeholder="停用註記" formControlName="STOP_FLAG" (ngModelChange)="changeSelect()">
+                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent" class="example-form-field">
+              <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" placeholder="停用日期">
+              <mat-datepicker-toggle matSuffix [for]="stopDateValue" >
+              </mat-datepicker-toggle>
+              <mat-datepicker #stopDateValue></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" placeholder="上層額度號" formControlName="UP_LEVEL" readonly >
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <mat-select placeholder="啟用註記" formControlName="ENABLE_FLAG" >
+                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent" class="example-form-field">
+              <input matInput [matDatepicker]="enableDateValue" formControlName="ENABLE_DATE" value="" placeholder="啟用日期">
+              <mat-datepicker-toggle matSuffix [for]="enableDateValue" >
+              </mat-datepicker-toggle>
+              <mat-datepicker #enableDateValue></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="form" mat-dialog-actions>
+            <button mat-raised-button color="primary" [type]="submit" (click)="confirmAdd()">儲存</button>
+            <button mat-button (click)="onNoClick()" tabindex="-1">取消</button>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <mat-select placeholder="是否可撤銷" formControlName="CANCEL_FLAG" >
+                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <mat-select placeholder="循環別" formControlName="CYCLE_TYPE" >
+                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

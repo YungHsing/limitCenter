@@ -1,0 +1,28 @@
+.f03_th{
+  font-size: 20px;
+  padding: 20px 20px;
+}
+
+.matCard{
+  box-shadow: 5px 5px 5px 5px dimgray;
+}
+
+mat-card-content{
+  background-color: linen;
+}
+
+button{
+  margin-right: 5px;
+}
+
+.f03_div{
+  padding-left: 20px;
+}
+
+th{
+  font-size: 15px;
+}
+
+mat-form-field{
+  width: 90%;
+}

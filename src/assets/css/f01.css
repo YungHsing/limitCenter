@@ -1,0 +1,44 @@
+.f01_th{
+  font-size: 20px;
+  padding: 20px 20px;
+}
+
+.f01_div{
+  padding-left: 20px;
+}
+
+button{
+  margin-right: 5px;
+}
+
+th{
+  font-size: 15px;
+}
+
+td{
+  font-size: 15px;
+}
+
+.matCard{
+  box-shadow: 5px 5px 5px 5px dimgray;
+}
+
+mat-card-content{
+  background-color: linen;
+}
+
+.activeFirst {
+  background-color: #00bfff;
+}
+
+.btn:hover  {
+  /* background-color:aqua; */
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.active {
+background-color:  #FFE4CA;
+}
+
