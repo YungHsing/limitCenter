@@ -46,8 +46,13 @@ export class F01003scn1addComponent implements OnInit {
     this.addForm.patchValue({ ENABLE_DATE: new Date() });
     if (this.data.levelNo == '3') {
       this.limitTypeOption = [{value: 'P0001010000', viewValue: '個人有擔'}, {value: 'P0001020000', viewValue: '個人無擔'}];
-    } else {
+    } else if(this.data.levelNo == '4' && this.data.limitTypeCode == 'P0001010000') {
+     
+      this.limitTypeOption = [];
+    } else if(this.data.levelNo == '4' && this.data.limitTypeCode == 'P0001020000') {
       this.limitTypeOption = [{value: 'P0001020100', viewValue: '無擔分期型限額'}, {value: 'P0001020200', viewValue: '無擔循環型限額'}];
+    } else {
+      this.limitTypeOption = [];
     }
   }
 
@@ -55,10 +60,10 @@ export class F01003scn1addComponent implements OnInit {
     Validators.required
   ]);
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? '此欄位必填!' :
-      this.formControl.hasError('email') ? 'Not a valid email' :
-        '';
+  getErrorMessage(cloumnName: string) {
+    let obj = this.addForm.get(cloumnName);
+    return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+           obj.hasError('minlength') ? '長度過短' : '';
   }
 
   changeSelect() {
@@ -85,23 +90,28 @@ export class F01003scn1addComponent implements OnInit {
   }
 
   public async confirmAdd(): Promise<void> {
-    var formData = new FormData();
-    let jsonStr = JSON.stringify(this.addForm.value);
-    let jsonObj = JSON.parse(jsonStr);
-    console.log(jsonStr);
-    let startDate = new Date(this.addForm.value.LIMIT_START_DATE);
-    let endDate = new Date(this.addForm.value.LIMIT_END_DATE);
-    let enableDate = new Date(this.addForm.value.ENABLE_DATE);
-    jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
-    jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
-    jsonObj.ENABLE_DATE = this.datePipe.transform(enableDate, "yyyy/MM/dd");
-    for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }
     let msgStr: string = "";
-    let baseUrl = 'f01/f01003level2add';
-    msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
-    const childernDialogRef = this.dialog.open(F01003confirmComponent, {
-      data: { msgStr: msgStr }
-    });
-    if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
+    if(!this.addForm.valid) {
+      msgStr = '資料格式有誤，請修正!';
+    } else {
+      var formData = new FormData();
+      let jsonStr = JSON.stringify(this.addForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      let startDate = new Date(this.addForm.value.LIMIT_START_DATE);
+      let endDate = new Date(this.addForm.value.LIMIT_END_DATE);
+      let enableDate = new Date(this.addForm.value.ENABLE_DATE);
+      jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
+      jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
+      jsonObj.ENABLE_DATE = this.datePipe.transform(enableDate, "yyyy/MM/dd");
+      for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }
+      
+      let baseUrl = 'f01/f01003childadd';
+      msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
+      const childernDialogRef = this.dialog.open(F01003confirmComponent, {
+        data: { msgStr: msgStr }
+      });
+      if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
+    }
   }
+  
 }

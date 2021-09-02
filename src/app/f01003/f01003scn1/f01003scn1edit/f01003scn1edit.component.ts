@@ -17,7 +17,7 @@ interface sysCode {
 export class F01003scn1editComponent implements OnInit, AfterViewInit {
 
   ynCode: sysCode[] = [{value: 'Y', viewValue: '是'}, {value: 'N', viewValue: '否'}];
-  limitTypeOption: sysCode[] =  [{value: 'P0001000000', viewValue: '個人限額'}];
+  limitTypeOption: sysCode[] =  [{value: 'P0001000000', viewValue: '個人限額'},{value: 'P0001010000', viewValue: '個人有擔'}, {value: 'P0001020000', viewValue: '個人無擔'},{value: 'P0001020100', viewValue: '無擔分期型限額'}, {value: 'P0001020200', viewValue: '無擔循環型限額'}];
   CurrencyOption: sysCode[] =  [{value: 'TWN', viewValue: '台幣'}];
   stopDateValue: Date;
   enableDateValue: Date = new Date();
@@ -34,10 +34,10 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
     CANCEL_FLAG: [this.data.cancelFlag, [Validators.maxLength(1)]],
     ENABLE_FLAG: [this.data.enableFlag, [Validators.maxLength(1)]],
     CYCLE_TYPE: [this.data.cycleType, [Validators.maxLength(1)]],
-    STOP_DATE: [ {value: this.data.stopDate, disabled: true}, [Validators.maxLength(10), Validators.minLength(10)]],
+    STOP_DATE: [ {value: this.data.stopDate, disabled: true}, []],
     PROJECT_CODE: [ this.data.projectCode, [Validators.maxLength(10), Validators.minLength(10)]],
     LIMIT_START_DATE: [this.data.limitStartDate, [Validators.maxLength(10), Validators.minLength(10)]],
-    LIMIT_END_DATE: [this.data.limitEndDate, [Validators.maxLength(10), Validators.minLength(10)]],
+    LIMIT_END_DATE: [this.data.limitEndDate, []],
     LIMIT_TYPE_CODE: [{value: this.data.limitTypeCode, disabled: true}, [Validators.maxLength(11)]],
     LIMIT_NO: [this.data.limitNo, [Validators.maxLength(10)]],
     EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]]
@@ -55,12 +55,13 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
 
   formControl = new FormControl('', [
     Validators.required
+    
   ]);
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? '此欄位必填!' :
-      this.formControl.hasError('email') ? 'Not a valid email' :
-        '';
+  getErrorMessage(cloumnName: string) {
+    let obj = this.addForm.get(cloumnName);
+    return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+           obj.hasError('minlength') ? '長度過短' : '';
   }
 
   changeSelect() {
@@ -87,29 +88,32 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
   }
 
   public async confirmAdd(): Promise<void> {
-    this.addForm.controls['STOP_DATE'].enable();
-    var formData = new FormData();
-    let jsonStr = JSON.stringify(this.addForm.value);
-    let jsonObj = JSON.parse(jsonStr);
-    let startDate = new Date(this.addForm.value.LIMIT_START_DATE);
-    let endDate = new Date(this.addForm.value.LIMIT_END_DATE);
-    jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
-    jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
-    jsonObj.STOP_DATE = '';
-
-    if (this.addForm.value.STOP_FLAG == 'Y') {
-      let stopDate = new Date(this.addForm.value.STOP_DATE);
-      jsonObj.STOP_DATE = this.datePipe.transform(stopDate, "yyyy/MM/dd");
-    }
-
-    for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }
     let msgStr: string = "";
-    let baseUrl = 'f01/f01003edit';
-    msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
-    const childernDialogRef = this.dialog.open(F01003confirmComponent, {
-      data: { msgStr: msgStr }
-    });
-    if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
-  }
+    if(!this.addForm.valid) {
+      msgStr = '資料格式有誤，請修正!';
+    } else {
+      this.addForm.controls['STOP_DATE'].enable();
+      var formData = new FormData();
+      let jsonStr = JSON.stringify(this.addForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      let startDate = new Date(this.addForm.value.LIMIT_START_DATE);
+      let endDate = new Date(this.addForm.value.LIMIT_END_DATE);
+      jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
+      jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
+      jsonObj.STOP_DATE = '';
 
+      if (this.addForm.value.STOP_FLAG == 'Y') {
+        let stopDate = new Date(this.addForm.value.STOP_DATE);
+        jsonObj.STOP_DATE = this.datePipe.transform(stopDate, "yyyy/MM/dd");
+      }
+
+      for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }
+      let baseUrl = 'f01/f01003edit';
+      msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
+      const childernDialogRef = this.dialog.open(F01003confirmComponent, {
+        data: { msgStr: msgStr }
+      });
+      if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
+    }
+  }
 }

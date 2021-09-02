@@ -202,7 +202,8 @@ export class F01003scn1Component implements OnInit {
         levelNo: Number(row.levelNo) + 1,
         upLevel: row.limitNo,
         nationalId: row.nationalId,
-        customerId: row.customerId
+        customerId: row.customerId,
+        limitTypeCode: row.limitTypeCode
       }
     });
     dialogRef.afterClosed().subscribe(result => {
