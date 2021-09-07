@@ -19,7 +19,6 @@ export class F01003addComponent implements OnInit {
   limitTypeOption: sysCode[] =  [{value: 'P0001000000', viewValue: '個人限額'}];
   CurrencyOption: sysCode[] =  [{value: 'TWN', viewValue: '台幣'}];
   stopDateValue: Date;
-  enableDateValue: Date = new Date();
   constructor(public dialogRef: MatDialogRef<F01003addComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) { }
 
   addForm: FormGroup = this.fb.group({
@@ -31,10 +30,8 @@ export class F01003addComponent implements OnInit {
     CURRENCY_TYPE: ['TWN', [Validators.maxLength(3)]],
     STOP_FLAG: ['N', [Validators.maxLength(1)]],
     CANCEL_FLAG: ['N', [Validators.maxLength(1)]],
-    ENABLE_FLAG: ['Y', [Validators.maxLength(1)]],
     CYCLE_TYPE: ['Y', [Validators.maxLength(1)]],
     STOP_DATE: [ {value: '', disabled: true}, [Validators.maxLength(10), Validators.minLength(10)]],
-    ENABLE_DATE: [ '', [Validators.maxLength(10), Validators.minLength(10)]],
     LIMIT_START_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     LIMIT_END_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     LIMIT_TYPE_CODE: ['P0001000000', [Validators.maxLength(11)]],
@@ -42,7 +39,6 @@ export class F01003addComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.addForm.patchValue({ ENABLE_DATE: new Date() });
   }
 
   formControl = new FormControl('', [
@@ -84,16 +80,14 @@ export class F01003addComponent implements OnInit {
     let jsonObj = JSON.parse(jsonStr);
     let startDate = new Date(this.addForm.value.LIMIT_START_DATE);
     let endDate = new Date(this.addForm.value.LIMIT_END_DATE);
-    let enableDate = new Date(this.addForm.value.ENABLE_DATE);
     jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
     jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
-    jsonObj.ENABLE_DATE = this.datePipe.transform(enableDate, "yyyy/MM/dd");
     for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }
     let msgStr: string = "";
     let baseUrl = 'f01/f01003level2add';
     msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
     const childernDialogRef = this.dialog.open(F01003confirmComponent, {
-      data: { msgStr: msgStr }
+      data: { msgStr: msgStr, display: true }
     });
     if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
   }

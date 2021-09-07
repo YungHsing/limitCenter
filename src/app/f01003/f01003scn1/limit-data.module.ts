@@ -21,8 +21,6 @@ export class LimitDataModule {
   private _applno: string;
   private _empno: string;
   private _manageDate: string;
-  private _enableFlag: string;
-  private _enableDate: string;
   private _statusFlag: string;
   private _productCode: string;
 
@@ -200,22 +198,6 @@ export class LimitDataModule {
 
   public set manageDate(manageDate: string) {
       this._manageDate = manageDate;
-  }
-
-  public get enableFlag(): string {
-      return this._enableFlag;
-  }
-
-  public set enableFlag(enableFlag: string) {
-      this._enableFlag = enableFlag;
-  }
-
-  public get enableDate(): string {
-      return this._enableDate;
-  }
-
-  public set enableDate(enableDate: string) {
-      this._enableDate = enableDate;
   }
 
   public get statusFlag(): string {

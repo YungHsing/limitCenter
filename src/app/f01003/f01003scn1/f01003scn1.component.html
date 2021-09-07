@@ -53,12 +53,12 @@
 
     <ng-container matColumnDef="limitStartDate">
       <th mat-header-cell *matHeaderCellDef> 額度起日 </th>
-      <td mat-cell *matCellDef="let element"> {{element.limitStartDate}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.limitStartDate |date :'yyyy-MM-dd'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="limitEndDate">
       <th mat-header-cell *matHeaderCellDef> 額度訖日 </th>
-      <td mat-cell *matCellDef="let element"> {{element.limitEndDate}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.limitEndDate |date :'yyyy-MM-dd'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="creditLimit">
@@ -86,16 +86,6 @@
       <td mat-cell *matCellDef="let element"> {{element.currencyType}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="enableFlag">
-      <th mat-header-cell *matHeaderCellDef> 啟用註記 </th>
-      <td mat-cell *matCellDef="let element"> {{element.enableFlag}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="enableDate">
-      <th mat-header-cell *matHeaderCellDef> 啟用日期 </th>
-      <td mat-cell *matCellDef="let element"> {{element.enableDate}} </td>
-    </ng-container>
-
     <ng-container matColumnDef="stopFlag">
       <th mat-header-cell *matHeaderCellDef> 停用註記 </th>
       <td mat-cell *matCellDef="let element"> {{element.stopFlag}} </td>
@@ -103,7 +93,7 @@
 
     <ng-container matColumnDef="stopDate">
       <th mat-header-cell *matHeaderCellDef> 停用日期 </th>
-      <td mat-cell *matCellDef="let element"> {{element.stopDate}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.stopDate |date :'yyyy-MM-dd'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="projectCode">
@@ -138,7 +128,7 @@
 
     <ng-container matColumnDef="manageDate">
       <th mat-header-cell *matHeaderCellDef> 異動時間 </th>
-      <td mat-cell *matCellDef="let element"> {{element.manageDate}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.manageDate | date:'yyyy/MM/dd hh:mm:ss'}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

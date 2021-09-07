@@ -79,12 +79,12 @@ export class F01003Component implements OnInit, AfterViewInit {
   async onSubmit() {
     this.submitted = true;
     if (this.limitSearchForm.value.CUSTOMER_ID == '' || this.limitSearchForm.value.NATIONAL_ID == '') {
-      this.dialog.open(F01003confirmComponent, { data: { msgStr: 'CID與NID必填!' } });
+      this.dialog.open(F01003confirmComponent, { data: { msgStr: 'CID與NID必填!', display: true } });
       return false;
     } else {
       await this.getViewDataList();
       let msgStr: string = this.limitDataSource.data.length == 0 ? '查無資料!' : '查詢成功!';
-      this.dialog.open(F01003confirmComponent, { data: { msgStr: msgStr } });
+      this.dialog.open(F01003confirmComponent, { data: { msgStr: msgStr, display: true } });
     }
   }
 
@@ -120,7 +120,7 @@ export class F01003Component implements OnInit, AfterViewInit {
 
   addNew() {
     if (this.limitSearchForm.value.CUSTOMER_ID == '' || this.limitSearchForm.value.NATIONAL_ID == '') {
-      this.dialog.open(F01003confirmComponent, { data: { msgStr: 'CID與NID必填!' } });
+      this.dialog.open(F01003confirmComponent, { data: { msgStr: 'CID與NID必填!', display: true } });
       return false;
     } else {
       const dialogRef = this.dialog.open(F01003addComponent, {

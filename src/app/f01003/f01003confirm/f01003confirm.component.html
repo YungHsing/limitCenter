@@ -1,1 +1,29 @@
-<p>{{ data.msgStr }}</p>
+<p *ngIf="data.display; else reasonContent">{{ data.msgStr }}</p>
+<ng-template #reasonContent>
+<div class="container">
+  <form [formGroup]="confirmForm" style="padding-left: 20px;">
+    <table>
+      <mat-card class="matCard">
+        <mat-card-content>
+          <tr>
+            <td>
+                請輸入修改原因：
+            </td>
+          <tr>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <input type="text" matInput [formControl]="formControl" formControlName="REASON_CONTENT">
+                </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <button type="submit" mat-raised-button color="primary" (click)="goBack()">確定</button>
+            </th>
+          </tr>
+        </mat-card-content>
+      </mat-card>
+    </table>
+  </form>
+</div>
+</ng-template>
