@@ -9,7 +9,7 @@ interface sysCode {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class LoginService extends BaseService {
   RuleCode: sysCode[] = null;
