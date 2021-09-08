@@ -1,0 +1,67 @@
+<div class="container">
+    <h2 mat-dialog-title>動用額度</h2>
+  
+    <form [formGroup]="reserveAddForm" class="mat-dialog-content" (ngSubmit)="submit()">
+      <table>
+        <tr>
+          <td [(hidden)]="active">
+            <div class="form">
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" placeholder="額度號" formControlName="LIMIT_NO" readonly >
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_NO')}}</mat-error>
+              </mat-form-field>
+            </div>
+          </td>
+          <td [(hidden)]="reserve">
+            <div class="form">
+                <mat-form-field color="accent" >
+                    <mat-select placeholder="預佔編號" formControlName="RESERVE_NO">
+                      <mat-option *ngFor="let code of reserveNoOption" [value]="code.value" >
+                        {{code.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+          </td>
+          <td>
+            <div class="form">
+              <mat-form-field color="accent">
+                <input matInput #input class="form-control" placeholder="幣別" formControlName="CURRENCY_TYPE" readonly >
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CURRENCY_TYPE')}}</mat-error>
+              </mat-form-field>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form">
+              <mat-form-field color="accent" >
+                <mat-select placeholder="動用類別" formControlName="ACTION_TYPE" required>
+                  <mat-option *ngFor="let code of actionTypeOption" [value]="code.value" >
+                    {{code.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </td>
+          <td>
+            <div class="form">
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" type="number" placeholder="金額" formControlName="CREDIT_LIMIT" required>
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error>
+                </mat-form-field>
+              </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form" mat-dialog-actions>
+              <button mat-raised-button color="primary" [type]="submit" (click)="confirmAdd()">儲存</button>
+              <button mat-button (click)="onNoClick()" tabindex="-1">取消</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  

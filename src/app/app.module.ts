@@ -38,6 +38,7 @@ import { F01003scn3Component } from './f01003/f01003scn3/f01003scn3.component';
 import { F01003scn4Component } from './f01003/f01003scn4/f01003scn4.component';
 import { F01003scn1editComponent } from './f01003/f01003scn1/f01003scn1edit/f01003scn1edit.component';
 import { F01003scn1addComponent } from './f01003/f01003scn1/f01003scn1add/f01003scn1add.component';
+import { F01003scn2wopenComponent } from './f01003/f01003scn2/f01003scn2wopen/f01003scn2wopen.component';
 
 export const TW_FORMATS = {
   parse: {
@@ -75,7 +76,8 @@ export const TW_FORMATS = {
     F01003scn1addComponent,
     F01003scn2Component,
     F01003scn3Component,
-    F01003scn4Component
+    F01003scn4Component,
+    F01003scn2wopenComponent
   ],
   imports: [
     BrowserModule,

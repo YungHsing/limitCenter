@@ -5,11 +5,13 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { F01003Service } from '../../f01003.service';
 import { F01003confirmComponent } from '../../f01003confirm/f01003confirm.component';
 
+//下拉選單框架
 interface sysCode {
   value: string;
   viewValue: string;
 }
 
+//額度資料修改
 @Component({
   templateUrl: './f01003scn1edit.component.html',
   styleUrls: ['./f01003scn1edit.component.css']
