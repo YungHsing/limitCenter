@@ -126,6 +126,9 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
           limitNo: this.drawdownReleaseForm.value.LIMIT_NO,
         }
       });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result != null && result.event == 'success') { this.refreshTable(); }
+      });
     }
     
   }
@@ -141,6 +144,9 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
           limitNo: this.drawdownReleaseForm.value.LIMIT_NO,
         }
       });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result != null && result.event == 'success') { this.refreshTable(); }
+      });
     }
   }
 
@@ -148,4 +154,16 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
     this.currentSort = sortInfo;
   }
 
+  private async refreshTable() {
+    let formData = new FormData();
+      let jsonStr = JSON.stringify(this.drawdownReleaseForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
+
+      let baseUrl = 'f01/f01003ReserveSearch';
+      await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
+        this.totalCount = data.rspBody.size;
+        this.drawdownReleaseDataSource.data = data.rspBody.items;
+      });
+  }
 }

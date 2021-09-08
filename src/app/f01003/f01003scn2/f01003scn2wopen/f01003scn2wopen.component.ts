@@ -109,4 +109,24 @@ export class F01003scn2wopenComponent implements OnInit {
       if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
     }
   }
+
+  changeSelect() {
+    let formData: FormData = new FormData();
+    let limitNo = this.data.limitNo;
+    this.reserveAddForm.patchValue({ LIMIT_NO: limitNo });
+      let jsonStr = JSON.stringify(this.reserveAddForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
+
+      let baseUrl = 'f01/f01003ReserveNoOption';
+      this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
+        for (const jsonObj of data.rspBody.reserveNoOption) {
+          if(jsonObj['reserveNo'] == this.reserveAddForm.value.RESERVE_NO) {
+            const creditLimit = jsonObj['creditLimit'];
+          console.log(creditLimit)
+          this.reserveAddForm.patchValue({ CREDIT_LIMIT: creditLimit });
+          }
+        }
+      });
+  }
 }

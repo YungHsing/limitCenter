@@ -15,7 +15,7 @@
           <td [(hidden)]="reserve">
             <div class="form">
                 <mat-form-field color="accent" >
-                    <mat-select placeholder="預佔編號" formControlName="RESERVE_NO">
+                    <mat-select placeholder="預佔編號" formControlName="RESERVE_NO" (ngModelChange)="changeSelect()">
                       <mat-option *ngFor="let code of reserveNoOption" [value]="code.value" >
                         {{code.viewValue}}
                       </mat-option>
@@ -44,10 +44,18 @@
               </mat-form-field>
             </div>
           </td>
-          <td>
+          <td [(hidden)]="active">
             <div class="form">
                 <mat-form-field color="accent">
                   <input matInput #input class="form-control" type="number" placeholder="金額" formControlName="CREDIT_LIMIT" required>
+                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error>
+                </mat-form-field>
+              </div>
+          </td>
+          <td [(hidden)]="reserve">
+            <div class="form">
+                <mat-form-field color="accent">
+                  <input matInput #input class="form-control" type="number" placeholder="金額" formControlName="CREDIT_LIMIT" required readonly>
                   <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error>
                 </mat-form-field>
               </div>
