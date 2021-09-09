@@ -15,7 +15,7 @@ interface sysCode {
 })
 export class F01003scn2wopenComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<F01003scn2wopenComponent>, public f01003Service: F01003Service, public dialog: MatDialog, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any,) { }
+  constructor(public dialogRef: MatDialogRef<F01003scn2wopenComponent>, public f01003Service: F01003Service, public dialog: MatDialog, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   actionTypeOption: sysCode[] = []; //動用類別下拉選單
   actionTypeSelectedValue: string; //動用類別
@@ -29,7 +29,8 @@ export class F01003scn2wopenComponent implements OnInit {
     CURRENCY_TYPE: ['TWD', [Validators.maxLength(5)]],
     ACTION_TYPE: [this.data.customerId, [Validators.maxLength(5)]],
     CREDIT_LIMIT: [this.data.creditLimit, [Validators.maxLength(10)]],
-    RESERVE_NO: [this.data.reserveNo, [Validators.maxLength(10)]]
+    RESERVE_NO: [this.data.reserveNo, [Validators.maxLength(10)]],
+    EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]]
   });
 
   formControl = new FormControl('', [

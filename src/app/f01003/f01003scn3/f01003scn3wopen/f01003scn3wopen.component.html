@@ -1,0 +1,54 @@
+<div class="container">
+    <div [(hidden)]="frozen">
+        <h2 mat-dialog-title>凍結</h2>
+    </div>
+    <div [(hidden)]="unfrozen">
+        <h2 mat-dialog-title>解凍</h2>
+    </div>
+
+    <form [formGroup]="frozenAddForm" class="mat-dialog-content" (ngSubmit)="submit()">
+        <table>
+            <tr>
+                <td>
+                    <div class="form">
+                        <mat-form-field color="accent">
+                            <input matInput #input class="form-control" placeholder="額度號" formControlName="LIMIT_NO"
+                                readonly>
+                            <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_NO')}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </td>
+                <td>
+                    <div class="form">
+                        <mat-form-field color="accent">
+                            <mat-select placeholder="原因碼" formControlName="REASON_CODE" required>
+                                <mat-option *ngFor="let code of reasonCodeOption" [value]="code.value">
+                                    {{code.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form">
+                        <mat-form-field color="accent">
+                            <input matInput #input class="form-control" type="text" placeholder="原因"
+                                formControlName="REASON_DESC" required>
+                            <mat-error *ngIf="formControl.invalid">{{getErrorMessage('REASON_DESC')}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form" mat-dialog-actions>
+                        <button mat-raised-button color="primary" [type]="submit" (click)="confirmAdd()">儲存</button>
+                        <button mat-button (click)="onNoClick()" tabindex="-1">取消</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

@@ -1,5 +1,6 @@
 <div class="container">
-    <h2 mat-dialog-title>動用額度</h2>
+    <div [(hidden)]="active"><h2  mat-dialog-title>動用額度</h2></div>
+    <div [(hidden)]="reserve"><h2  mat-dialog-title>釋放額度</h2></div>
   
     <form [formGroup]="reserveAddForm" class="mat-dialog-content" (ngSubmit)="submit()">
       <table>
