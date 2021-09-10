@@ -24,10 +24,10 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
   StopCodeOption: sysCode[] =  [{value: 'CODE_1', viewValue: '原因代碼1'},{value: 'CODE_2', viewValue: '原因代碼2'},{value: 'CODE_3', viewValue: '原因代碼3'}];
   stopDateValue: Date;
   minDate: Date;
-  constructor(public dialogRef: MatDialogRef<F01003scn1editComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) { 
+  constructor(public dialogRef: MatDialogRef<F01003scn1editComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) {
     this.minDate = new Date();
   }
-  
+
   addForm: FormGroup = this.fb.group({
     LEVEL_NO: [this.data.levelNo, [Validators.maxLength(1)]],
     UP_LEVEL: [this.data.upLevel, [Validators.maxLength(10)]],
@@ -65,7 +65,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
 
   formControl = new FormControl('', [
     Validators.required
-    
+
   ]);
 
   getErrorMessage(cloumnName: string) {
@@ -123,6 +123,8 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
           console.log(this.addForm.value)
           this.addForm.controls['STOP_DATE'].enable();
           var formData = new FormData();
+          if (this.addForm.value.STOP_CODE == null) { this.addForm.value.STOP_CODE = ''; }
+          if (this.addForm.value.STOP_DESC == null) { this.addForm.value.STOP_DESC = ''; }
           let jsonStr = JSON.stringify(this.addForm.value);
           let jsonObj = JSON.parse(jsonStr);
           let startDate = new Date(this.addForm.value.LIMIT_START_DATE);
@@ -130,12 +132,12 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
           jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
           jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
           jsonObj.STOP_DATE = '';
-    
+
           if (this.addForm.value.STOP_FLAG == 'Y') {
             let stopDate = new Date(this.addForm.value.STOP_DATE);
             jsonObj.STOP_DATE = this.datePipe.transform(stopDate, "yyyy/MM/dd");
           }
-    
+
           for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }
           let baseUrl = 'f01/f01003edit';
           msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
