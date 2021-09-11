@@ -21,12 +21,12 @@
                         <td>
                             <mat-form-field>
                                 <mat-label>起-訖</mat-label>
-                                <mat-date-range-input [rangePicker]="rangePicker">
-                                    <input matStartDate placeholder="起" formControlName="START_DATE">
-                                    <input matEndDate placeholder="訖" formControlName="END_DATE">
+                                <mat-date-range-input [rangePicker]="rangePicker" [min]="minDate" [max]="maxDate">
+                                    <input matStartDate placeholder="起" formControlName="START_DATE" disabled>
+                                    <input matEndDate placeholder="訖" formControlName="END_DATE" disabled>
                                 </mat-date-range-input>
                                 <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-                                <mat-date-range-picker #rangePicker>
+                                <mat-date-range-picker #rangePicker disabled="false">
                                     <mat-date-range-picker-actions>
                                         <button mat-raised-button color="primary" matDateRangePickerApply>確認</button>
                                         <button mat-button matDateRangePickerCancel>取消</button>

@@ -21,7 +21,14 @@ interface sysCode {
 })
 export class F01003scn4Component implements OnInit {
 
-  constructor(private route: ActivatedRoute, public f01003Service: F01003Service, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private datePipe: DatePipe, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, public f01003Service: F01003Service, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private datePipe: DatePipe, public dialog: MatDialog) { 
+     //設定異動日期選擇最多不超過三個月
+     const currentYear = new Date().getFullYear();
+     const currentMonth = new Date().getMonth();
+     const currentDay = new Date().getDate();
+     this.minDate = new Date(currentYear, currentMonth -3, currentDay);
+     this.maxDate = new Date(currentYear, currentMonth, currentDay);
+  }
 
   //額度欄位修改明細
   manageRecordForm: FormGroup = this.fb.group({
@@ -37,6 +44,8 @@ export class F01003scn4Component implements OnInit {
     Validators.required
   ]);
 
+  minDate: Date;
+  maxDate: Date;
   sysCode: sysCode[] = [];
   selectedValue: string;
   NATIONAL_ID: string;  //客戶編號
