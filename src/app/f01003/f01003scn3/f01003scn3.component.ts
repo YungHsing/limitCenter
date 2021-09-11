@@ -25,7 +25,7 @@ export class F01003scn3Component implements OnInit {
   constructor(private route: ActivatedRoute, public f01003Service: F01003Service, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private datePipe: DatePipe, public dialog: MatDialog) { }
 
   //凍結&解凍
-  drawdownReleaseForm: FormGroup = this.fb.group({
+  frozenForm: FormGroup = this.fb.group({
     LIMIT_NO: [this.data.limitNo, [Validators.maxLength(10)]],
     ACTION_TYPE: [this.data.actionType, [Validators.maxLength(5)]],
     pageIndex: ['', [Validators.maxLength(3)]],
@@ -52,7 +52,7 @@ export class F01003scn3Component implements OnInit {
   @ViewChild('sortTable', { static: true }) sortTable: MatSort;
   currentPage: PageEvent;
   currentSort: Sort;
-  drawdownReleaseDataSource = new MatTableDataSource<any>();
+  frozenDataSource = new MatTableDataSource<any>();
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -94,22 +94,22 @@ export class F01003scn3Component implements OnInit {
 
   async onSubmit() {
     this.submitted = true;
-    if (this.drawdownReleaseForm.value.LIMIT_NO == undefined && this.drawdownReleaseForm.value.ACTION_TYPE == undefined) {
+    if (this.frozenForm.value.LIMIT_NO == undefined && this.frozenForm.value.ACTION_TYPE == undefined) {
       this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號或功能', display: true } });
       return false;
     } else {
       let formData = new FormData();
-      let jsonStr = JSON.stringify(this.drawdownReleaseForm.value);
+      let jsonStr = JSON.stringify(this.frozenForm.value);
       let jsonObj = JSON.parse(jsonStr);
       for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
 
       let baseUrl = 'f01/f01003FrozenSearch';
       await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
         this.totalCount = data.rspBody.size;
-        this.drawdownReleaseDataSource.data = data.rspBody.items;
+        this.frozenDataSource.data = data.rspBody.items;
       });
 
-      let msgStr: string = this.drawdownReleaseDataSource.data.length == 0 ? '查無資料!' : '查詢成功!';
+      let msgStr: string = this.frozenDataSource.data.length == 0 ? '查無資料!' : '查詢成功!';
       this.dialog.open(F01003confirmComponent, { data: { msgStr: msgStr, display: true } });
     }
   }
@@ -119,14 +119,14 @@ export class F01003scn3Component implements OnInit {
   }
 
   frozen(frozen: boolean) {
-    if (this.drawdownReleaseForm.value.LIMIT_NO == undefined) {
+    if (this.frozenForm.value.LIMIT_NO == undefined) {
       this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號', display: true } });
       return false;
     } else {
       const dialogRef = this.dialog.open(F01003scn3wopenComponent, {
         data: {
           isFrozen: frozen,
-          limitNo: this.drawdownReleaseForm.value.LIMIT_NO,
+          limitNo: this.frozenForm.value.LIMIT_NO,
         }
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -136,37 +136,20 @@ export class F01003scn3Component implements OnInit {
     
   }
 
-  // unfrozen() {
-  //   if (this.drawdownReleaseForm.value.LIMIT_NO == undefined) {
-  //     this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號', display: true } });
-  //     return false;
-  //   } else {
-  //     const dialogRef = this.dialog.open(F01003scn3wopenComponent, {
-  //       data: {
-  //         isFrozen: false,
-  //         limitNo: this.drawdownReleaseForm.value.LIMIT_NO,
-  //       }
-  //     });
-  //     dialogRef.afterClosed().subscribe(result => {
-  //       if (result != null && result.event == 'success') { this.refreshTable(); }
-  //     });
-  //   }
-  // }
-
   changeSort(sortInfo: Sort) {
     this.currentSort = sortInfo;
   }
   
   private async refreshTable() {
     let formData = new FormData();
-      let jsonStr = JSON.stringify(this.drawdownReleaseForm.value);
+      let jsonStr = JSON.stringify(this.frozenForm.value);
       let jsonObj = JSON.parse(jsonStr);
       for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
 
-      let baseUrl = 'f01/f01003ReserveSearch';
+      let baseUrl = 'f01/f01003FrozenSearch';
       await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
         this.totalCount = data.rspBody.size;
-        this.drawdownReleaseDataSource.data = data.rspBody.items;
+        this.frozenDataSource.data = data.rspBody.items;
       });
   }
 

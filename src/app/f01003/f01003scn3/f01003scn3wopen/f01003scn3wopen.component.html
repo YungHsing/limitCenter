@@ -21,7 +21,7 @@
                 <td>
                     <div class="form">
                         <mat-form-field color="accent">
-                            <mat-select placeholder="原因碼" formControlName="REASON_CODE" required>
+                            <mat-select placeholder="原因碼" class="form-control" formControlName="REASON_CODE" required>
                                 <mat-option *ngFor="let code of reasonCodeOption" [value]="code.value">
                                     {{code.viewValue}}
                                 </mat-option>
@@ -33,9 +33,10 @@
             <tr>
                 <td>
                     <div class="form">
-                        <mat-form-field color="accent">
-                            <input matInput #input class="form-control" type="text" placeholder="原因"
-                                formControlName="REASON_DESC" required>
+                        <mat-form-field color="accent" appearance="fill">
+                            <mat-label>原因</mat-label>
+                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" class="form-control" required
+                                formControlName="REASON_DESC" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
                             <mat-error *ngIf="formControl.invalid">{{getErrorMessage('REASON_DESC')}}</mat-error>
                         </mat-form-field>
                     </div>
