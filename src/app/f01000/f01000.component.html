@@ -1,1 +1,116 @@
-<p>f01000 works!</p>
+<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 40px; margin-left: 10px; margin-top: 10px;">
+    <table>
+        <tr>
+            <th> 覆核 </th>
+            <td>
+                <button mat-raised-button color="success">核可</button>
+                <button mat-raised-button color="warn">取消</button>
+            </td>
+        </tr>
+    </table>
+</cdk-virtual-scroll-viewport>
+
+<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px; margin-left: 10px;">
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="editBtn">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-raised-button color="success" *ngIf="element.levelNo == '1'; else canUse"
+                    disabled>修改</button>
+                <ng-template #canUse>
+                    <button mat-raised-button color="success" (click)="editContent(element)">修改
+                    </button>
+                </ng-template>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="childBtn">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-raised-button color="success" *ngIf="element.levelNo == '1'; else canUse"
+                    disabled>新增子額度</button>
+                <ng-template #canUse>
+                    <button mat-raised-button color="success" (click)="addChildLimit(element)">新增子額度
+                    </button>
+                </ng-template>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isChk">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox color="primary" (change)="setAll($event.checked)">全選</mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row; let i = index;">
+                <mat-checkbox [(ngModel)]="data.CHECKBOX[i].completed" color="primary"></mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="limitNo">
+            <th mat-header-cell *matHeaderCellDef> 額度號 </th>
+            <td mat-cell *matCellDef="let element"> {{element.limitNo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="columnName">
+            <th mat-header-cell *matHeaderCellDef> 欄位代碼 </th>
+            <td mat-cell *matCellDef="let element"> {{element.columnName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="columnDesc">
+            <th mat-header-cell *matHeaderCellDef> 欄位說明 </th>
+            <td mat-cell *matCellDef="let element"> {{element.columnDesc}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="beforeVal">
+            <th mat-header-cell *matHeaderCellDef> 修改前欄位值 </th>
+            <td mat-cell *matCellDef="let element"> {{element.beforeVal}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="afterVal">
+            <th mat-header-cell *matHeaderCellDef> 修改後欄位值 </th>
+            <td mat-cell *matCellDef="let element"> {{element.afterVal}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="reasonContent">
+            <th mat-header-cell *matHeaderCellDef> 原因說明 </th>
+            <td mat-cell *matCellDef="let element"> {{element.reasonContent |date :'yyyy-MM-dd'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="empno">
+            <th mat-header-cell *matHeaderCellDef> 處理員編 </th>
+            <td mat-cell *matCellDef="let element"> {{element.empno }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="manageDate">
+            <th mat-header-cell *matHeaderCellDef> 異動時間 </th>
+            <td mat-cell *matCellDef="let element"> {{element.manageDate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="reviewEmpno">
+            <th mat-header-cell *matHeaderCellDef> 覆核員編 </th>
+            <td mat-cell *matCellDef="let element"> {{element.reviewEmpno}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actionSort">
+            <th mat-header-cell *matHeaderCellDef> 行為順序 </th>
+            <td mat-cell *matCellDef="let element"> {{element.actionSort}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Group header -->
+        <ng-container matColumnDef="groupHeader">
+            <td colspan="999" mat-cell *matCellDef="let group">
+                <mat-icon *ngIf="group.expanded">expand_less</mat-icon>
+                <mat-icon *ngIf="!group.expanded">expand_more</mat-icon>
+                <strong>第{{group[groupByColumns[group.level-1]]}}層級</strong>
+            </td>
+        </ng-container>
+
+        <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup" (click)="groupHeaderClick(row)"> </tr>
+
+    </table>
+
+</cdk-virtual-scroll-viewport>
