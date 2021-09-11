@@ -37,7 +37,6 @@ export class F01003confirmComponent {
   }
 
   goBack() {
-    console.log(this.confirmForm.value.REASON_CONTENT)
     this.dialogRef.close({ event:'success', value: this.confirmForm.value.REASON_CONTENT });
   }
 }

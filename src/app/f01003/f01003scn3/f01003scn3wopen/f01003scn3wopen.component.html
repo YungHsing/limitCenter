@@ -9,7 +9,7 @@
     <form [formGroup]="frozenAddForm" class="mat-dialog-content" (ngSubmit)="submit()">
         <table>
             <tr>
-                <td>
+                <td [(hidden)]="frozen">
                     <div class="form">
                         <mat-form-field color="accent">
                             <input matInput #input class="form-control" placeholder="額度號" formControlName="LIMIT_NO"
@@ -18,7 +18,18 @@
                         </mat-form-field>
                     </div>
                 </td>
-                <td>
+                <td [(hidden)]="unfrozen">
+                    <div class="form">
+                        <mat-form-field color="accent">
+                            <mat-select placeholder="凍結編號" formControlName="FROZEN_NO" (ngModelChange)="changeSelect()">
+                                <mat-option *ngFor="let code of frozenNoOption" [value]="code.value">
+                                    {{code.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </td>
+                <td [(hidden)]="frozen">
                     <div class="form">
                         <mat-form-field color="accent">
                             <mat-select placeholder="原因碼" class="form-control" formControlName="REASON_CODE" required>
@@ -29,14 +40,33 @@
                         </mat-form-field>
                     </div>
                 </td>
+                <td [(hidden)]="unfrozen">
+                    <div class="form">
+                        <mat-form-field color="accent">
+                            <input matInput #input class="form-control" placeholder="原因碼" formControlName="REASON_CODE"
+                                readonly>
+                            <mat-error *ngIf="formControl.invalid">{{getErrorMessage('REASON_CODE')}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </td>
             </tr>
             <tr>
-                <td>
+                <td [(hidden)]="frozen">
                     <div class="form">
                         <mat-form-field color="accent" appearance="fill">
                             <mat-label>原因</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" class="form-control" required
-                                formControlName="REASON_DESC" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" class="form-control"
+                                required formControlName="REASON_DESC" cdkAutosizeMinRows="1"
+                                cdkAutosizeMaxRows="5"></textarea>
+                            <mat-error *ngIf="formControl.invalid">{{getErrorMessage('REASON_DESC')}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </td>
+                <td [(hidden)]="unfrozen">
+                    <div class="form">
+                        <mat-form-field color="accent">
+                            <input matInput #input class="form-control" placeholder="原因" formControlName="REASON_DESC"
+                                readonly>
                             <mat-error *ngIf="formControl.invalid">{{getErrorMessage('REASON_DESC')}}</mat-error>
                         </mat-form-field>
                     </div>

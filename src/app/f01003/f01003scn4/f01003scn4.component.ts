@@ -26,7 +26,8 @@ export class F01003scn4Component implements OnInit {
   //額度欄位修改明細
   manageRecordForm: FormGroup = this.fb.group({
     LIMIT_NO: [this.data.limitNo, [Validators.maxLength(10)]],
-    ACTION_TYPE: [this.data.actionType, [Validators.maxLength(5)]],
+    START_DATE: [this.data.startDate, [Validators.maxLength(5)]],
+    END_DATE: [this.data.endDate, [Validators.maxLength(5)]],
     pageIndex: ['', [Validators.maxLength(3)]],
     pageSize: ['', [Validators.maxLength(3)]],
     EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]]
@@ -41,8 +42,7 @@ export class F01003scn4Component implements OnInit {
   NATIONAL_ID: string;  //客戶編號
   CUSTOMER_ID: string;  //身分證字號
   CREDIT_LIMIT: string; //額度
-  START_DATE: string;
-  END_DATE: string;
+
   limitNoOption: sysCode[] = [];  //額度號下拉選單
   limitNoSelectedValue: string; //額度號
   actionTypeOption: sysCode[] = []; //選擇功能下拉選單
@@ -53,8 +53,8 @@ export class F01003scn4Component implements OnInit {
       this.NATIONAL_ID = params['NATIONAL_ID'];
       this.CUSTOMER_ID = params['CUSTOMER_ID'];
       this.CREDIT_LIMIT = params['CREDIT_LIMIT'];
-      this.START_DATE = this.datePipe.transform(params['START_DATE'], "yyyy/MM/dd");
-      this.END_DATE = this.datePipe.transform(params['END_DATE'], "yyyy/MM/dd");
+      // this.START_DATE = this.datePipe.transform(params['START_DATE'], "yyyy/MM/dd");
+      // this.END_DATE = this.datePipe.transform(params['END_DATE'], "yyyy/MM/dd");
     });
     let formData: FormData = new FormData();
     formData.append('CUSTOMER_ID', this.CUSTOMER_ID);
@@ -91,16 +91,20 @@ export class F01003scn4Component implements OnInit {
 
   async onSubmit() {
     this.submitted = true;
-    if (this.manageRecordForm.value.LIMIT_NO == undefined && this.manageRecordForm.value.ACTION_TYPE == undefined) {
-      this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號或功能', display: true } });
+    if (this.manageRecordForm.value.LIMIT_NO == undefined && (this.manageRecordForm.value.START_DATE == null || this.manageRecordForm.value.END_DATE == null)) {
+      this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號或異動時間起迄日', display: true } });
       return false;
     } else {
       let formData = new FormData();
       let jsonStr = JSON.stringify(this.manageRecordForm.value);
       let jsonObj = JSON.parse(jsonStr);
+      let startDate = new Date(this.manageRecordForm.value.START_DATE);
+      let endDate = new Date(this.manageRecordForm.value.END_DATE);
+      jsonObj.START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
+      jsonObj.END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
       for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
 
-      let baseUrl = 'f01/f01003FrozenSearch';
+      let baseUrl = 'f01/f01003RecordSearch';
       await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
         this.totalCount = data.rspBody.size;
         this.manageRecordDataSource.data = data.rspBody.items;
@@ -115,39 +119,21 @@ export class F01003scn4Component implements OnInit {
     return this.formControl.hasError('required') ? 'Required field' : '';
   }
 
-  edit() {
-    if (this.manageRecordForm.value.LIMIT_NO == undefined) {
-      this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號', display: true } });
-      return false;
-    } else {
-      // const dialogRef = this.dialog.open(F01003scn4wopenComponent, {
-      //   data: {
-      //     isFrozen: frozen,
-      //     limitNo: this.manageRecordForm.value.LIMIT_NO,
-      //   }
-      // });
-      // dialogRef.afterClosed().subscribe(result => {
-      //   if (result != null && result.event == 'success') { this.refreshTable(); }
-      // });
-    }
-    
-  }
-
   changeSort(sortInfo: Sort) {
     this.currentSort = sortInfo;
   }
-  
+
   private async refreshTable() {
     let formData = new FormData();
-      let jsonStr = JSON.stringify(this.manageRecordForm.value);
-      let jsonObj = JSON.parse(jsonStr);
-      for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
+    let jsonStr = JSON.stringify(this.manageRecordForm.value);
+    let jsonObj = JSON.parse(jsonStr);
+    for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
 
-      let baseUrl = 'f01/f01003FrozenSearch';
-      await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
-        this.totalCount = data.rspBody.size;
-        this.manageRecordDataSource.data = data.rspBody.items;
-      });
+    let baseUrl = 'f01/f01003FrozenSearch';
+    await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
+      this.totalCount = data.rspBody.size;
+      this.manageRecordDataSource.data = data.rspBody.items;
+    });
   }
 
 }

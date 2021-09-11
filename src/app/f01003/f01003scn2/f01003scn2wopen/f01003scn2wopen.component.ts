@@ -124,7 +124,6 @@ export class F01003scn2wopenComponent implements OnInit {
         for (const jsonObj of data.rspBody.reserveNoOption) {
           if(jsonObj['reserveNo'] == this.reserveAddForm.value.RESERVE_NO) {
             const creditLimit = jsonObj['creditLimit'];
-          console.log(creditLimit)
           this.reserveAddForm.patchValue({ CREDIT_LIMIT: creditLimit });
           }
         }

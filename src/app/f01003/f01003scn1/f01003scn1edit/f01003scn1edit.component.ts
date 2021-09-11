@@ -120,7 +120,6 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
       reasonDialogRef.afterClosed().subscribe(async result => {
         if (result != null && result.event == 'success' && result.value != null && result.value != '') {
           this.addForm.patchValue({ REASON_CONTENT : result.value });
-          console.log(this.addForm.value)
           this.addForm.controls['STOP_DATE'].enable();
           var formData = new FormData();
           if (this.addForm.value.STOP_CODE == null) { this.addForm.value.STOP_CODE = ''; }

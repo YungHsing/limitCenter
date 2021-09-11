@@ -7,9 +7,6 @@
                 <mat-card-content>
                     <tr>
                         <td>
-                            <button type="submit" mat-raised-button color="success" (click)="edit()">修改</button>
-                        </td>
-                        <td>
                         <th nowrap="nowrap">選擇額度號：</th>
                         <td>
                             <mat-form-field color="accent">
@@ -25,17 +22,17 @@
                             <mat-form-field>
                                 <mat-label>起-訖</mat-label>
                                 <mat-date-range-input [rangePicker]="rangePicker">
-                                  <input matStartDate placeholder="起" formControlName="START_DATE">
-                                  <input matEndDate placeholder="訖" formControlName="END_DATE">
+                                    <input matStartDate placeholder="起" formControlName="START_DATE">
+                                    <input matEndDate placeholder="訖" formControlName="END_DATE">
                                 </mat-date-range-input>
                                 <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
                                 <mat-date-range-picker #rangePicker>
-                                  <mat-date-range-picker-actions>
-                                    <button mat-raised-button color="primary" matDateRangePickerApply >確認</button>
-                                    <button mat-button matDateRangePickerCancel>取消</button>
-                                  </mat-date-range-picker-actions>
+                                    <mat-date-range-picker-actions>
+                                        <button mat-raised-button color="primary" matDateRangePickerApply>確認</button>
+                                        <button mat-button matDateRangePickerCancel>取消</button>
+                                    </mat-date-range-picker-actions>
                                 </mat-date-range-picker>
-                              </mat-form-field>
+                            </mat-form-field>
                         </td>
                         <td>
                             <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">查詢</button>
