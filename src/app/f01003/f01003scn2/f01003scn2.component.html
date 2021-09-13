@@ -94,12 +94,17 @@
                 <mat-cell *matCellDef="let row">{{ row.unreserveFlag }}</mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="STATUS_FLAG">
+                <mat-header-cell *matHeaderCellDef>是否已核准</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.statusFlag }}</mat-cell>
+            </ng-container>
+
             <mat-header-row
-                *matHeaderRowDef="['LIMIT_NO', 'CURRENCY_TYPE', 'CREDIT_LIMIT', 'ACTION_TYPE', 'EMPNO', 'APPLNO', 'MANAGE_DATE', 'RESERVE_NO', 'UNRESERVE_FLAG']; sticky: true">
+                *matHeaderRowDef="['LIMIT_NO', 'CURRENCY_TYPE', 'CREDIT_LIMIT', 'ACTION_TYPE', 'EMPNO', 'APPLNO', 'MANAGE_DATE', 'RESERVE_NO', 'UNRESERVE_FLAG', 'STATUS_FLAG']; sticky: true">
             </mat-header-row>
 
             <mat-row
-                *matRowDef="let ruleParmRow; columns: ['LIMIT_NO', 'CURRENCY_TYPE', 'CREDIT_LIMIT', 'ACTION_TYPE', 'EMPNO', 'APPLNO', 'MANAGE_DATE', 'RESERVE_NO', 'UNRESERVE_FLAG']">
+                *matRowDef="let ruleParmRow; columns: ['LIMIT_NO', 'CURRENCY_TYPE', 'CREDIT_LIMIT', 'ACTION_TYPE', 'EMPNO', 'APPLNO', 'MANAGE_DATE', 'RESERVE_NO', 'UNRESERVE_FLAG', 'STATUS_FLAG']">
             </mat-row>
 
         </mat-table>
