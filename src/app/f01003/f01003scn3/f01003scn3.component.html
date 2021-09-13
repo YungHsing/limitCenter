@@ -89,12 +89,17 @@
                 <mat-cell *matCellDef="let row">{{ row.unfrozenFlag }}</mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="STATUS_FLAG">
+                <mat-header-cell *matHeaderCellDef>是否已解凍</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.statusFlag }}</mat-cell>
+            </ng-container>
+
             <mat-header-row
-                *matHeaderRowDef="['LIMIT_NO', 'ACTION_TYPE', 'REASON_CODE', 'REASON_DESC', 'EMPNO', 'APPLNO', 'MANAGE_DATE', 'UNFROZEN_FLAG']; sticky: true">
+                *matHeaderRowDef="['LIMIT_NO', 'ACTION_TYPE', 'REASON_CODE', 'REASON_DESC', 'EMPNO', 'APPLNO', 'MANAGE_DATE', 'UNFROZEN_FLAG', 'STATUS_FLAG']; sticky: true">
             </mat-header-row>
 
             <mat-row
-                *matRowDef="let ruleParmRow; columns: ['LIMIT_NO', 'ACTION_TYPE', 'REASON_CODE', 'REASON_DESC', 'EMPNO', 'APPLNO', 'MANAGE_DATE', 'UNFROZEN_FLAG']">
+                *matRowDef="let ruleParmRow; columns: ['LIMIT_NO', 'ACTION_TYPE', 'REASON_CODE', 'REASON_DESC', 'EMPNO', 'APPLNO', 'MANAGE_DATE', 'UNFROZEN_FLAG', 'STATUS_FLAG']">
             </mat-row>
 
         </mat-table>

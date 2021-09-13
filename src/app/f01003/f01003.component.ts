@@ -40,6 +40,8 @@ export class F01003Component implements OnInit, AfterViewInit {
   currentPage: PageEvent;
   currentSort: Sort;
   limitDataSource = new MatTableDataSource<any>();
+  isReadOnly = false;
+  isDisabled = true;
 
   ngOnInit(): void {
     
@@ -73,7 +75,8 @@ export class F01003Component implements OnInit, AfterViewInit {
     await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
       this.totalCount = data.rspBody.size;
       this.limitDataSource.data = data.rspBody.items;
-      console.log(data.rspBody.items[0].statusFlag)
+      this.isReadOnly = true;
+      
     });
   }
 
@@ -86,6 +89,7 @@ export class F01003Component implements OnInit, AfterViewInit {
       await this.getViewDataList();
       let msgStr: string = this.limitDataSource.data.length == 0 ? '查無資料!' : '查詢成功!';
       this.dialog.open(F01003confirmComponent, { data: { msgStr: msgStr, display: true } });
+      if(this.limitDataSource.data.length == 0) {this.isDisabled = false; }
     }
   }
 
@@ -101,6 +105,8 @@ export class F01003Component implements OnInit, AfterViewInit {
     };
     this.totalCount = 0;
     this.limitDataSource.data = null;
+    this.isReadOnly = false;
+    this.isDisabled = true;
   }
 
   setTimes() {

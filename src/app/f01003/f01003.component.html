@@ -13,7 +13,7 @@
             <th nowrap="nowrap">客戶編號 CID：</th>
             <td>
               <mat-form-field color="accent">
-                <input matInput #input class="form-control" formControlName="CUSTOMER_ID">
+                <input [readonly]="isReadOnly" matInput #input class="form-control" formControlName="CUSTOMER_ID">
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
             </td>
@@ -95,7 +95,7 @@
           <!-- <button mat-icon-button color="primary" (click)="addNew()">
             <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
           </button> -->
-          <button type="button" mat-raised-button color="basic" (click)="addNew()">新增</button>
+          <button [disabled]="isDisabled" type="button" mat-raised-button color="basic" (click)="addNew()">新增</button>
         </mat-header-cell>
         <mat-cell *matCellDef="let row; let i=index;"></mat-cell>
       </ng-container>

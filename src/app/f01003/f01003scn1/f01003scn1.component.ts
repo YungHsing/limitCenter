@@ -29,10 +29,10 @@ export class F01003scn1Component implements OnInit {
     'editBtn',
     'childBtn',
     'levelNo',
+    'statusFlag',
     'limitNo',
     'upLevel',
     'limitTypeCode',
-    'statusFlag',
     'limitStartDate',
     'limitEndDate',
     'creditLimit',
@@ -217,5 +217,13 @@ export class F01003scn1Component implements OnInit {
     });
     this.dataSource.data = this.addGroups(this.LimitData, this.groupByColumns);
     this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
+  }
+
+  checkButton(statusFlag: string) {
+    if (statusFlag === 'N') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
