@@ -42,7 +42,7 @@ export class F01003Component implements OnInit, AfterViewInit {
   limitDataSource = new MatTableDataSource<any>();
 
   ngOnInit(): void {
-
+    
   }
 
   ngAfterViewInit(): void {
@@ -73,13 +73,14 @@ export class F01003Component implements OnInit, AfterViewInit {
     await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
       this.totalCount = data.rspBody.size;
       this.limitDataSource.data = data.rspBody.items;
+      console.log(data.rspBody.items[0].statusFlag)
     });
   }
 
   async onSubmit() {
     this.submitted = true;
-    if (this.limitSearchForm.value.CUSTOMER_ID == '' || this.limitSearchForm.value.NATIONAL_ID == '') {
-      this.dialog.open(F01003confirmComponent, { data: { msgStr: 'CID與NID必填!', display: true } });
+    if (this.limitSearchForm.value.CUSTOMER_ID == '') {
+      this.dialog.open(F01003confirmComponent, { data: { msgStr: 'CID必填!', display: true } });
       return false;
     } else {
       await this.getViewDataList();
@@ -119,13 +120,12 @@ export class F01003Component implements OnInit, AfterViewInit {
   }
 
   addNew() {
-    if (this.limitSearchForm.value.CUSTOMER_ID == '' || this.limitSearchForm.value.NATIONAL_ID == '') {
-      this.dialog.open(F01003confirmComponent, { data: { msgStr: 'CID與NID必填!', display: true } });
+    if (this.limitSearchForm.value.CUSTOMER_ID == '') {
+      this.dialog.open(F01003confirmComponent, { data: { msgStr: 'CID必填!', display: true } });
       return false;
     } else {
       const dialogRef = this.dialog.open(F01003addComponent, {
         data: {
-          NATIONAL_ID: this.limitSearchForm.value.NATIONAL_ID,
           CUSTOMER_ID : this.limitSearchForm.value.CUSTOMER_ID
         }
       });
@@ -141,6 +141,14 @@ export class F01003Component implements OnInit, AfterViewInit {
 
   async getContent(nid: string, cid: string, limitNum: string, startDate: string) {
     this.router.navigate(['./F01003SCN0'], { queryParams: { NATIONAL_ID: nid, CUSTOMER_ID: cid, CREDIT_LIMIT: limitNum, LIMIT_START_DATE: startDate } });
+  }
+
+  checkButton(statusFlag: string) {
+    if (statusFlag === 'N') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

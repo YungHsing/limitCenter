@@ -7,7 +7,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="身分證字號" formControlName="NATIONAL_ID" readonly >
+              <input matInput #input class="form-control" placeholder="身分證字號" formControlName="NATIONAL_ID" readonly>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
@@ -15,7 +15,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="客戶編號" formControlName="CUSTOMER_ID" readonly >
+              <input matInput #input class="form-control" placeholder="客戶編號" formControlName="CUSTOMER_ID" readonly>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
@@ -23,7 +23,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="層級" formControlName="LEVEL_NO" readonly >
+              <input matInput #input class="form-control" placeholder="層級" formControlName="LEVEL_NO" readonly>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
@@ -33,7 +33,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <mat-select placeholder="額度類別代碼" formControlName="LIMIT_TYPE_CODE" >
+              <mat-select placeholder="額度類別代碼" formControlName="LIMIT_TYPE_CODE">
                 <mat-option *ngFor="let yn of limitTypeOption" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -61,7 +61,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" type="number" placeholder="額度" formControlName="CREDIT_LIMIT" >
+              <input matInput #input class="form-control" type="number" placeholder="額度" formControlName="CREDIT_LIMIT">
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
@@ -94,7 +94,7 @@
           <div class="form">
             <mat-form-field color="accent" class="example-form-field">
               <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" placeholder="停用日期">
-              <mat-datepicker-toggle matSuffix [for]="stopDateValue" >
+              <mat-datepicker-toggle matSuffix [for]="stopDateValue">
               </mat-datepicker-toggle>
               <mat-datepicker #stopDateValue></mat-datepicker>
             </mat-form-field>
@@ -105,8 +105,30 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="上層額度號" formControlName="UP_LEVEL" readonly >
+              <input matInput #input class="form-control" placeholder="上層額度號" formControlName="UP_LEVEL" readonly>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <mat-select placeholder="是否可撤銷" formControlName="CANCEL_FLAG">
+                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <mat-select placeholder="循環別" formControlName="CYCLE_TYPE">
+                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
         </td>
@@ -116,28 +138,6 @@
           <div class="form" mat-dialog-actions>
             <button mat-raised-button color="primary" [type]="submit" (click)="confirmAdd()">儲存</button>
             <button mat-button (click)="onNoClick()" tabindex="-1">取消</button>
-          </div>
-        </td>
-        <td>
-          <div class="form">
-            <mat-form-field color="accent">
-              <mat-select placeholder="是否可撤銷" formControlName="CANCEL_FLAG" >
-                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
-                  {{yn.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </td>
-        <td>
-          <div class="form">
-            <mat-form-field color="accent">
-              <mat-select placeholder="循環別" formControlName="CYCLE_TYPE" >
-                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
-                  {{yn.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
           </div>
         </td>
       </tr>

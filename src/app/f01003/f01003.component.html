@@ -17,13 +17,6 @@
                 <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field>
             </td>
-            <th nowrap="nowrap">身分證字號 NID：</th>
-            <td>
-              <mat-form-field color="accent">
-                <input matInput #input class="form-control" formControlName="NATIONAL_ID">
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-              </mat-form-field>
-            </td>
             <th nowrap="nowrap">額度起訖：</th>
             <td>
               <mat-form-field color="accent" class="example-form-field">
@@ -58,23 +51,13 @@
           明細內容
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <button mat-raised-button color="success"  (click) = "getContent(row.nationalId, row.customerId, row.creditLimit, row.limitStartDate)">明細</button>
+          <button [disabled]="checkButton(row.statusFlag)" mat-raised-button color="success"  (click) = "getContent(row.nationalId, row.customerId, row.creditLimit, row.limitStartDate)">明細</button>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="LIMIT_NO">
         <mat-header-cell *matHeaderCellDef>額度編號</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.limitNo }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="NATIONAL_ID">
-        <mat-header-cell *matHeaderCellDef>身分證字號</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.nationalId }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="CUSTOMER_ID">
-        <mat-header-cell *matHeaderCellDef>客戶編號(CID)</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.customerId }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="LIMIT_TYPE_CODE">
@@ -102,21 +85,27 @@
         <mat-cell *matCellDef="let row">{{ row.limitEndDate |date :'yyyy-MM-dd'}}</mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="STATUS_FLAG">
+        <mat-header-cell *matHeaderCellDef>是否已核准</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.statusFlag }}</mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>
-          <button mat-icon-button color="primary" (click)="addNew()">
+          <!-- <button mat-icon-button color="primary" (click)="addNew()">
             <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-          </button>
+          </button> -->
+          <button type="button" mat-raised-button color="basic" (click)="addNew()">新增</button>
         </mat-header-cell>
         <mat-cell *matCellDef="let row; let i=index;"></mat-cell>
       </ng-container>
 
       <mat-header-row
-        *matHeaderRowDef="['management', 'LIMIT_NO', 'NATIONAL_ID', 'CUSTOMER_ID', 'LIMIT_TYPE_CODE', 'STOP_FLAG', 'CREDIT_LIMIT', 'LIMIT_START_DATE', 'LIMIT_END_DATE', 'actions']; sticky: true">
+        *matHeaderRowDef="['management', 'LIMIT_NO', 'LIMIT_TYPE_CODE', 'STOP_FLAG', 'CREDIT_LIMIT', 'LIMIT_START_DATE', 'LIMIT_END_DATE', 'STATUS_FLAG', 'actions']; sticky: true">
       </mat-header-row>
 
       <mat-row
-        *matRowDef="let ruleParmRow; columns: ['management', 'LIMIT_NO', 'NATIONAL_ID', 'CUSTOMER_ID', 'LIMIT_TYPE_CODE', 'STOP_FLAG', 'CREDIT_LIMIT', 'LIMIT_START_DATE', 'LIMIT_END_DATE', 'actions']">
+        *matRowDef="let ruleParmRow; columns: ['management', 'LIMIT_NO', 'LIMIT_TYPE_CODE', 'STOP_FLAG', 'CREDIT_LIMIT', 'LIMIT_START_DATE', 'LIMIT_END_DATE', 'STATUS_FLAG', 'actions']">
       </mat-row>
 
     </mat-table>
