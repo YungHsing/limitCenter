@@ -220,10 +220,6 @@ export class F01003scn1Component implements OnInit {
   }
 
   checkButton(statusFlag: string) {
-    if (statusFlag === 'N') {
-      return true;
-    } else {
-      return false;
-    }
+    return statusFlag === 'N'? true : false;
   }
 }

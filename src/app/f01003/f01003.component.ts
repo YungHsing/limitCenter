@@ -150,11 +150,7 @@ export class F01003Component implements OnInit, AfterViewInit {
   }
 
   checkButton(statusFlag: string) {
-    if (statusFlag === 'N') {
-      return true;
-    } else {
-      return false;
-    }
+    return statusFlag === 'N'? true : false;
   }
 
 }
