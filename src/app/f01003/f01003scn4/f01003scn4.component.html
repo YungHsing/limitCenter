@@ -96,17 +96,17 @@
                 <mat-cell *matCellDef="let row">{{ row.reviewEmpno }}</mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="ACTION_SORT">
-                <mat-header-cell *matHeaderCellDef>行為順序</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.actionSort }}</mat-cell>
+            <ng-container matColumnDef="AGREE_FLAG">
+                <mat-header-cell *matHeaderCellDef>是否核准</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.agreeFlag }}</mat-cell>
             </ng-container>
 
             <mat-header-row
-                *matHeaderRowDef="['LIMIT_NO', 'COLUMN_NAME', 'COLUMN_DESC', 'BEFORE_VAL', 'AFTER_VAL', 'REASON_CONTENT', 'EMPNO', 'MANAGE_DATE', 'REVIEW_EMPNO', 'ACTION_SORT']; sticky: true">
+                *matHeaderRowDef="['LIMIT_NO', 'COLUMN_NAME', 'COLUMN_DESC', 'BEFORE_VAL', 'AFTER_VAL', 'REASON_CONTENT', 'EMPNO', 'MANAGE_DATE', 'REVIEW_EMPNO', 'AGREE_FLAG']; sticky: true">
             </mat-header-row>
 
             <mat-row
-                *matRowDef="let ruleParmRow; columns: ['LIMIT_NO', 'COLUMN_NAME', 'COLUMN_DESC', 'BEFORE_VAL', 'AFTER_VAL', 'REASON_CONTENT', 'EMPNO', 'MANAGE_DATE', 'REVIEW_EMPNO', 'ACTION_SORT']">
+                *matRowDef="let ruleParmRow; columns: ['LIMIT_NO', 'COLUMN_NAME', 'COLUMN_DESC', 'BEFORE_VAL', 'AFTER_VAL', 'REASON_CONTENT', 'EMPNO', 'MANAGE_DATE', 'REVIEW_EMPNO', 'AGREE_FLAG']">
             </mat-row>
 
         </mat-table>

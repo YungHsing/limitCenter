@@ -21,7 +21,7 @@ interface sysCode {
 })
 export class F01003scn4Component implements OnInit {
 
-  constructor(private route: ActivatedRoute, public f01003Service: F01003Service, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private datePipe: DatePipe, public dialog: MatDialog) { 
+  constructor(private route: ActivatedRoute, public f01003Service: F01003Service, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private datePipe: DatePipe, public dialog: MatDialog) {
      //設定異動日期選擇最多不超過三個月
      const currentYear = new Date().getFullYear();
      const currentMonth = new Date().getMonth();
@@ -68,7 +68,7 @@ export class F01003scn4Component implements OnInit {
     let formData: FormData = new FormData();
     formData.append('CUSTOMER_ID', this.CUSTOMER_ID);
     formData.append('NATIONAL_ID', this.NATIONAL_ID);
-    let baseUrl = 'f01/f01003FrozenOption';
+    let baseUrl = 'f01/f01003RecordOption';
     this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
       console.log(data.rspBody)
       for (const jsonObj of data.rspBody.limitNoOption) {
@@ -107,10 +107,17 @@ export class F01003scn4Component implements OnInit {
       let formData = new FormData();
       let jsonStr = JSON.stringify(this.manageRecordForm.value);
       let jsonObj = JSON.parse(jsonStr);
-      let startDate = new Date(this.manageRecordForm.value.START_DATE);
-      let endDate = new Date(this.manageRecordForm.value.END_DATE);
-      jsonObj.START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
-      jsonObj.END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
+
+      if (this.manageRecordForm.value.START_DATE != null && this.manageRecordForm.value.START_DATE != '') {
+        let startDate = new Date(this.manageRecordForm.value.START_DATE);
+        jsonObj.START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
+      } else { jsonObj.START_DATE = ''; }
+
+      if (this.manageRecordForm.value.END_DATE != null && this.manageRecordForm.value.END_DATE != '') {
+        let endDate = new Date(this.manageRecordForm.value.END_DATE);
+        jsonObj.END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
+      } else { jsonObj.END_DATE = ''; }
+
       for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
 
       let baseUrl = 'f01/f01003RecordSearch';

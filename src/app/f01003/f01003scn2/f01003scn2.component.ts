@@ -62,15 +62,17 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
     });
 
     let formData: FormData = new FormData();
+    formData.append('CUSTOMER_ID', this.CUSTOMER_ID);
+    formData.append('NATIONAL_ID', this.NATIONAL_ID);
     let baseUrl = 'f01/f01003ReserveOption';
     this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
+
       for (const jsonObj of data.rspBody.actionTypeOption) {
         const codeNo = jsonObj['codeNo'];
         const codeDesc = jsonObj['codeDesc'];
         this.actionTypeOption.push({ value: codeNo, viewValue: codeDesc })
       }
-    });
-    this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
+
       for (const jsonObj of data.rspBody.limitNoOption) {
         const limitNo = jsonObj['limitNo'];
         this.limitNoOption.push({ value: limitNo, viewValue: limitNo })
@@ -123,15 +125,16 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
     } else {
       const dialogRef = this.dialog.open(F01003scn2wopenComponent, {
         data: {
+          cid: this.CUSTOMER_ID,
           isActive: true,
-          limitNo: this.drawdownReleaseForm.value.LIMIT_NO,
+          limitNo: this.drawdownReleaseForm.value.LIMIT_NO
         }
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result != null && result.event == 'success') { this.refreshTable(); }
       });
     }
-    
+
   }
 
   release() {

@@ -5,7 +5,7 @@
     <ng-container matColumnDef="editBtn">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button [disabled]="checkButton(element.statusFlag)" mat-raised-button color="success" *ngIf="element.levelNo == '1'; else canUse" disabled>修改</button>
+        <button mat-raised-button color="success" *ngIf="element.levelNo == '1'; else canUse" disabled>修改</button>
         <ng-template #canUse>
           <button [disabled]="checkButton(element.statusFlag)" mat-raised-button color="success"
             (click) = "editContent(element)">修改
@@ -17,7 +17,7 @@
     <ng-container matColumnDef="childBtn">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button [disabled]="checkButton(element.statusFlag)" mat-raised-button color="success" *ngIf="element.levelNo == '1'; else canUse" disabled>新增子額度</button>
+        <button mat-raised-button color="success" *ngIf="element.levelNo == '1'; else canUse" disabled>新增子額度</button>
         <ng-template #canUse>
           <button [disabled]="checkButton(element.statusFlag)" mat-raised-button color="success" (click) = "addChildLimit(element)">新增子額度</button>
         </ng-template>
@@ -144,5 +144,5 @@
     <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup" (click)="groupHeaderClick(row)"> </tr>
 
   </table>
-  
+
 </cdk-virtual-scroll-viewport>

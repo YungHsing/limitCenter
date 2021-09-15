@@ -42,6 +42,7 @@ export class F01003scn2wopenComponent implements OnInit {
 
   ngOnInit(): void {
     let formData: FormData = new FormData();
+    formData.append('CUSTOMER_ID', this.data.cid);
     let baseUrl = 'f01/f01003ReserveOption';
     let limitNo = this.data.limitNo;
     let isActive = this.data.isActive;
