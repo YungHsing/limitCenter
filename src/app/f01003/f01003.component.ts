@@ -18,7 +18,9 @@ import { F01003scn0Component } from './f01003scn0/f01003scn0.component';
 })
 export class F01003Component implements OnInit, AfterViewInit {
 
-  constructor(private router: Router, private f01003Service: F01003Service, public dialog: MatDialog, private fb: FormBuilder, private datePipe: DatePipe) { }
+  constructor(private router: Router, private f01003Service: F01003Service, public dialog: MatDialog, private fb: FormBuilder, private datePipe: DatePipe) { 
+    
+  }
 
   limitSearchForm: FormGroup = this.fb.group({
     CUSTOMER_ID: ['', [Validators.maxLength(30)]],
@@ -44,7 +46,7 @@ export class F01003Component implements OnInit, AfterViewInit {
   isDisabled = true;
 
   ngOnInit(): void {
-    
+
   }
 
   ngAfterViewInit(): void {
@@ -69,14 +71,14 @@ export class F01003Component implements OnInit, AfterViewInit {
       let endDate = new Date(this.limitSearchForm.value.LIMIT_END_DATE);
       jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
       jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
-    } for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }
+    } for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
 
     let baseUrl = 'f01/f01003level2query';
     await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
       this.totalCount = data.rspBody.size;
       this.limitDataSource.data = data.rspBody.items;
       this.isReadOnly = true;
-      
+
     });
   }
 
@@ -89,7 +91,7 @@ export class F01003Component implements OnInit, AfterViewInit {
       await this.getViewDataList();
       let msgStr: string = this.limitDataSource.data.length == 0 ? '查無資料!' : '查詢成功!';
       this.dialog.open(F01003confirmComponent, { data: { msgStr: msgStr, display: true } });
-      if(this.limitDataSource.data.length == 0) {this.isDisabled = false; }
+      if (this.limitDataSource.data.length == 0) { this.isDisabled = false; }
     }
   }
 
@@ -132,11 +134,14 @@ export class F01003Component implements OnInit, AfterViewInit {
     } else {
       const dialogRef = this.dialog.open(F01003addComponent, {
         data: {
-          CUSTOMER_ID : this.limitSearchForm.value.CUSTOMER_ID
+          CUSTOMER_ID: this.limitSearchForm.value.CUSTOMER_ID
         }
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (result != null && result.event == 'success') { this.refreshTable(); }
+        if (result != null && result.event == 'success') {
+          this.refreshTable();
+          this.isDisabled = true;
+        }
       });
     }
   }
@@ -150,7 +155,7 @@ export class F01003Component implements OnInit, AfterViewInit {
   }
 
   checkButton(statusFlag: string) {
-    return statusFlag === 'N'? true : false;
+    return statusFlag === 'N' ? true : false;
   }
 
 }

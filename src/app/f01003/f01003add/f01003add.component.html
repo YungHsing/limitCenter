@@ -44,10 +44,12 @@
         <td>
           <div class="form">
             <mat-form-field color="accent" class="example-form-field">
-              <mat-date-range-input [rangePicker]="rangePicker">
-                <input matStartDate formControlName="LIMIT_START_DATE" value="" placeholder="額度起日">
-                <input matEndDate formControlName="LIMIT_END_DATE" placeholder="額度訖日">
+              <mat-date-range-input [rangePicker]="rangePicker" [min]="minDate">
+                <input matStartDate formControlName="LIMIT_START_DATE" value="" placeholder="額度起日" required>
+                <input matEndDate formControlName="LIMIT_END_DATE" placeholder="額度訖日" required>
               </mat-date-range-input>
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_END_DATE')}}</mat-error>
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_START_DATE')}}</mat-error>
               <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
               <mat-date-range-picker #rangePicker>
                 <mat-date-range-picker-actions>
@@ -61,7 +63,8 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" type="number" placeholder="額度" formControlName="CREDIT_LIMIT">
+              <input matInput #input class="form-control" type="number" placeholder="額度" formControlName="CREDIT_LIMIT"
+                required>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>

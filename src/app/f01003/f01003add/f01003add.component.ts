@@ -19,7 +19,14 @@ export class F01003addComponent implements OnInit {
   limitTypeOption: sysCode[] =  [{value: 'P0001000000', viewValue: '個人限額'}];
   CurrencyOption: sysCode[] =  [{value: 'TWN', viewValue: '台幣'}];
   stopDateValue: Date;
-  constructor(public dialogRef: MatDialogRef<F01003addComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) { }
+  minDate: Date;
+  constructor(public dialogRef: MatDialogRef<F01003addComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) { 
+    //設定起日最早僅能選擇今日
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const currentDay = new Date().getDate();
+    this.minDate = new Date(currentYear, currentMonth, currentDay);
+  }
 
   addForm: FormGroup = this.fb.group({
     LEVEL_NO: ['2', [Validators.maxLength(1)]],
