@@ -45,7 +45,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent" class="example-form-field">
-              <input matInput [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE" value="" placeholder="額度訖日" disabled>
+              <input matInput [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE" placeholder="額度訖日" disabled>
               <mat-datepicker-toggle matSuffix [for]="endDateValue" >
               </mat-datepicker-toggle>
               <mat-datepicker #endDateValue disabled="false"></mat-datepicker>
@@ -170,7 +170,7 @@
             <button mat-button (click)="onNoClick()" tabindex="-1">取消</button>
           </div>
         </td>
-        
+
         <td>
           <div class="form">
             <mat-form-field color="accent">

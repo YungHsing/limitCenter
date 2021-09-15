@@ -42,7 +42,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
     STOP_DATE: [ {value: this.data.stopDate, disabled: true}, []],
     PROJECT_CODE: [ this.data.projectCode, [Validators.maxLength(10), Validators.minLength(10)]],
     LIMIT_START_DATE: [this.data.limitStartDate, []],
-    LIMIT_END_DATE: [this.data.limitEndDate, []],
+    LIMIT_END_DATE: [new Date(this.data.limitEndDate), []],
     LIMIT_TYPE_CODE: [{value: this.data.limitTypeCode, disabled: true}, [Validators.maxLength(11)]],
     LIMIT_NO: [this.data.limitNo, [Validators.maxLength(10)]],
     EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]],
@@ -52,7 +52,9 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
   });
 
   ngOnInit(): void {
+    console.log('test=' + new Date(this.data.limitEndDate));
     if (this.addForm.value.STOP_FLAG != 'N') {
+      this.addForm.patchValue({ STOP_DATE: new Date(this.data.stopDate) });
       this.addForm.controls['STOP_DATE'].enable();
       this.addForm.controls['STOP_CODE'].enable();
       this.addForm.controls['STOP_DESC'].enable();
