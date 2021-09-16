@@ -171,6 +171,7 @@ export class F01000Component implements OnInit {
     let jsonStr = JSON.stringify(rowIdArray);
     let jsonObj = JSON.parse(jsonStr);
     formData.append('rowIds', jsonObj);
+    formData.append('handleEmpNo', localStorage.getItem("empNo"));
     let baseUrl = 'f01/f01000Action';
     await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
       const childernDialogRef = this.dialog.open(F01000confirmComponent, {
@@ -195,6 +196,7 @@ export class F01000Component implements OnInit {
     let jsonStr = JSON.stringify(rowIdArray);
     let jsonObj = JSON.parse(jsonStr);
     formData.append('rowIds', jsonObj);
+    formData.append('handleEmpNo', localStorage.getItem("empNo"));
     let baseUrl = 'f01/f01000Delete';
     await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
       const childernDialogRef = this.dialog.open(F01000confirmComponent, {
@@ -212,13 +214,13 @@ export class F01000Component implements OnInit {
     let baseUrl = 'f01/f01000Query';
     await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
       this.LimitData = data.rspBody.list;
-      console.log(this.LimitData)
     });
 
     this.dataSource.data = this.addGroups(this.LimitData, this.groupByColumns);
     for (const jsonObj of this.dataSource.data) {
       this.chkArray.push({ value: jsonObj['ROWID'] != undefined ? jsonObj['ROWID'] : '', completed: false });
     }
+    this.setAll(false);
   }
 
   //載入選項

@@ -17,8 +17,8 @@
         <ng-container matColumnDef="AGREE_FLAG"  >
             <th mat-header-cell *matHeaderCellDef>
                 <mat-checkbox color="primary" (change)="setAll($event.checked)">全選</mat-checkbox>
-            </th>>
-            <td mat-cell *matCellDef="let element; let i = index;"> {{i}}
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index;">
                 <mat-checkbox [(ngModel)]="chkArray[i].completed" color="primary" (change)="checkChecked($event.checked, i, dataSource)"></mat-checkbox>
             </td>>
         </ng-container>
