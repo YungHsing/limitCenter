@@ -1,12 +1,19 @@
 import { DataRowOutlet } from '@angular/cdk/table';
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { element } from 'protractor';
+import { forkJoin } from 'rxjs';
 import { F01000Service } from './f01000.service';
+import { F01000confirmComponent } from './f01000confirm/f01000confirm.component';
 import { ManageRecordModule } from './manage-record.module';
-
+// checkBox框架
+interface checkBox {
+  value: string;
+  completed: boolean;
+}
 export class Group {
   level: number = 0;
   parent: Group;
@@ -24,42 +31,43 @@ export class Group {
 export class F01000Component implements OnInit {
 
   displayedColumns: string[] = [
-    'editBtn',
-    'childBtn',
-    'limitNo',
-    'columnName',
-    'columnDesc',
-    'beforeVal',
-    'afterVal',
-    'reasonContent',
-    'empno',
-    'manageDate',
-    'reviewEmpno',
-    'actionSort'
+    'AGREE_FLAG',
+    'LIMIT_NO',
+    'COLUMN_DESC',
+    'BEFORE_VAL',
+    'AFTER_VAL',
+    'REASON_CONTENT',
+    'EMPNO',
+    'MANAGE_DATE',
+    'REVIEW_EMPNO',
+    'ACTION_SORT'
   ];
 
   public dataSource = new MatTableDataSource<ManageRecordModule | Group>([]);
 
-  groupByColumns: string[] = ['limitNo'];
+  groupByColumns: string[] = ['ACTION_SORT'];
 
-  constructor(private route: ActivatedRoute, public f01000Service: F01000Service, private datePipe: DatePipe, public dialog: MatDialog,) { }
+  constructor(public dialogRef: MatDialogRef<F01000Component>, @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute, public f01000Service: F01000Service, private datePipe: DatePipe, public dialog: MatDialog,) { }
 
   CREDIT_LIMIT: string;
   LIMIT_START_DATE: string;
   LimitData: ManageRecordModule[];
+  chkArray: checkBox[] = [];
 
   async ngOnInit(): Promise<void> {
-    this.route.queryParams.subscribe(params => {
-      this.CREDIT_LIMIT = params['CREDIT_LIMIT'];
-      this.LIMIT_START_DATE = this.datePipe.transform(params['LIMIT_START_DATE'], "yyyy/MM/dd");
-    });
     var formData = new FormData();
-    let baseUrl = 'f01/f01000query';
-    // await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
-    //   this.LimitData = data.rspBody.items;
-    // });
+    formData.append('page', '1');
+    formData.append('per_page', '10');
 
-    // this.dataSource.data = this.addGroups(this.LimitData, this.groupByColumns);
+    let baseUrl = 'f01/f01000Query';
+    await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
+      this.LimitData = data.rspBody.list;
+    });
+
+    this.dataSource.data = this.addGroups(this.LimitData, this.groupByColumns);
+    for (const jsonObj of this.dataSource.data) {
+      this.chkArray.push({ value: jsonObj['ROWID'] != undefined ? jsonObj['ROWID'] : '', completed: false });
+    }
     this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
   }
 
@@ -91,54 +99,53 @@ export class F01000Component implements OnInit {
     this.dataSource.filter = performance.now().toString(); // hack to trigger filter refresh
   }
 
-  // addGroups(data: any[], groupByColumns: string[]): any[] {
-  //   var rootGroup = new Group();
-  //   return this.getSublevel(data, 0, groupByColumns, rootGroup);
-  // }
+  addGroups(data: any[], groupByColumns: string[]): any[] {
+    var rootGroup = new Group();
+    return this.getSublevel(data, 0, groupByColumns, rootGroup);
+  }
 
-  // getSublevel(
-  //   data: any[],
-  //   level: number,
-  //   groupByColumns: string[],
-  //   parent: Group
-  // ): any[] {
-  //   // Recursive function, stop when there are no more levels.
-  //   if (level >= groupByColumns.length) return data;
+  getSublevel(
+    data: any[],
+    level: number,
+    groupByColumns: string[],
+    parent: Group
+  ): any[] {
+    // Recursive function, stop when there are no more levels.
+    if (level >= groupByColumns.length) return data;
+    var groups = this.uniqueBy(
+      data.map(row => {
+        var result = new Group();
+        result.level = level + 1;
+        result.parent = parent;
+        for (var i = 0; i <= level; i++)
+          result[groupByColumns[i]] = row[groupByColumns[i]];
+        return result;
+      }),
+      JSON.stringify
+    );
 
-  //   var groups = this.uniqueBy(
-  //     data.map(row => {
-  //       var result = new Group();
-  //       result.level = level + 1;
-  //       result.parent = parent;
-  //       for (var i = 0; i <= level; i++)
-  //         result[groupByColumns[i]] = row[groupByColumns[i]];
-  //       return result;
-  //     }),
-  //     JSON.stringify
-  //   );
+    const currentColumn = groupByColumns[level];
 
-  //   const currentColumn = groupByColumns[level];
-
-  //   var subGroups = [];
-  //   groups.forEach(group => {
-  //     let rowsInGroup = data.filter(
-  //       row => group[currentColumn] === row[currentColumn]
-  //     );
-  //     let subGroup = this.getSublevel(
-  //       rowsInGroup,
-  //       level + 1,
-  //       groupByColumns,
-  //       group
-  //     );
-  //     subGroup.unshift(group);
-  //     subGroups = subGroups.concat(subGroup);
-  //   });
-  //   return subGroups;
-  // } 
+    var subGroups = [];
+    groups.forEach(group => {
+      let rowsInGroup = data.filter(
+        row => group[currentColumn] === row[currentColumn]
+      );
+      let subGroup = this.getSublevel(
+        rowsInGroup,
+        level + 1,
+        groupByColumns,
+        group
+      );
+      subGroup.unshift(group);
+      subGroups = subGroups.concat(subGroup);
+    });
+    return subGroups;
+  }
 
   uniqueBy(a, key) {
     var seen = {};
-    return a.filter(function(item) {
+    return a.filter(function (item) {
       var k = key(item);
       return seen.hasOwnProperty(k) ? false : (seen[k] = true);
     });
@@ -148,53 +155,87 @@ export class F01000Component implements OnInit {
     return item.level;
   }
 
-  editContent(row: any) {
-      const dialogRef = this.dialog.open(F01000Component, {
-        data: {
-          levelNo: row.levelNo,
-          upLevel: row.upLevel,
-          nationalId: row.nationalId,
-          customerId: row.customerId,
-          creditLimit: row.creditLimit,
-          currencyType: row.currencyType,
-          stopFlag: row.stopFlag,
-          cancelFlag: row.cancelFlag,
-          cycleType: row.cycleType,
-          stopDate: row.stopDate,
-          limitStartDate: row.limitStartDate,
-          limitEndDate: row.limitEndDate,
-          limitTypeCode: row.limitTypeCode,
-          projectCode: row.projectCode == null ? '' : row.projectCode,
-          limitNo: row.limitNo
-        }
+  async approve() {
+    let count = 0;
+    for (const obj of this.chkArray) { if(obj.completed == true) { count = count + 1; }  }
+    if(count == 0) {
+      const childernDialogRef = this.dialog.open(F01000confirmComponent, {
+        data: { msgStr: "請至少勾選一項" }
       });
-      // dialogRef.afterClosed().subscribe(result => {
-      //   if (result != null && result.event == 'success') { this.refreshTable(); }
-      // });
-  }
+      return;
+    }
+    var rowIdArray: string[] = new Array;
+    let formData = new FormData();
 
-  addChildLimit(row: any) {
-    const dialogRef = this.dialog.open(F01000Component, {
-      data: {
-        levelNo: Number(row.levelNo) + 1,
-        upLevel: row.limitNo,
-        nationalId: row.nationalId,
-        customerId: row.customerId,
-        limitTypeCode: row.limitTypeCode
-      }
+    for (const obj of this.chkArray) { if (obj.completed && obj.value != '') { rowIdArray.push(obj.value); } }
+    let jsonStr = JSON.stringify(rowIdArray);
+    let jsonObj = JSON.parse(jsonStr);
+    formData.append('rowIds', jsonObj);
+    let baseUrl = 'f01/f01000Action';
+    await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
+      const childernDialogRef = this.dialog.open(F01000confirmComponent, {
+        data: { msgStr: data.rspMsg }
+      });
     });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result != null && result.event == 'success') { this.refreshTable(); }
-    // });
+    this.refreshTable();  
   }
 
-  // private async refreshTable() {
-  //   var formData = new FormData();
-  //   let baseUrl = 'f01/f01000query';
-  //   // await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
-  //   //   this.LimitData = data.rspBody.items;
-  //   // });
-  //   this.dataSource.data = this.addGroups(this.LimitData, this.groupByColumns);
-  //   this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
-  // }
+  async notApprove() {
+    let count = 0;
+    for (const obj of this.chkArray) { if(obj.completed == true) { count = count + 1; }  }
+    if(count == 0) {
+      const childernDialogRef = this.dialog.open(F01000confirmComponent, {
+        data: { msgStr: "請至少勾選一項" }
+      });
+      return;
+    }
+    var rowIdArray: string[] = new Array;
+    let formData = new FormData();
+    for (const obj of this.chkArray) { if (obj.completed && obj.value != '') { rowIdArray.push(obj.value); } }
+    let jsonStr = JSON.stringify(rowIdArray);
+    let jsonObj = JSON.parse(jsonStr);
+    formData.append('rowIds', jsonObj);
+    let baseUrl = 'f01/f01000Delete';
+    await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
+      const childernDialogRef = this.dialog.open(F01000confirmComponent, {
+        data: { msgStr: data.rspMsg }
+      });
+    });
+    this.refreshTable();
+  }
+
+  async refreshTable(): Promise<void> {
+    var formData = new FormData();
+    formData.append('page', '1');
+    formData.append('per_page', '10');
+
+    let baseUrl = 'f01/f01000Query';
+    await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
+      this.LimitData = data.rspBody.list;
+      console.log(this.LimitData)
+    });
+
+    this.dataSource.data = this.addGroups(this.LimitData, this.groupByColumns);
+    for (const jsonObj of this.dataSource.data) {
+      this.chkArray.push({ value: jsonObj['ROWID'] != undefined ? jsonObj['ROWID'] : '', completed: false });
+    }
+  }
+
+  //載入選項
+  setAll(completed: boolean) {
+    for (const obj of this.chkArray) {
+      obj.completed = completed;
+    }
+  }
+
+  // 檢查ActionSort=2的需要一同打勾
+  checkChecked(completed: boolean, index: number, dataSource: any) {
+    if (dataSource.data[index].ACTION_SORT == 2) {
+      for (let i = 0; i < dataSource.data.length; i++) {
+        if (dataSource.data[i].ACTION_SORT == 2) {
+          this.chkArray[i].completed = completed;
+        }
+      }
+    }
+  }
 }
