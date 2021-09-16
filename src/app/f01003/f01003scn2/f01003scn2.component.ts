@@ -92,6 +92,16 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
     };
   }
 
+  getOptionDesc(codeVal: string): string {
+    for (const data of this.actionTypeOption) {
+      if (data.value == codeVal) {
+        return data.viewValue;
+        break;
+      }
+    }
+    return codeVal;
+  }
+
   async onSubmit() {
     this.submitted = true;
     if (this.drawdownReleaseForm.value.LIMIT_NO == undefined && this.drawdownReleaseForm.value.ACTION_TYPE == undefined) {
