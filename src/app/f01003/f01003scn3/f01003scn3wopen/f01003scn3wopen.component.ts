@@ -63,9 +63,6 @@ export class F01003scn3wopenComponent implements OnInit {
           const frozenDesc = jsonObj['codeDesc'];
           this.reasonCodeOption.push({ value: frozenNo, viewValue: frozenDesc })
         }
-
-        // //等user提供原因碼後刪除
-        // this.reasonCodeOption.push({ value: "1", viewValue: "原因碼1" })
       });
     } else {
       this.unfrozen = false;

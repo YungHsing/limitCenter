@@ -153,4 +153,33 @@ export class F01003scn3Component implements OnInit {
       });
   }
 
+  getOptionDesc(codeVal: string): string {
+    for (const data of this.actionTypeOption) {
+      if (data.value == codeVal) {
+        return data.viewValue;
+        break;
+      }
+    }
+    return codeVal;
+  }
+
+  getDesc(codeVal: string): string {
+    console.log(codeVal);
+    let formData: FormData = new FormData();
+    formData.append("ACTION_TYPE", '4');
+
+    let baseUrl = 'f01/f01003FrozenNoOption';
+      this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
+        console.log("test" +data.rspBody.frozenNoOption)
+        // for (const jsonObj of data.rspBody.frozenNoOption) {
+        //   const frozenNo = jsonObj['codeNo'];
+        //   const frozenDesc = jsonObj['codeDesc'];
+        //   if (frozenNo == codeVal) {
+        //     return data.viewValue;
+        //     break;
+        //   }
+        // }
+      });
+      return codeVal;
+  }
 }

@@ -49,6 +49,7 @@ export class F01000Component implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<F01000Component>, @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute, public f01000Service: F01000Service, private datePipe: DatePipe, public dialog: MatDialog,) { }
 
+  isChecked: boolean;
   CREDIT_LIMIT: string;
   LIMIT_START_DATE: string;
   LimitData: ManageRecordModule[];
@@ -221,6 +222,7 @@ export class F01000Component implements OnInit {
       this.chkArray.push({ value: jsonObj['ROWID'] != undefined ? jsonObj['ROWID'] : '', completed: false });
     }
     this.setAll(false);
+    this.isChecked = false;
   }
 
   //載入選項

@@ -154,8 +154,4 @@ export class F01003Component implements OnInit, AfterViewInit {
     this.router.navigate(['./F01003SCN0'], { queryParams: { NATIONAL_ID: nid, CUSTOMER_ID: cid, CREDIT_LIMIT: limitNum, LIMIT_START_DATE: startDate } });
   }
 
-  checkButton(statusFlag: string) {
-    return statusFlag === 'N' ? true : false;
-  }
-
 }
