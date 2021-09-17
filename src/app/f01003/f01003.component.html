@@ -51,7 +51,7 @@
           明細內容
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <button [disabled]="checkButton(row.statusFlag)" mat-raised-button color="success"  (click) = "getContent(row.nationalId, row.customerId, row.creditLimit, row.limitStartDate)">明細</button>
+          <button mat-raised-button color="success"  (click) = "getContent(row.nationalId, row.customerId, row.creditLimit, row.limitStartDate)">明細</button>
         </mat-cell>
       </ng-container>
 
