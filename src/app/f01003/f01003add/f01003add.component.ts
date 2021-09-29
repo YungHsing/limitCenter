@@ -20,7 +20,7 @@ export class F01003addComponent implements OnInit {
   CurrencyOption: sysCode[] =  [{value: 'TWN', viewValue: '台幣'}];
   stopDateValue: Date;
   minDate: Date;
-  constructor(public dialogRef: MatDialogRef<F01003addComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) { 
+  constructor(public dialogRef: MatDialogRef<F01003addComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) {
     //設定起日最早僅能選擇今日
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
@@ -30,7 +30,6 @@ export class F01003addComponent implements OnInit {
 
   addForm: FormGroup = this.fb.group({
     LEVEL_NO: ['2', [Validators.maxLength(1)]],
-    UP_LEVEL: ['Z00000001', [Validators.maxLength(9)]],
     CUSTOMER_ID: [this.data.CUSTOMER_ID, [Validators.maxLength(30)]],
     NATIONAL_ID: [this.data.NATIONAL_ID, [Validators.maxLength(30)]],
     CREDIT_LIMIT: ['', [Validators.maxLength(10)]],

@@ -106,11 +106,9 @@
       </tr>
       <tr>
         <td>
-          <div class="form">
-            <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="上層額度號" formControlName="UP_LEVEL" readonly>
-              <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
+          <div class="form" mat-dialog-actions>
+            <button mat-raised-button color="primary" [type]="submit" (click)="confirmAdd()">儲存</button>
+            <button mat-button (click)="onNoClick()" tabindex="-1">取消</button>
           </div>
         </td>
         <td>
@@ -133,14 +131,6 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="form" mat-dialog-actions>
-            <button mat-raised-button color="primary" [type]="submit" (click)="confirmAdd()">儲存</button>
-            <button mat-button (click)="onNoClick()" tabindex="-1">取消</button>
           </div>
         </td>
       </tr>
