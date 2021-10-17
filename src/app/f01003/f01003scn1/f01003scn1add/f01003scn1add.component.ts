@@ -12,7 +12,7 @@ interface sysCode {
 
 @Component({
   templateUrl: './f01003scn1add.component.html',
-  styleUrls: ['./f01003scn1add.component.css']
+  styleUrls: ['./f01003scn1add.component.css', '../../../../assets/css/child.css']
 })
 export class F01003scn1addComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class F01003scn1addComponent implements OnInit {
   stopDateValue: Date;
   DateValue: Date = new Date();
   minDate: Date;
-  constructor(public dialogRef: MatDialogRef<F01003scn1addComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) { 
+  constructor(public dialogRef: MatDialogRef<F01003scn1addComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) {
     this.minDate = new Date();
   }
 
@@ -47,7 +47,7 @@ export class F01003scn1addComponent implements OnInit {
     if (this.data.levelNo == '3') {
       this.limitTypeOption = [{value: 'P0001010000', viewValue: '個人有擔'}, {value: 'P0001020000', viewValue: '個人無擔'}];
     } else if(this.data.levelNo == '4' && this.data.limitTypeCode == 'P0001010000') {
-     
+
       this.limitTypeOption = [];
     } else if(this.data.levelNo == '4' && this.data.limitTypeCode == 'P0001020000') {
       this.limitTypeOption = [{value: 'P0001020100', viewValue: '無擔分期型限額'}, {value: 'P0001020200', viewValue: '無擔循環型限額'}];
@@ -104,7 +104,7 @@ export class F01003scn1addComponent implements OnInit {
       let endDate = new Date(this.addForm.value.LIMIT_END_DATE);
       jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
       for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }
-      
+
       let baseUrl = 'f01/f01003childAdd';
       msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
       const childernDialogRef = this.dialog.open(F01003confirmComponent, {
@@ -113,5 +113,5 @@ export class F01003scn1addComponent implements OnInit {
       if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
     }
   }
-  
+
 }

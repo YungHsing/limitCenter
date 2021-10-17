@@ -21,7 +21,7 @@ export class Group {
 @Component({
   selector: 'app-f01003scn1',
   templateUrl: './f01003scn1.component.html',
-  styleUrls: ['./f01003scn1.component.css']
+  styleUrls: ['./f01003scn1.component.css', '../../../assets/css/child.css']
 })
 export class F01003scn1Component implements OnInit {
 

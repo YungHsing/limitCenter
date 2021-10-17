@@ -9,6 +9,8 @@ import { F01001addComponent } from './f01001add/f01001add.component';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { F01001confirmComponent } from './f01001confirm/f01001confirm.component';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { Data } from '@angular/router';
 
 interface sysCode {
   value: string;
@@ -17,7 +19,7 @@ interface sysCode {
 @Component({
   selector: 'app-f01001',
   templateUrl: './f01001.component.html',
-  styleUrls: ['./f01001.component.css', '../../assets/css/f01.css']
+  styleUrls: ['./f01001.component.css', '../../assets/css/child.css']
 })
 export class F01001Component implements OnInit, AfterViewInit {
 
@@ -38,11 +40,16 @@ export class F01001Component implements OnInit, AfterViewInit {
 
   submitted = false;
   totalCount: any;
-  @ViewChild('paginator', { static: true }) paginator: MatPaginator;
-  @ViewChild('sortTable', { static: true }) sortTable: MatSort;
-  currentPage: PageEvent;
-  currentSort: Sort;
-  limitDataSource = new MatTableDataSource<any>();
+  // @ViewChild('paginator', { static: true }) paginator: MatPaginator;
+  // @ViewChild('sortTable', { static: true }) sortTable: MatSort;
+  // currentPage: PageEvent;
+  // currentSort: Sort;
+  limitDataSource: Data[] = [];
+  total = 1;
+  loading = false;
+  pageSize = 10;
+  pageIndex = 1;
+
 
   elements: any = [
     {LIMIT_NO: 'P2000000001', NATIONAL_ID: 'A123456789', CUSTOMER_ID: 'A123456789', LIMIT_TYPE_CODE: 'P0001000000', STOP_FLAG: 'N', CREDIT_LIMIT: '3,000,000', LIMIT_START_DATE: '2021/08/24', LIMIT_END_DATE: '2031/08/24'},
@@ -52,23 +59,23 @@ export class F01001Component implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.totalCount = 3;
-    this.limitDataSource.data = this.elements;
+    this.limitDataSource = this.elements;
   }
 
   ngAfterViewInit(): void {
-    this.currentPage = {
-      pageIndex: 0,
-      pageSize: 5,
-      length: null
-    };
-    this.currentSort = {
-      active: '',
-      direction: ''
-    };
-    this.paginator.page.subscribe((page: PageEvent) => {
-      this.currentPage = page;
-      this.getViewDataList();
-    });
+    // this.currentPage = {
+    //   pageIndex: 0,
+    //   pageSize: 5,
+    //   length: null
+    // };
+    // this.currentSort = {
+    //   active: '',
+    //   direction: ''
+    // };
+    // this.paginator.page.subscribe((page: PageEvent) => {
+    //   this.currentPage = page;
+    //   this.getViewDataList();
+    // });
   }
 
   getViewDataList() {
@@ -85,12 +92,12 @@ export class F01001Component implements OnInit, AfterViewInit {
       this.dialog.open(F01001confirmComponent, { data: { msgStr: '請選擇一項查詢!' } });
       return false;
     } else {
-      this.currentPage = {
-        pageIndex: 0,
-        pageSize: 5,
-        length: null
-      };
-      this.paginator.firstPage();
+      // this.currentPage = {
+      //   pageIndex: 0,
+      //   pageSize: 5,
+      //   length: null
+      // };
+      // this.paginator.firstPage();
       this.getViewDataList();
     }
   }
@@ -102,14 +109,14 @@ export class F01001Component implements OnInit, AfterViewInit {
     this.registrationForm.patchValue({ createdate_end: '' });
     this.registrationForm.patchValue({ ban: '' });
     this.registrationForm.patchValue({ owner: '' });
-    this.currentPage = {
-      pageIndex: 0,
-      pageSize: 10,
-      length: null
-    };
+    // this.currentPage = {
+    //   pageIndex: 0,
+    //   pageSize: 10,
+    //   length: null
+    // };
     this.totalCount = 0;
-    this.paginator.firstPage();
-    this.limitDataSource.data = null;
+    // this.paginator.firstPage();
+    this.limitDataSource = null;
   }
 
   setTimes() {
@@ -125,7 +132,7 @@ export class F01001Component implements OnInit, AfterViewInit {
   }
 
   changeSort(sortInfo: Sort) {
-    this.currentSort = sortInfo;
+    // this.currentSort = sortInfo;
     this.getViewDataList();
   }
 
@@ -147,5 +154,12 @@ export class F01001Component implements OnInit, AfterViewInit {
 
   getContent(nid: string, cid: string) {
 
+  }
+
+  onQueryParamsChange(params: NzTableQueryParams): void {
+    const { pageSize, pageIndex } = params;
+    this.pageSize = pageSize;
+    this.pageIndex = pageIndex;
+    // this.selectBlockList(this.pageIndex, this.pageSize);
   }
 }

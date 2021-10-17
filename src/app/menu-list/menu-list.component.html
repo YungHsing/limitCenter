@@ -1,24 +1,39 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="line_bank_form_header_title_color" style="position:fixed;z-index:50">
   <mat-toolbar-row>
-    <img src="assets\images\LineBank.png" width="10%" (click)="goHome()">
+    <img src="assets\images\LineBank.png" width="14%" (click)="goHome()">
     <button mat-button [matMenuTriggerFor]="aboveMenu" *ngFor="let menu of getMenu()">
       {{menu.getTitle()}}
       <mat-menu #aboveMenu="matMenu" yPosition="below">
         <button mat-menu-item *ngFor="let map of menu.getMenuList() | keyvalue: returnZero" [routerLink]="map.value">{{map.key}}</button>
       </mat-menu>
     </button>
+
+    <!-- <button mat-button [matMenuTriggerFor]="aboveMenu" *ngFor="let menu of getMenu()"
+      style="margin: 0px 20px; text-align: center;">
+      <mat-icon style="display:inline-block;position:relative;bottom:7px">{{menu.getIcon()}}</mat-icon>
+      {{menu.getTitle()}}
+      <mat-menu #aboveMenu="matMenu" yPosition="below" style="font-size:25px">
+        <button mat-menu-item *ngFor="let map of menu.getMenuList() | keyvalue: returnZero" [routerLink]="map.value">
+          {{map.key}}
+        </button>
+      </mat-menu>
+    </button> -->
     <span class="example-spacer"></span>
     使用者：{{empNo}}
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User">
-      <mat-icon>account_box</mat-icon>
+    <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User"> -->
+      <!-- <mat-icon>account_box</mat-icon> -->
+
+
+      <mat-icon [matMenuTriggerFor]="menu" aria-label="User" style="position: absolute; top:16px;right:20px">
+        xxwmore_horiz</mat-icon>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="logOut()">
           <mat-icon>exit_to_app</mat-icon>
           <span>登出</span>
         </button>
       </mat-menu>
-    </button>
+    <!-- </button> -->
   </mat-toolbar-row>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<router-outlet class="router" style="padding-top: 90px;"></router-outlet>
 

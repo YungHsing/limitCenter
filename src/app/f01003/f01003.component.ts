@@ -5,7 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { Data, Router } from '@angular/router';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { F01003Service } from './f01003.service';
 import { F01003addComponent } from './f01003add/f01003add.component';
 import { F01003confirmComponent } from './f01003confirm/f01003confirm.component';
@@ -14,12 +15,12 @@ import { F01003scn0Component } from './f01003scn0/f01003scn0.component';
 @Component({
   selector: 'app-f01003',
   templateUrl: './f01003.component.html',
-  styleUrls: ['./f01003.component.css', '../../assets/css/f01.css']
+  styleUrls: ['./f01003.component.css', '../../assets/css/child.css']
 })
 export class F01003Component implements OnInit, AfterViewInit {
 
-  constructor(private router: Router, private f01003Service: F01003Service, public dialog: MatDialog, private fb: FormBuilder, private datePipe: DatePipe) { 
-    
+  constructor(private router: Router, private f01003Service: F01003Service, public dialog: MatDialog, private fb: FormBuilder, private datePipe: DatePipe) {
+
   }
 
   limitSearchForm: FormGroup = this.fb.group({
@@ -27,8 +28,8 @@ export class F01003Component implements OnInit, AfterViewInit {
     NATIONAL_ID: ['', [Validators.maxLength(30)]],
     LIMIT_START_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     LIMIT_END_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],
-    pageIndex: ['', [Validators.maxLength(3)]],
-    pageSize: ['', [Validators.maxLength(3)]]
+    // pageIndex: ['', [Validators.maxLength(3)]],
+    // pageSize: ['', [Validators.maxLength(3)]]
   });
 
   formControl = new FormControl('', [
@@ -37,28 +38,32 @@ export class F01003Component implements OnInit, AfterViewInit {
 
   submitted = false;
   totalCount: any;
-  @ViewChild('paginator', { static: true }) paginator: MatPaginator;
-  @ViewChild('sortTable', { static: true }) sortTable: MatSort;
-  currentPage: PageEvent;
-  currentSort: Sort;
-  limitDataSource = new MatTableDataSource<any>();
+  // @ViewChild('paginator', { static: true }) paginator: MatPaginator;
+  // @ViewChild('sortTable', { static: true }) sortTable: MatSort;
+  // currentPage: PageEvent;
+  // currentSort: Sort;
+  limitDataSource: Data[] = [];
   isReadOnly = false;
   isDisabled = true;
+  total = 1;
+  loading = false;
+  pageSize = 10;
+  pageIndex = 1;
 
   ngOnInit(): void {
 
   }
 
   ngAfterViewInit(): void {
-    this.currentPage = {
-      pageIndex: 0,
-      pageSize: 5,
-      length: null
-    };
-    this.currentSort = {
-      active: '',
-      direction: ''
-    };
+    // this.currentPage = {
+    //   pageIndex: 0,
+    //   pageSize: 5,
+    //   length: null
+    // };
+    // this.currentSort = {
+    //   active: '',
+    //   direction: ''
+    // };
   }
 
   async getViewDataList(): Promise<void> {
@@ -76,9 +81,8 @@ export class F01003Component implements OnInit, AfterViewInit {
     let baseUrl = 'f01/f01003level2query';
     await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
       this.totalCount = data.rspBody.size;
-      this.limitDataSource.data = data.rspBody.items;
+      this.limitDataSource = data.rspBody.items;
       this.isReadOnly = true;
-
     });
   }
 
@@ -89,9 +93,9 @@ export class F01003Component implements OnInit, AfterViewInit {
       return false;
     } else {
       await this.getViewDataList();
-      let msgStr: string = this.limitDataSource.data.length == 0 ? '查無資料!' : '查詢成功!';
+      let msgStr: string = this.limitDataSource.length == 0 ? '查無資料!' : '查詢成功!';
       this.dialog.open(F01003confirmComponent, { data: { msgStr: msgStr, display: true } });
-      if (this.limitDataSource.data.length == 0) { this.isDisabled = false; }
+      if (this.limitDataSource.length == 0) { this.isDisabled = false; }
     }
   }
 
@@ -100,13 +104,13 @@ export class F01003Component implements OnInit, AfterViewInit {
     this.limitSearchForm.patchValue({ NATIONAL_ID: '' });
     this.limitSearchForm.patchValue({ LIMIT_START_DATE: '' });
     this.limitSearchForm.patchValue({ LIMIT_END_DATE: '' });
-    this.currentPage = {
-      pageIndex: 0,
-      pageSize: 10,
-      length: null
-    };
+    // this.currentPage = {
+    //   pageIndex: 0,
+    //   pageSize: 10,
+    //   length: null
+    // };
     this.totalCount = 0;
-    this.limitDataSource.data = null;
+    this.limitDataSource = null;
     this.isReadOnly = false;
     this.isDisabled = true;
   }
@@ -123,7 +127,7 @@ export class F01003Component implements OnInit, AfterViewInit {
   }
 
   changeSort(sortInfo: Sort) {
-    this.currentSort = sortInfo;
+    // this.currentSort = sortInfo;
     this.getViewDataList();
   }
 
@@ -154,4 +158,10 @@ export class F01003Component implements OnInit, AfterViewInit {
     this.router.navigate(['./F01003SCN0'], { queryParams: { NATIONAL_ID: nid, CUSTOMER_ID: cid, CREDIT_LIMIT: limitNum, LIMIT_START_DATE: startDate } });
   }
 
+  onQueryParamsChange(params: NzTableQueryParams): void {
+    const { pageSize, pageIndex } = params;
+    this.pageSize = pageSize;
+    this.pageIndex = pageIndex;
+    // this.getViewDataList(this.pageIndex, this.pageSize);
+  }
 }

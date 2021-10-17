@@ -6,7 +6,7 @@ import { F01003Service } from '../f01003.service';
 
 @Component({
   templateUrl: './f01003scn0.component.html',
-  styleUrls: ['./f01003scn0.component.css', '../../../assets/css/f01.css']
+  styleUrls: ['./f01003scn0.component.css', '../../../assets/css/child.css']
 })
 export class F01003scn0Component implements OnInit {
 

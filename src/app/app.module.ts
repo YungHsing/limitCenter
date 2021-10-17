@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { MaterialModule } from './material/material.module';
-
+import { NgZorroAntdModule } from './ngzorro/ng-zorro-antd.module';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { F03004Component } from './f03004/f03004.component';
 import { F03004confirmComponent } from './f03004/f03004confirm/f03004confirm.component';
@@ -95,7 +95,8 @@ export const TW_FORMATS = {
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgZorroAntdModule
   ],
   providers: [
     BnNgIdleService,

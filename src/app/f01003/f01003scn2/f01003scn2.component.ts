@@ -5,7 +5,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { F01003Service } from '../f01003.service';
 import { F01003confirmComponent } from '../f01003confirm/f01003confirm.component';
 import { F01003scn2wopenComponent } from './f01003scn2wopen/f01003scn2wopen.component';
@@ -19,7 +19,7 @@ interface sysCode {
 @Component({
   selector: 'app-f01003scn2',
   templateUrl: './f01003scn2.component.html',
-  styleUrls: ['./f01003scn2.component.css']
+  styleUrls: ['./f01003scn2.component.css', '../../../assets/css/child.css']
 })
 export class F01003scn2Component implements OnInit, AfterViewInit {
 
@@ -49,11 +49,15 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
 
   submitted = false;
   totalCount: any;
-  @ViewChild('paginator', { static: true }) paginator: MatPaginator;
-  @ViewChild('sortTable', { static: true }) sortTable: MatSort;
+  // @ViewChild('paginator', { static: true }) paginator: MatPaginator;
+  // @ViewChild('sortTable', { static: true }) sortTable: MatSort;
   currentPage: PageEvent;
   currentSort: Sort;
-  drawdownReleaseDataSource = new MatTableDataSource<any>();
+  drawdownReleaseDataSource: Data[] = [];
+  total = 1;
+  loading = false;
+  pageSize = 10;
+  pageIndex = 1;
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -116,10 +120,10 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
       let baseUrl = 'f01/f01003ReserveSearch';
       await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
         this.totalCount = data.rspBody.size;
-        this.drawdownReleaseDataSource.data = data.rspBody.items;
+        this.drawdownReleaseDataSource = data.rspBody.items;
       });
 
-      let msgStr: string = this.drawdownReleaseDataSource.data.length == 0 ? '查無資料!' : '查詢成功!';
+      let msgStr: string = this.drawdownReleaseDataSource.length == 0 ? '查無資料!' : '查詢成功!';
       this.dialog.open(F01003confirmComponent, { data: { msgStr: msgStr, display: true } });
     }
   }
@@ -177,7 +181,7 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
       let baseUrl = 'f01/f01003ReserveSearch';
       await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
         this.totalCount = data.rspBody.size;
-        this.drawdownReleaseDataSource.data = data.rspBody.items;
+        this.drawdownReleaseDataSource = data.rspBody.items;
       });
   }
 }

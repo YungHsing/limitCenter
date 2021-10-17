@@ -1,110 +1,76 @@
-<div class="container">
-  <th class="f01_th">個人額度維護</th>
-  <form [formGroup]="limitSearchForm" style="padding-left: 20px;">
-    <div class="f01_div">
-      <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">查詢</button>
-      <button type="clear" mat-raised-button color="primary" (click)="cleanToEmpty()">清除</button>
+<div class="line_bank_bankground_color">
+  <form [formGroup]="limitSearchForm">
+    <!-- <div class="">個人額度維護</div> -->
+    <div style="padding-left: 20px; padding-top: 70px;">
+      <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="onSubmit()">查詢</button>
+      <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="cleanToEmpty()">清除</button>
     </div>
-    <table>
-      <br>
-      <mat-card class="matCard">
-        <mat-card-content>
-          <tr>
-            <th nowrap="nowrap">客戶編號 CID：</th>
-            <td>
-              <mat-form-field color="accent">
-                <input [readonly]="isReadOnly" matInput #input class="form-control" formControlName="CUSTOMER_ID">
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-              </mat-form-field>
-            </td>
-            <th nowrap="nowrap">額度起訖：</th>
-            <td>
-              <mat-form-field color="accent" class="example-form-field">
-                <mat-date-range-input [rangePicker]="rangePicker">
-                  <input matStartDate formControlName="LIMIT_START_DATE" value="" >
-                  <input matEndDate formControlName="LIMIT_END_DATE">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-                <mat-date-range-picker #rangePicker>
-                  <mat-date-range-picker-actions>
-                    <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
-                    <button mat-button matDateRangePickerCancel>取消</button>
-                  </mat-date-range-picker-actions>
-                </mat-date-range-picker>
-              </mat-form-field>
-            </td>
-          </tr>
-        </mat-card-content>
-      </mat-card>
-    </table>
+
+    <div class="line_bank_card_no_padding">
+      <div nz-row>
+        <div nz-col nzSpan="32">
+          <div style="padding:10px"><span class="form-title">客戶編號 CID：</span>
+            <input style="display: block;" formControlName="CUSTOMER_ID" value="">
+          </div>
+        </div>
+        <div nz-col nzSpan="32">
+          <div style="padding:10px"><span class="form-title">額度起訖：</span>
+            <mat-form-field color="accent" class="example-form-field">
+              <mat-date-range-input [rangePicker]="rangePicker">
+                <input matStartDate formControlName="LIMIT_START_DATE" value="">
+                <input matEndDate formControlName="LIMIT_END_DATE">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+              <mat-date-range-picker #rangePicker>
+                <mat-date-range-picker-actions>
+                  <button mat-raised-button color="primary" matDateRangePickerApply (click)="setTimes()">確定</button>
+                  <button mat-button matDateRangePickerCancel>取消</button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
   </form>
+
+  <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+    <div style="padding-left: 20px;;">
+      <button [disabled]="isDisabled" nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px; "
+        (click)="addNew()">新增</button>
+    </div>
+    <div class="line_bank_card_no_padding">
+      <!-- 表格 -->
+      <nz-table nzShowSizeChanger [nzData]="limitDataSource" [nzFrontPagination]="false" [nzSimple]="true"
+        (nzQueryParams)="onQueryParamsChange($event)" [nzLoading]="loading" [nzTotal]="total" [nzPageSize]="pageSize"
+        [nzPageIndex]="pageIndex" nzSize="small" [nzScroll]="{ x: '300px', y: '240;px' }" nzTitle="個人額度明細">
+        <thead>
+          <tr>
+            <th nzLeft class="table-header">明細內容</th>
+            <th class="table-header">額度編號</th>
+            <th class="table-header">額度類別代碼</th>
+            <th class="table-header">停用註記</th>
+            <th class="table-header">額度</th>
+            <th class="table-header">額度起日</th>
+            <th class="table-header">額度訖日</th>
+            <th class="table-header">是否已核准</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of limitDataSource">
+            <td nzLeft><button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+                (click)="getContent(data.nationalId, data.customerId, data.creditLimit, data.limitStartDate)">明細</button>
+            </td>
+            <td class="table-data">{{ data.limitNo }}</td>
+            <td class="table-data">{{ data.limitTypeCode }}</td>
+            <td class="table-data">{{ data.stopFlag }}</td>
+            <td class="table-data">{{ data.creditLimit }}</td>
+            <td class="table-data">{{ data.limitStartDate |date :'yyyy-MM-dd' }}</td>
+            <td class="table-data">{{ data.limitEndDate |date :'yyyy-MM-dd' }}</td>
+            <td class="table-data">{{ data.statusFlag }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </cdk-virtual-scroll-viewport>
 </div>
-
-<br>
-<hr>
-
-<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
-  <mat-dialog-content>
-    <mat-table [dataSource]="limitDataSource" matSort (matSortChange)="changeSort($event)">
-      <ng-container matColumnDef="management">
-        <mat-header-cell *matHeaderCellDef>
-          明細內容
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <button mat-raised-button color="success"  (click) = "getContent(row.nationalId, row.customerId, row.creditLimit, row.limitStartDate)">明細</button>
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="LIMIT_NO">
-        <mat-header-cell *matHeaderCellDef>額度編號</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.limitNo }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="LIMIT_TYPE_CODE">
-        <mat-header-cell *matHeaderCellDef>額度類別代碼</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.limitTypeCode }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="STOP_FLAG">
-        <mat-header-cell *matHeaderCellDef>停用註記</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.stopFlag }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="CREDIT_LIMIT">
-        <mat-header-cell *matHeaderCellDef>額度</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.creditLimit }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="LIMIT_START_DATE">
-        <mat-header-cell *matHeaderCellDef>額度起日</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.limitStartDate |date :'yyyy-MM-dd'}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="LIMIT_END_DATE">
-        <mat-header-cell *matHeaderCellDef>額度訖日</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.limitEndDate |date :'yyyy-MM-dd'}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="STATUS_FLAG">
-        <mat-header-cell *matHeaderCellDef>是否已核准</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.statusFlag }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
-          <button [disabled]="isDisabled" type="button" mat-raised-button color="basic" (click)="addNew()">新增</button>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row; let i=index;"></mat-cell>
-      </ng-container>
-
-      <mat-header-row
-        *matHeaderRowDef="['management', 'LIMIT_NO', 'LIMIT_TYPE_CODE', 'STOP_FLAG', 'CREDIT_LIMIT', 'LIMIT_START_DATE', 'LIMIT_END_DATE', 'STATUS_FLAG', 'actions']; sticky: true">
-      </mat-header-row>
-
-      <mat-row
-        *matRowDef="let ruleParmRow; columns: ['management', 'LIMIT_NO', 'LIMIT_TYPE_CODE', 'STOP_FLAG', 'CREDIT_LIMIT', 'LIMIT_START_DATE', 'LIMIT_END_DATE', 'STATUS_FLAG', 'actions']">
-      </mat-row>
-
-    </mat-table>
-  </mat-dialog-content>
-</cdk-virtual-scroll-viewport>

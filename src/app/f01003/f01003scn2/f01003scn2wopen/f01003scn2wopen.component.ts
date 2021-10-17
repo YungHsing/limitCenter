@@ -11,7 +11,7 @@ interface sysCode {
 @Component({
   selector: 'app-f01003scn2wopen',
   templateUrl: './f01003scn2wopen.component.html',
-  styleUrls: ['./f01003scn2wopen.component.css']
+  styleUrls: ['./f01003scn2wopen.component.css', '../../../../assets/css/child.css']
 })
 export class F01003scn2wopenComponent implements OnInit {
 

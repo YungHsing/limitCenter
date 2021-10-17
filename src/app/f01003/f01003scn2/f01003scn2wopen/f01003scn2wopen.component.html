@@ -1,76 +1,152 @@
-<div class="container">
-    <div [(hidden)]="active"><h2  mat-dialog-title>動用額度</h2></div>
-    <div [(hidden)]="reserve"><h2  mat-dialog-title>釋放額度</h2></div>
-  
-    <form [formGroup]="reserveAddForm" class="mat-dialog-content" (ngSubmit)="submit()">
-      <table>
-        <tr>
-          <td [(hidden)]="active">
-            <div class="form">
-              <mat-form-field color="accent">
-                <input matInput #input class="form-control" placeholder="額度號" formControlName="LIMIT_NO" readonly >
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_NO')}}</mat-error>
-              </mat-form-field>
+<!-- <div class="container">
+  <div [(hidden)]="active">
+    <h2 mat-dialog-title>動用額度</h2>
+  </div>
+  <div [(hidden)]="reserve">
+    <h2 mat-dialog-title>釋放額度</h2>
+  </div>
+
+  <form [formGroup]="reserveAddForm" class="mat-dialog-content" (ngSubmit)="submit()">
+    <table>
+      <tr>
+        <td [(hidden)]="active">
+          <div class="form">
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" placeholder="額度號" formControlName="LIMIT_NO" readonly>
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_NO')}}</mat-error>
+            </mat-form-field>
+          </div>
+        </td>
+        <td [(hidden)]="reserve">
+          <div class="form">
+            <mat-form-field color="accent">
+              <mat-select placeholder="預佔編號" formControlName="RESERVE_NO" (ngModelChange)="changeSelect()">
+                <mat-option *ngFor="let code of reserveNoOption" [value]="code.value">
+                  {{code.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" placeholder="幣別" formControlName="CURRENCY_TYPE" readonly>
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CURRENCY_TYPE')}}</mat-error>
+            </mat-form-field>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="form">
+            <mat-form-field color="accent">
+              <mat-select placeholder="動用類別" formControlName="ACTION_TYPE" required>
+                <mat-option *ngFor="let code of actionTypeOption" [value]="code.value">
+                  {{code.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </td>
+        <td [(hidden)]="active">
+          <div class="form">
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" type="number" placeholder="金額" formControlName="CREDIT_LIMIT"
+                required>
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error>
+            </mat-form-field>
+          </div>
+        </td>
+        <td [(hidden)]="reserve">
+          <div class="form">
+            <mat-form-field color="accent">
+              <input matInput #input class="form-control" type="number" placeholder="金額" formControlName="CREDIT_LIMIT"
+                required readonly>
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error>
+            </mat-form-field>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="form" mat-dialog-actions>
+            <button mat-raised-button color="primary" [type]="submit" (click)="confirmAdd()">儲存</button>
+            <button mat-button (click)="onNoClick()" tabindex="-1">取消</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+ -->
+
+<div class="line_bank_card_no_padding" style="min-height:170px">
+  <div class="line_bank_form_header_title" [(hidden)]="active">動用額度</div>
+  <div class="line_bank_form_header_title" [(hidden)]="reserve">釋放額度</div>
+  <div class="container" style="padding:20px">
+    <form class="mat-dialog-content" #formControl="ngForm" [formGroup]="reserveAddForm">
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <div class="form" [(hidden)]="active" style="padding:20px">
+            <div><span class="form-title-actions">額度號</span>
+              <input matInput #input class="form-control" name="codeTag" formControlName="LIMIT_NO" readonly>
             </div>
-          </td>
-          <td [(hidden)]="reserve">
-            <div class="form">
-                <mat-form-field color="accent" >
-                    <mat-select placeholder="預佔編號" formControlName="RESERVE_NO" (ngModelChange)="changeSelect()">
-                      <mat-option *ngFor="let code of reserveNoOption" [value]="code.value" >
-                        {{code.viewValue}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
+          </div>
+          <div class="form" [(hidden)]="reserve" style="padding:20px">
+            <div>
+              <mat-select placeholder="預佔編號" formControlName="RESERVE_NO" (ngModelChange)="changeSelect()">
+                <mat-option *ngFor="let code of reserveNoOption" [value]="code.value">
+                  {{code.viewValue}}
+                </mat-option>
+              </mat-select>
             </div>
-          </td>
-          <td>
-            <div class="form">
-              <mat-form-field color="accent">
-                <input matInput #input class="form-control" placeholder="幣別" formControlName="CURRENCY_TYPE" readonly >
-                <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CURRENCY_TYPE')}}</mat-error>
-              </mat-form-field>
+          </div>
+        </div>
+        <div nz-col nzSpan="12">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">幣別</span>
+              <input matInput #input class="form-control" name="codeTag" formControlName="CURRENCY_TYPE" readonly>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form">
-              <mat-form-field color="accent" >
-                <mat-select placeholder="動用類別" formControlName="ACTION_TYPE" required>
-                  <mat-option *ngFor="let code of actionTypeOption" [value]="code.value" >
-                    {{code.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <div class="form" style="padding:20px">
+            <div>
+              <mat-select placeholder="動用類別" formControlName="ACTION_TYPE" required>
+                <mat-option *ngFor="let code of actionTypeOption" [value]="code.value">
+                  {{code.viewValue}}
+                </mat-option>
+              </mat-select>
             </div>
-          </td>
-          <td [(hidden)]="active">
-            <div class="form">
-                <mat-form-field color="accent">
-                  <input matInput #input class="form-control" type="number" placeholder="金額" formControlName="CREDIT_LIMIT" required>
-                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error>
-                </mat-form-field>
-              </div>
-          </td>
-          <td [(hidden)]="reserve">
-            <div class="form">
-                <mat-form-field color="accent">
-                  <input matInput #input class="form-control" type="number" placeholder="金額" formControlName="CREDIT_LIMIT" required readonly>
-                  <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error>
-                </mat-form-field>
-              </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="form" mat-dialog-actions>
-              <button mat-raised-button color="primary" [type]="submit" (click)="confirmAdd()">儲存</button>
-              <button mat-button (click)="onNoClick()" tabindex="-1">取消</button>
+          </div>
+        </div>
+        <div nz-col nzSpan="12">
+          <div class="form" style="padding:20px" [(hidden)]="active">
+            <div><span class="form-title-actions">金額</span>
+              <input matInput #input class="form-control" type="number" name="codeTag" formControlName="CREDIT_LIMIT"
+                required>
             </div>
-          </td>
-        </tr>
-      </table>
+          </div>
+          <div class="form" style="padding:20px" [(hidden)]="reserve">
+            <div><span class="form-title-actions">金額</span>
+              <input matInput #input class="form-control" type="number" name="codeTag" formControlName="CREDIT_LIMIT"
+                required readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div mat-dialog-actions>
+        <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+          (click)="confirmAdd() ">儲存</button>
+        <button nz-button [nzSize]="'middle'" nzType="default" nzDanger (click)="onNoClick()" tabindex="-1"
+          style="margin:0px 5px">取消</button>
+      </div>
+      <br><br>
     </form>
   </div>
-  
+</div>

@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <h2 mat-dialog-title>個人額度維護-編輯</h2>
 
   <form [formGroup]="addForm" class="mat-dialog-content" (ngSubmit)="submit()">
@@ -7,7 +7,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="身分證字號" formControlName="NATIONAL_ID" readonly >
+              <input matInput #input class="form-control" placeholder="身分證字號" formControlName="NATIONAL_ID" readonly>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage('NATIONAL_ID')}}</mat-error>
             </mat-form-field>
           </div>
@@ -15,7 +15,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="客戶編號" formControlName="CUSTOMER_ID" readonly >
+              <input matInput #input class="form-control" placeholder="客戶編號" formControlName="CUSTOMER_ID" readonly>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CUSTOMER_ID')}}</mat-error>
             </mat-form-field>
           </div>
@@ -23,7 +23,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="層級" formControlName="LEVEL_NO" readonly >
+              <input matInput #input class="form-control" placeholder="層級" formControlName="LEVEL_NO" readonly>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LEVEL_NO')}}</mat-error>
             </mat-form-field>
           </div>
@@ -45,8 +45,9 @@
         <td>
           <div class="form">
             <mat-form-field color="accent" class="example-form-field">
-              <input matInput [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE" placeholder="額度訖日" disabled>
-              <mat-datepicker-toggle matSuffix [for]="endDateValue" >
+              <input matInput [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE"
+                placeholder="額度訖日" disabled>
+              <mat-datepicker-toggle matSuffix [for]="endDateValue">
               </mat-datepicker-toggle>
               <mat-datepicker #endDateValue disabled="false"></mat-datepicker>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_END_DATE')}}</mat-error>
@@ -56,7 +57,8 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input type="number" class="form-control" placeholder="額度" formControlName="CREDIT_LIMIT" required>
+              <input matInput #input type="number" class="form-control" placeholder="額度" formControlName="CREDIT_LIMIT"
+                required>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error>
             </mat-form-field>
           </div>
@@ -90,10 +92,11 @@
         <td>
           <div class="form">
             <mat-form-field color="accent" class="example-form-field">
-              <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" placeholder="停用日期" disabled>
-              <mat-datepicker-toggle matSuffix [for]="stopDateValue" >
+              <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" placeholder="停用日期"
+                disabled>
+              <mat-datepicker-toggle matSuffix [for]="stopDateValue">
               </mat-datepicker-toggle>
-              <mat-datepicker #stopDateValue ></mat-datepicker>
+              <mat-datepicker #stopDateValue></mat-datepicker>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage('STOP_DATE')}}</mat-error>
             </mat-form-field>
           </div>
@@ -103,7 +106,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="上層額度號" formControlName="UP_LEVEL" readonly >
+              <input matInput #input class="form-control" placeholder="上層額度號" formControlName="UP_LEVEL" readonly>
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage('UP_LEVEL')}}</mat-error>
             </mat-form-field>
           </div>
@@ -111,7 +114,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <mat-select placeholder="是否可撤銷" formControlName="CANCEL_FLAG" >
+              <mat-select placeholder="是否可撤銷" formControlName="CANCEL_FLAG">
                 <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -123,7 +126,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <mat-select placeholder="循環別" formControlName="CYCLE_TYPE" >
+              <mat-select placeholder="循環別" formControlName="CYCLE_TYPE">
                 <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -145,7 +148,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="專案代碼" formControlName="PROJECT_CODE" >
+              <input matInput #input class="form-control" placeholder="專案代碼" formControlName="PROJECT_CODE">
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage('PROJECT_CODE')}}</mat-error>
             </mat-form-field>
           </div>
@@ -153,7 +156,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <mat-select placeholder="停用原因" formControlName="STOP_CODE" value = ''>
+              <mat-select placeholder="停用原因" formControlName="STOP_CODE" value=''>
                 <mat-option *ngFor="let yn of StopCodeOption" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -174,7 +177,7 @@
         <td>
           <div class="form">
             <mat-form-field color="accent">
-              <input matInput #input class="form-control" placeholder="停用說明" formControlName="STOP_DESC" >
+              <input matInput #input class="form-control" placeholder="停用說明" formControlName="STOP_DESC">
               <mat-error *ngIf="formControl.invalid">{{getErrorMessage('STOP_DESC')}}</mat-error>
             </mat-form-field>
           </div>
@@ -182,4 +185,192 @@
       </tr>
     </table>
   </form>
+</div> -->
+
+
+ <div class="line_bank_card_no_padding" style="min-height:170px">
+  <div class="line_bank_form_header_title">個人額度維護-編輯</div>
+  <div class="container" style="padding:20px">
+    <form class="mat-dialog-content" #formControl="ngForm" [formGroup]="addForm">
+      <div nz-row>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">身分證字號</span>
+              <input matInput #input class="form-control" name="codeTag" formControlName="NATIONAL_ID" readonly>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('NATIONAL_ID')}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">客戶編號</span>
+              <input matInput #input class="form-control" name="codeTag" formControlName="CUSTOMER_ID" readonly>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CUSTOMER_ID')}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">層級</span>
+              <input matInput #input class="form-control" name="codeTag" formControlName="LEVEL_NO" readonly>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LEVEL_NO')}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div nz-row>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">額度類別代碼</span>
+              <mat-select formControlName="LIMIT_TYPE_CODE"
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                <mat-option *ngFor="let yn of limitTypeOption" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <!-- <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker> -->
+          <div class="form" style="padding:20px;">
+            <mat-form-field color="accent" class="example-form-field" style="width: 150px;">
+              <input matInput [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE"
+                placeholder="額度訖日" disabled>
+              <mat-datepicker-toggle matSuffix [for]="endDateValue">
+              </mat-datepicker-toggle>
+              <mat-datepicker #endDateValue disabled="false"></mat-datepicker>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_END_DATE')}}</mat-error> -->
+            </mat-form-field>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">額度</span>
+              <input matInput #input class="form-control" name="codeTag" formControlName="CREDIT_LIMIT">
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">幣別</span>
+              <mat-select formControlName="CURRENCY_TYPE" readonly
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                <mat-option *ngFor="let type of CurrencyOption" [value]="type.value">
+                  {{type.viewValue}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage(CURRENCY_TYPE)}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">停用註記</span>
+              <mat-select formControlName="STOP_FLAG"
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage(STOP_FLAG)}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <mat-form-field color="accent" class="example-form-field" style="width: 150px;">
+              <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" placeholder="停用日期"
+                disabled>
+              <mat-datepicker-toggle matSuffix [for]="stopDateValue">
+              </mat-datepicker-toggle>
+              <mat-datepicker #stopDateValue></mat-datepicker>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('STOP_DATE')}}</mat-error> -->
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">上層額度號</span>
+              <input matInput #input class="form-control" name="codeTag" formControlName="UP_LEVEL" readonly>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('UP_LEVEL')}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">是否可撤銷</span>
+              <mat-select formControlName="CANCEL_FLAG"
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage(CANCEL_FLAG)}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">循環別</span>
+              <mat-select formControlName="CYCLE_TYPE"
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage(CYCLE_TYPE)}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div nz-row>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">額度號</span>
+              <input matInput #input class="form-control" formControlName="LIMIT_NO" readonly>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_NO')}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">專案代碼</span>
+              <input matInput #input class="form-control" formControlName="PROJECT_CODE">
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('PROJECT_CODE')}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">停用原因</span>
+              <mat-select formControlName="STOP_CODE"
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                <mat-option *ngFor="let yn of StopCodeOption" [value]="yn.value">
+                  {{yn.viewValue}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div mat-dialog-actions>
+        <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+          (click)="confirmAdd() ">儲存</button>
+        <button nz-button [nzSize]="'middle'" nzType="default" nzDanger (click)="onNoClick()" tabindex="-1"
+          style="margin:0px 5px">取消</button>
+      </div>
+      <br><br>
+    </form>
+  </div>
 </div>

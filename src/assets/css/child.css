@@ -1,0 +1,102 @@
+/* 格線切版背景 */
+mat-grid-tile {
+  background: white;
+}
+/* 表格標題樣式 */
+::ng-deep.ant-table.ant-table-small .ant-table-title{
+  color:#2E4765;
+  font-size:18px;
+  border-radius:5px 5px 0 0;
+  background-color:#BFECD0;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #DBDBDB;
+}
+/* 表格表頭樣式 */
+.table-header{
+  background-color:#ededed;
+  border: 1px solid #e8e8e8;
+  color:#848E9C;
+  margin-bottom: 1px;
+  font-size: 14px;
+}
+/* 表格內容樣式 */
+.table-data{
+  background-color:white;
+  border: 1px solid #e8e8e8;
+  color:black;
+  margin-bottom: 1px;
+  font-size: 14px;
+}
+/* 表單輸入欄 */
+input{
+  background-color:#E6E6E6;
+  border-radius: 10px;
+  height:30px;
+  width:100%;
+  border: 1px solid #E6E6E6;
+}
+/* 表單標題 */
+.form-title{
+  color:#2E4765;
+  font-weight: bold;
+  margin-bottom:5px;
+  display:block;
+}
+
+.form-title-actions{
+  color:#2E4765;
+  font-weight: 500;
+  display:block;
+}
+
+/* 功能按鈕樣式 */
+.ant-btn-primary{
+  color:#24C875;
+  background:white;
+  border-color:#24C875;
+  border-radius:5px;
+
+}
+.ant-btn-primary:hover{
+  color:#ffffff;
+  background:#24C875;
+  border-color:#24C875;
+  border-radius:5px;
+  box-shadow:0 2px 0 rgb(0 0 0 / 5%);
+}
+.ant-btn-primary:active{
+  color:#ffffff;
+  background:#24C875;
+  border-color:#24C875;
+  border-radius:5px;
+}
+
+.mat-dialog-actions{
+  padding-left:20px;
+}
+
+/* title和input為一個form */
+.form{
+  padding:10px;
+}
+
+/* 輸入區樣式 */
+.input-textarea{
+  width: 100%;
+  height:200px;
+  background-color:#E6E6E6;
+  border-radius:10px;
+  border:none
+}
+/* 下拉選單樣式 */
+.input-select{
+  width:100%;
+  height:35px;
+  border-radius:10px;
+  border:none;
+  padding:10px;
+  background-color:#E6E6E6
+}
+
+

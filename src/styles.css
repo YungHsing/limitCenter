@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+/* html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .login-background{
@@ -10,7 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-position: left 50% top 0%;
     background-size: 50%;
   }
-  
+
   .mat-cell,
 .mat-header-cell {
   word-wrap: initial;
@@ -24,4 +24,137 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-row,
 .mat-header-row {
   display: table-row;
+}
+
+ */
+/* You can add global styles to this file, and also import other style files */
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+@import "~ng-zorro-antd/style/index.min.css"; /* 引入基本样式 */
+@import "~ng-zorro-antd/button/style/index.min.css"; /* 引入组件样式 */
+
+html, body {min-height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.login-background{
+    background-image: url(src\assets\images\LineBank.png);
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-position: left 50% top 0%;
+    background-size: 50%;
+  }
+
+  .mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  display: table-cell;
+  padding: 0px 10px;
+  line-break: unset;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.mat-row,
+.mat-header-row {
+  display: table-row;
+}
+body {
+	touch-action: manipulation;
+	-webkit-overflow-scrolling: touch;
+	/* -ms-overflow-style: none; */
+	overflow-x: hidden;
+	/* user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none; */
+	font-family: 'SF Pro TC', 'SF Pro Text', 'SF Pro Icons', 'PingFang TC', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
+html {
+	height: 100%;
+	background: transparent;
+
+}
+.line_bank_h1{
+  font-size: 25px;
+}
+.line_bank_h2{
+  font-size: 20px;
+}
+.line_bank_h3{
+  font-size: 18px;
+}
+.line_bank_h4{
+  font-size: 15px;
+}
+.line_bank_bankground_color{
+  background-color: #fff7e9;
+  width:100%;
+  min-height:100%;
+}
+.line_bank_form_header_title_color{
+  background-color: #98CCFE;
+}
+.line_bank_form_header_title{
+  text-align: center;
+  font-weight:500;
+  font-size: 18px;
+  color:#2E4765;
+  background-color: #BFECD0;
+  padding:10px 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.line_bank_form_header_child_title{
+  text-align: center;
+  font-weight:500;
+  font-size: 14px;
+  color:#2E4765;
+  background-color:	#BEBEBE	;
+  padding:10px 0;
+}
+
+.line_bank_card {
+	position: relative;
+  margin:10px auto;
+	width: 95%;
+	background: white;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 10px;
+	padding: 10px ;
+}
+.line_bank_card_no_padding {
+	position: relative;
+  margin:20px auto;
+	width: 95%;
+	background: white;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 10px;
+}
+.line_bank_function_btn{
+background-color:white;
+max-width: 5%;
+text-align:center;
+font-size:15px;
+color:#24C875;
+border-radius: 10px;
+border:none;
+cursor: pointer;
+padding:10px;
+box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
+}
+.line_bank_function_btn:hover{
+background-color:#24C875;
+font-size:15px;
+text-align:center;
+max-width: 5%;
+color:#ffffff;
+border-radius: 10px;
+border:none;
+cursor: pointer;
+padding:10px;
+box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
+}
+
+.mat-dialog-transparent .mat-dialog-container {
+  background: transparent;
+  box-shadow: none;
 }

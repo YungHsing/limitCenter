@@ -14,9 +14,10 @@ interface sysCode {
 //額度資料修改
 @Component({
   templateUrl: './f01003scn1edit.component.html',
-  styleUrls: ['./f01003scn1edit.component.css']
+  styleUrls: ['./f01003scn1edit.component.css', '../../../../assets/css/child.css']
 })
 export class F01003scn1editComponent implements OnInit, AfterViewInit {
+  date = null;
   display = true;
   ynCode: sysCode[] = [{value: 'Y', viewValue: '是'}, {value: 'N', viewValue: '否'}];
   limitTypeOption: sysCode[] =  [{value: 'P0001000000', viewValue: '個人限額'},{value: 'P0001010000', viewValue: '個人有擔'}, {value: 'P0001020000', viewValue: '個人無擔'},{value: 'P0001020100', viewValue: '無擔分期型限額'}, {value: 'P0001020200', viewValue: '無擔循環型限額'}];
@@ -88,6 +89,9 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
       this.addForm.controls['STOP_DESC'].enable();
       this.addForm.patchValue({ STOP_DATE: new Date() });
     }
+  }
+  onChange(result: Date): void {
+    console.log('onChange: ', result);
   }
 
   setTimes() {
