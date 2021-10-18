@@ -8,23 +8,23 @@
 
     <div class="line_bank_card_no_padding">
       <div nz-row>
-        <div nz-col nzSpan="32">
+        <div nz-col nzSpan="6">
           <div style="padding:10px"><span class="form-title">客戶編號 CID：</span>
             <input style="display: block;" formControlName="cid" value="">
           </div>
         </div>
-        <div nz-col nzSpan="32">
+        <div nz-col nzSpan="6">
           <div style="padding:10px"><span class="form-title">身分證字號：</span>
             <input style="display: block;" formControlName="nid" onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
               maxlength="10" value="">
           </div>
         </div>
-        <div nz-col nzSpan="32">
-          <div style="padding:10px"><span class="form-title">額度起訖：</span>
-            <mat-form-field color="accent" class="example-form-field">
+        <div nz-col nzSpan="6">
+          <div style="padding:10px;"><span class="form-title">額度起訖：</span>
+            <mat-form-field color="accent" class="example-form-field" style="margin-top:-20px; width: 250px;">
               <mat-date-range-input [rangePicker]="rangePicker">
-                <input matStartDate formControlName="createdate_start" value="">
-                <input matEndDate formControlName="createdate_end">
+                <input matStartDate formControlName="createdate_start" style="padding-bottom: 15px; background-color: white; border-color: white; width: 100px">
+                <input matEndDate formControlName="createdate_end" style="background-color: white; border-color: white; width: 100px">
               </mat-date-range-input>
               <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
               <mat-date-range-picker #rangePicker>

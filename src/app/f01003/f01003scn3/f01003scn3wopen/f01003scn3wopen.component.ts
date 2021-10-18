@@ -13,7 +13,7 @@ interface sysCode {
 @Component({
   selector: 'app-f01003scn3wopen',
   templateUrl: './f01003scn3wopen.component.html',
-  styleUrls: ['./f01003scn3wopen.component.css']
+  styleUrls: ['./f01003scn3wopen.component.css', '../../../../assets/css/child.css']
 })
 export class F01003scn3wopenComponent implements OnInit {
 

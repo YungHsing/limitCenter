@@ -1,7 +1,50 @@
-<br>
-<div class="container">
-    <form [formGroup]="manageRecordForm" style="padding-left: 20px;">
-        <table>
+<div class="line_bank_bankground_color">
+  <!-- <div class="container"> -->
+  <form [formGroup]="manageRecordForm">
+    <div class="line_bank_card_no_padding">
+      <div nz-row>
+        <div nz-col nzSpan="6">
+          <div style="padding:10px"><span class="form-title">選擇額度號：</span>
+            <mat-select [(ngModel)]="limitNoSelectedValue" formControlName="LIMIT_NO"
+              style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+              <mat-option *ngFor="let code of limitNoOption" [value]="code.value">
+                {{code.viewValue}}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+        <div nz-col nzSpan="6">
+          <div style="padding:10px"><span class="form-title">選擇異動時間：</span>
+            <!-- <mat-label>起-訖</mat-label> -->
+            <div style="width: 250px;">
+              <mat-date-range-input [rangePicker]="rangePicker" [min]="minDate" [max]="maxDate">
+                <input matStartDate placeholder="起" formControlName="START_DATE" disabled
+                  style="padding-bottom: 15px; background-color: white; border-color: white; width: 100px">
+                <input matEndDate placeholder="訖" formControlName="END_DATE" disabled
+                  style="background-color: white; border-color: white; width: 100px">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+              <mat-date-range-picker #rangePicker disabled="false">
+                <mat-date-range-picker-actions>
+                  <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+                    matDateRangePickerApply>確認</button>
+                  <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+                    matDateRangePickerCancel>取消</button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="32">
+          <div style="padding:10px">
+            <button nz-button [nzSize]="'large'" nzType="primary" style="margin:0px 5px"
+              (click)="onSubmit()">查詢</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <table>
             <br>
             <mat-card class="matCard">
                 <mat-card-content>
@@ -40,83 +83,122 @@
                     </tr>
                 </mat-card-content>
             </mat-card>
-        </table>
-    </form>
-</div>
+        </table> -->
+    </div>
+  </form>
+  <!-- </div> -->
 
-<br>
-<hr>
 
-<cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+  <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+    <div class="line_bank_card_no_padding">
+      <!-- 表格 -->
+      <nz-table nzShowSizeChanger [nzData]="manageRecordDataSource" [nzFrontPagination]="false" [nzSimple]="true"
+        [nzLoading]="loading" [nzTotal]="total" [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" nzSize="small"
+        [nzScroll]="{ x: '300px', y: '240;px' }" nzTitle="額度欄位修改明細">
+        <thead>
+          <tr>
+            <th nzLeft class="table-header">額度號</th>
+            <th class="table-header">欄位代碼</th>
+            <th class="table-header">欄位說明</th>
+            <th class="table-header">修改前欄位值</th>
+            <th class="table-header">修改後欄位值</th>
+            <th class="table-header">原因說明</th>
+            <th class="table-header">處理員編</th>
+            <th class="table-header">異動時間</th>
+            <th class="table-header">覆核員編</th>
+            <th class="table-header">是否核准</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of manageRecordDataSource">
+            <td class="table-data">{{ data.limitNo }}</td>
+            <td class="table-data">{{ data.columnName }}</td>
+            <td class="table-data">{{ data.columnDesc }}</td>
+            <td class="table-data">{{ data.beforeVal }}</td>
+            <td class="table-data">{{ data.afterVal }}</td>
+            <td class="table-data">{{ data.reasonContent }}</td>
+            <td class="table-data">{{ data.empno }}</td>
+            <td class="table-data">{{ data.manageDate |date :'yyyy-MM-dd' }}</td>
+            <td class="table-data">{{ data.reviewEmpno }}</td>
+            <td class="table-data">{{ data.agreeFlag }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+
+  <!-- <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
     <mat-dialog-content>
-        <mat-table [dataSource]="manageRecordDataSource" matSort (matSortChange)="changeSort($event)">
+      <mat-table [dataSource]="manageRecordDataSource" matSort (matSortChange)="changeSort($event)">
 
-            <ng-container matColumnDef="LIMIT_NO">
-                <mat-header-cell *matHeaderCellDef>額度號</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.limitNo }}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="LIMIT_NO">
+          <mat-header-cell *matHeaderCellDef>額度號</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.limitNo }}</mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="COLUMN_NAME">
-                <mat-header-cell *matHeaderCellDef>欄位代碼</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.ColumnName }}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="COLUMN_NAME">
+          <mat-header-cell *matHeaderCellDef>欄位代碼</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.ColumnName }}</mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="COLUMN_DESC">
-                <mat-header-cell *matHeaderCellDef>欄位說明</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.columnDesc }}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="COLUMN_DESC">
+          <mat-header-cell *matHeaderCellDef>欄位說明</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.columnDesc }}</mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="BEFORE_VAL">
-                <mat-header-cell *matHeaderCellDef>修改前欄位值</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.beforeVal }}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="BEFORE_VAL">
+          <mat-header-cell *matHeaderCellDef>修改前欄位值</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.beforeVal }}</mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="AFTER_VAL">
-                <mat-header-cell *matHeaderCellDef>修改後欄位值</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.afterVal }}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="AFTER_VAL">
+          <mat-header-cell *matHeaderCellDef>修改後欄位值</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.afterVal }}</mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="REASON_CONTENT">
-                <mat-header-cell *matHeaderCellDef>原因說明</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.reasonContent }}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="REASON_CONTENT">
+          <mat-header-cell *matHeaderCellDef>原因說明</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.reasonContent }}</mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="EMPNO">
-                <mat-header-cell *matHeaderCellDef>處理員編</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.empno }}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="EMPNO">
+          <mat-header-cell *matHeaderCellDef>處理員編</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.empno }}</mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="MANAGE_DATE">
-                <mat-header-cell *matHeaderCellDef>異動時間</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.manageDate |date :'yyyy-MM-dd' }}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="MANAGE_DATE">
+          <mat-header-cell *matHeaderCellDef>異動時間</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.manageDate |date :'yyyy-MM-dd' }}</mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="REVIEW_EMPNO">
-                <mat-header-cell *matHeaderCellDef>覆核員編</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.reviewEmpno }}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="REVIEW_EMPNO">
+          <mat-header-cell *matHeaderCellDef>覆核員編</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.reviewEmpno }}</mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="AGREE_FLAG">
-                <mat-header-cell *matHeaderCellDef>是否核准</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ row.agreeFlag }}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="AGREE_FLAG">
+          <mat-header-cell *matHeaderCellDef>是否核准</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.agreeFlag }}</mat-cell>
+        </ng-container>
 
-            <mat-header-row
-                *matHeaderRowDef="['LIMIT_NO', 'COLUMN_NAME', 'COLUMN_DESC', 'BEFORE_VAL', 'AFTER_VAL', 'REASON_CONTENT', 'EMPNO', 'MANAGE_DATE', 'REVIEW_EMPNO', 'AGREE_FLAG']; sticky: true">
-            </mat-header-row>
+        <mat-header-row
+          *matHeaderRowDef="['LIMIT_NO', 'COLUMN_NAME', 'COLUMN_DESC', 'BEFORE_VAL', 'AFTER_VAL', 'REASON_CONTENT', 'EMPNO', 'MANAGE_DATE', 'REVIEW_EMPNO', 'AGREE_FLAG']; sticky: true">
+        </mat-header-row>
 
-            <mat-row
-                *matRowDef="let ruleParmRow; columns: ['LIMIT_NO', 'COLUMN_NAME', 'COLUMN_DESC', 'BEFORE_VAL', 'AFTER_VAL', 'REASON_CONTENT', 'EMPNO', 'MANAGE_DATE', 'REVIEW_EMPNO', 'AGREE_FLAG']">
-            </mat-row>
+        <mat-row
+          *matRowDef="let ruleParmRow; columns: ['LIMIT_NO', 'COLUMN_NAME', 'COLUMN_DESC', 'BEFORE_VAL', 'AFTER_VAL', 'REASON_CONTENT', 'EMPNO', 'MANAGE_DATE', 'REVIEW_EMPNO', 'AGREE_FLAG']">
+        </mat-row>
 
-        </mat-table>
+      </mat-table>
 
-        <tr>
-            <td>
-                <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="10"
-                    [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
-                </mat-paginator>
-            </td>
-        </tr>
+      <tr>
+        <td>
+          <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
+          </mat-paginator>
+        </td>
+      </tr>
     </mat-dialog-content>
-</cdk-virtual-scroll-viewport>
+  </cdk-virtual-scroll-viewport> -->
+</div>

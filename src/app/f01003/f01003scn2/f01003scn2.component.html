@@ -1,6 +1,6 @@
 <div class="line_bank_bankground_color">
   <div class="container">
-    <form [formGroup]="drawdownReleaseForm" style="padding-left: 20px;">
+    <form [formGroup]="drawdownReleaseForm">
       <!-- <div style="padding-left: 20px; padding-top: 70px;">
         <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="drawdown()">動用額度</button>
         <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="release()">釋放額度</button>
@@ -10,12 +10,12 @@
         <div nz-row>
           <div nz-col nzSpan="32">
             <div style="padding:10px">
-              <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="drawdown()">動用額度</button>
+              <button nz-button [nzSize]="'large'" nzType="primary" style="margin:0px 5px" (click)="drawdown()">動用額度</button>
             </div>
           </div>
           <div nz-col nzSpan="32">
             <div style="padding:10px">
-              <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="release()">釋放額度</button>
+              <button nz-button [nzSize]="'large'" nzType="primary" style="margin:0px 5px" (click)="release()">釋放額度</button>
             </div>
           </div>
           <div nz-col nzSpan="6">
@@ -40,7 +40,7 @@
           </div>
           <div nz-col nzSpan="32">
             <div style="padding:10px">
-              <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+              <button nz-button [nzSize]="'large'" nzType="primary" style="margin:0px 5px"
                 (click)="onSubmit()">查詢</button>
             </div>
           </div>
@@ -88,10 +88,7 @@
     </form>
   </div>
 
-  <br>
-  <hr>
-
-  <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
+  <!-- <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;"> -->
     <!-- <mat-dialog-content>
       <mat-table [dataSource]="drawdownReleaseDataSource" matSort (matSortChange)="changeSort($event)">
 
@@ -190,5 +187,5 @@
       </div>
     </cdk-virtual-scroll-viewport>
 
-  </cdk-virtual-scroll-viewport>
+  <!-- </cdk-virtual-scroll-viewport> -->
 </div>

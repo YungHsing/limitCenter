@@ -5,7 +5,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { F01003Service } from '../f01003.service';
 import { F01003confirmComponent } from '../f01003confirm/f01003confirm.component';
 import { F01003scn3wopenComponent } from './f01003scn3wopen/f01003scn3wopen.component';
@@ -18,7 +18,7 @@ interface sysCode {
 @Component({
   selector: 'app-f01003scn3',
   templateUrl: './f01003scn3.component.html',
-  styleUrls: ['./f01003scn3.component.css']
+  styleUrls: ['./f01003scn3.component.css', '../../../assets/css/child.css']
 })
 export class F01003scn3Component implements OnInit {
 
@@ -52,14 +52,18 @@ export class F01003scn3Component implements OnInit {
   @ViewChild('sortTable', { static: true }) sortTable: MatSort;
   currentPage: PageEvent;
   currentSort: Sort;
-  frozenDataSource = new MatTableDataSource<any>();
+  frozenDataSource: Data[] = [];
+  total = 1;
+  loading = false;
+  pageSize = 10;
+  pageIndex = 1;
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.NATIONAL_ID = params['NATIONAL_ID'];
       this.CUSTOMER_ID = params['CUSTOMER_ID'];
     });
-    
+
     let formData: FormData = new FormData();
     formData.append('CUSTOMER_ID', this.CUSTOMER_ID);
     formData.append('NATIONAL_ID', this.NATIONAL_ID);
@@ -106,10 +110,10 @@ export class F01003scn3Component implements OnInit {
       let baseUrl = 'f01/f01003FrozenSearch';
       await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
         this.totalCount = data.rspBody.size;
-        this.frozenDataSource.data = data.rspBody.items;
+        this.frozenDataSource = data.rspBody.items;
       });
 
-      let msgStr: string = this.frozenDataSource.data.length == 0 ? '查無資料!' : '查詢成功!';
+      let msgStr: string = this.frozenDataSource.length == 0 ? '查無資料!' : '查詢成功!';
       this.dialog.open(F01003confirmComponent, { data: { msgStr: msgStr, display: true } });
     }
   }
@@ -133,13 +137,13 @@ export class F01003scn3Component implements OnInit {
         if (result != null && result.event == 'success') { this.refreshTable(); }
       });
     }
-    
+
   }
 
   changeSort(sortInfo: Sort) {
     this.currentSort = sortInfo;
   }
-  
+
   private async refreshTable() {
     let formData = new FormData();
       let jsonStr = JSON.stringify(this.frozenForm.value);
@@ -149,7 +153,7 @@ export class F01003scn3Component implements OnInit {
       let baseUrl = 'f01/f01003FrozenSearch';
       await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
         this.totalCount = data.rspBody.size;
-        this.frozenDataSource.data = data.rspBody.items;
+        this.frozenDataSource = data.rspBody.items;
       });
   }
 

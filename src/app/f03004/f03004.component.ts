@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { F03004addComponent } from './f03004add/f03004add.component';
 import { F03004editComponent } from './f03004edit/f03004edit.component';
 import { F03004Service } from './f03004.service';
+import { Data } from '@angular/router';
 
 interface sysCode {
   value: string;
@@ -17,7 +18,7 @@ interface sysCode {
 @Component({
   selector: 'app-f03004',
   templateUrl: './f03004.component.html',
-  styleUrls: ['./f03004.component.css','../../assets/css/f03.css']
+  styleUrls: ['./f03004.component.css', '../../assets/css/child.css']
 })
 export class F03004Component implements OnInit, AfterViewInit  {
   sysCode: sysCode[] = [];
@@ -39,7 +40,12 @@ export class F03004Component implements OnInit, AfterViewInit  {
   @ViewChild('sortTable', { static: true }) sortTable: MatSort;
   currentPage: PageEvent;
   currentSort: Sort;
-  mappingCodeSource = new MatTableDataSource<any>();
+  mappingCodeSource: Data[] = [];
+  total = 1;
+  loading = false;
+  pageSize = 10;
+  pageIndex = 1;
+
   ngAfterViewInit() {
     this.currentPage = {
       pageIndex: 0,
@@ -66,13 +72,13 @@ export class F03004Component implements OnInit, AfterViewInit  {
     this.f03004Service.getMappingCodeList(baseUrl, this.currentPage.pageIndex, this.currentPage.pageSize, this.selectedValue)
     .subscribe(data => {
       this.totalCount = data.rspBody.size;
-      this.mappingCodeSource.data = data.rspBody.items;
+      this.mappingCodeSource = data.rspBody.items;
     });
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.mappingCodeSource.filter = filterValue.trim().toLowerCase();
+    // this.mappingCodeSource.filter = filterValue.trim().toLowerCase();
   }
 
   changeSelect() {

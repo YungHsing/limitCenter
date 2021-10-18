@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { element } from 'protractor';
 import { forkJoin } from 'rxjs';
 import { F01000Service } from './f01000.service';
@@ -26,7 +26,7 @@ export class Group {
 @Component({
   selector: 'app-f01000',
   templateUrl: './f01000.component.html',
-  styleUrls: ['./f01000.component.css']
+  styleUrls: ['./f01000.component.css', '../../assets/css/child.css']
 })
 export class F01000Component implements OnInit {
 
@@ -52,8 +52,12 @@ export class F01000Component implements OnInit {
   isChecked: boolean;
   CREDIT_LIMIT: string;
   LIMIT_START_DATE: string;
-  LimitData: ManageRecordModule[];
+  LimitData: Data[] = [];
   chkArray: checkBox[] = [];
+  total = 1;
+  loading = false;
+  pageSize = 10;
+  pageIndex = 1;
 
   async ngOnInit(): Promise<void> {
     var formData = new FormData();
@@ -179,7 +183,7 @@ export class F01000Component implements OnInit {
         data: { msgStr: data.rspMsg }
       });
     });
-    this.refreshTable();  
+    this.refreshTable();
   }
 
   async notApprove() {

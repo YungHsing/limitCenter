@@ -2,31 +2,51 @@ table {
     border-collapse: collapse;
     width: 100%;
   }
-  
+
   th {
     /* row border */
     border-bottom: 1px solid #ffa600;
   }
-  
+
   td.mat-cell {
     /* row padding */
     padding: 20px 20px 0px 0px;
     border: none;
     text-align: left;
   }
-  
+
   tr.mat-row {
     /* row border */
     border: 1px solid #ffa600;
   }
-  
+
   .mat-header-cell {
     padding: 20px 20px 0px 0px;
     text-align: left;
    }
-  
+
   .mat-success {
     background-color: green;
     color: #fff;
   }
-  
+
+  .ant-btn-dangerous{
+    color: #f80000;;
+    background:white;
+    border-color:#f80000;
+    border-radius:5px;
+
+  }
+  .ant-btn-dangerous:hover{
+    color:#ffffff;
+    background:#f80000;
+    border-color:#f80000;
+    border-radius:5px;
+    box-shadow:0 2px 0 rgb(0 0 0 / 5%);
+  }
+  .ant-btn-dangerous:active{
+    color:#ffffff;
+    background:#f80000;
+    border-color:#f80000;
+    border-radius:5px;
+  }

@@ -12,7 +12,7 @@ interface sysCode {
 
 @Component({
   templateUrl: './f01003add.component.html',
-  styleUrls: ['./f01003add.component.css']
+  styleUrls: ['./f01003add.component.css', '../../../assets/css/child.css']
 })
 export class F01003addComponent implements OnInit {
   ynCode: sysCode[] = [{value: 'Y', viewValue: '是'}, {value: 'N', viewValue: '否'}];

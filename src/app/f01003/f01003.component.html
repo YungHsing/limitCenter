@@ -15,10 +15,12 @@
         </div>
         <div nz-col nzSpan="32">
           <div style="padding:10px"><span class="form-title">額度起訖：</span>
-            <mat-form-field color="accent" class="example-form-field">
+            <mat-form-field color="accent" class="example-form-field" style="margin-top:-20px; width: 200px;">
               <mat-date-range-input [rangePicker]="rangePicker">
-                <input matStartDate formControlName="LIMIT_START_DATE" value="">
-                <input matEndDate formControlName="LIMIT_END_DATE">
+                <input matStartDate formControlName="LIMIT_START_DATE"
+                  style="padding-bottom: 15px; background-color: white; border-color: white; width: 100px">
+                <input matEndDate formControlName="LIMIT_END_DATE"
+                  style="background-color: white; border-color: white; width: 100px">
               </mat-date-range-input>
               <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
               <mat-date-range-picker #rangePicker>

@@ -5,7 +5,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { F01003Service } from '../f01003.service';
 import { F01003confirmComponent } from '../f01003confirm/f01003confirm.component';
 
@@ -17,7 +17,7 @@ interface sysCode {
 @Component({
   selector: 'app-f01003scn4',
   templateUrl: './f01003scn4.component.html',
-  styleUrls: ['./f01003scn4.component.css']
+  styleUrls: ['./f01003scn4.component.css', '../../../assets/css/child.css']
 })
 export class F01003scn4Component implements OnInit {
 
@@ -56,6 +56,10 @@ export class F01003scn4Component implements OnInit {
   limitNoSelectedValue: string; //額度號
   actionTypeOption: sysCode[] = []; //選擇功能下拉選單
   actionTypeSelectedValue: string; //功能
+  total = 1;
+  loading = false;
+  pageSize = 10;
+  pageIndex = 1;
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -84,18 +88,18 @@ export class F01003scn4Component implements OnInit {
   @ViewChild('sortTable', { static: true }) sortTable: MatSort;
   currentPage: PageEvent;
   currentSort: Sort;
-  manageRecordDataSource = new MatTableDataSource<any>();
+  manageRecordDataSource: Data[] = [];
 
   ngAfterViewInit(): void {
-    this.currentPage = {
-      pageIndex: 0,
-      pageSize: 5,
-      length: null
-    };
-    this.currentSort = {
-      active: '',
-      direction: ''
-    };
+    // this.currentPage = {
+    //   pageIndex: 0,
+    //   pageSize: 5,
+    //   length: null
+    // };
+    // this.currentSort = {
+    //   active: '',
+    //   direction: ''
+    // };
   }
 
   async onSubmit() {
@@ -123,10 +127,10 @@ export class F01003scn4Component implements OnInit {
       let baseUrl = 'f01/f01003RecordSearch';
       await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
         this.totalCount = data.rspBody.size;
-        this.manageRecordDataSource.data = data.rspBody.items;
+        this.manageRecordDataSource = data.rspBody.items;
       });
 
-      let msgStr: string = this.manageRecordDataSource.data.length == 0 ? '查無資料!' : '查詢成功!';
+      let msgStr: string = this.manageRecordDataSource.length == 0 ? '查無資料!' : '查詢成功!';
       this.dialog.open(F01003confirmComponent, { data: { msgStr: msgStr, display: true } });
     }
   }
@@ -148,7 +152,7 @@ export class F01003scn4Component implements OnInit {
     let baseUrl = 'f01/f01003FrozenSearch';
     await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
       this.totalCount = data.rspBody.size;
-      this.manageRecordDataSource.data = data.rspBody.items;
+      this.manageRecordDataSource = data.rspBody.items;
     });
   }
 
