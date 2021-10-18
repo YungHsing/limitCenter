@@ -16,10 +16,10 @@
         <div nz-col nzSpan="6">
           <div style="padding:10px"><span class="form-title">選擇異動時間：</span>
             <!-- <mat-label>起-訖</mat-label> -->
-            <div style="width: 250px;">
+            <div style="width: 200px;">
               <mat-date-range-input [rangePicker]="rangePicker" [min]="minDate" [max]="maxDate">
                 <input matStartDate placeholder="起" formControlName="START_DATE" disabled
-                  style="padding-bottom: 15px; background-color: white; border-color: white; width: 100px">
+                  style="padding-bottom: 10px; background-color: white; border-color: white; width: 100px">
                 <input matEndDate placeholder="訖" formControlName="END_DATE" disabled
                   style="background-color: white; border-color: white; width: 100px">
               </mat-date-range-input>
@@ -28,7 +28,7 @@
                 <mat-date-range-picker-actions>
                   <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
                     matDateRangePickerApply>確認</button>
-                  <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+                  <button nz-button [nzSize]="'middle'" nzType="default" nzDanger style="margin:0px 5px"
                     matDateRangePickerCancel>取消</button>
                 </mat-date-range-picker-actions>
               </mat-date-range-picker>
