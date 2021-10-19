@@ -13,7 +13,7 @@
             </mat-select>
           </div>
         </div>
-        <div nz-col nzSpan="6">
+        <div nz-col nzSpan="6" style="position:relative">
           <div style="padding:10px"><span class="form-title">選擇異動時間：</span>
             <!-- <mat-label>起-訖</mat-label> -->
             <div style="width: 200px;">
@@ -23,7 +23,8 @@
                 <input matEndDate placeholder="訖" formControlName="END_DATE" disabled
                   style="background-color: white; border-color: white; width: 100px">
               </mat-date-range-input>
-              <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+              <mat-datepicker-toggle matSuffix [for]="rangePicker" style="position: absolute;left:220px;bottom:5px">
+              </mat-datepicker-toggle>
               <mat-date-range-picker #rangePicker disabled="false">
                 <mat-date-range-picker-actions>
                   <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
@@ -35,7 +36,7 @@
             </div>
           </div>
         </div>
-        <div nz-col nzSpan="32">
+        <div nz-col nzSpan="6">
           <div style="padding:10px">
             <button nz-button [nzSize]="'large'" nzType="primary" style="margin:0px 5px"
               (click)="onSubmit()">查詢</button>

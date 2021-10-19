@@ -1,6 +1,9 @@
 <div class="line_bank_bankground_color">
-  <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 500px; margin-left: 10px; margin-right: 30px;">
-    <div class="line_bank_card_no_padding" style="min-height:170px">
+  <div class="line_bank_card_no_padding">
+
+    <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56"
+      style="height: 500px; margin-left: 10px; margin-right: 30px;">
+
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 500px;">
         <ng-container matColumnDef="editBtn">
           <mat-header-cell *matHeaderCellDef></mat-header-cell>
@@ -143,10 +146,9 @@
             <strong>第{{group[groupByColumns[group.level-1]]}}層級</strong>
           </td>
         </ng-container>
-
-        <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup" (click)="groupHeaderClick(row)"> </tr>
-
+        <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup" (click)="groupHeaderClick(row)">
+        </tr>
       </table>
-    </div>
-  </cdk-virtual-scroll-viewport>
+    </cdk-virtual-scroll-viewport>
+  </div>
 </div>
