@@ -13,7 +13,7 @@ interface ynCode {
 @Component({
   selector: 'app-f03004edit',
   templateUrl: './f03004edit.component.html',
-  styleUrls: ['./f03004edit.component.css']
+  styleUrls: ['./f03004edit.component.css', '../../../assets/css/child.css']
 })
 export class F03004editComponent {
 

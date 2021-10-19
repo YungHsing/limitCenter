@@ -3,7 +3,8 @@
     <div nz-row>
       <div nz-col nzSpan="6">
         <div style="padding:10px"><span class="form-title">代碼類別：</span>
-          <mat-select [(ngModel)]="selectedValue" name="sysCode">
+          <mat-select [(ngModel)]="selectedValue" name="sysCode"
+          style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
             <mat-option *ngFor="let code of sysCode" [value]="code.value">
               {{code.viewValue}}
             </mat-option>

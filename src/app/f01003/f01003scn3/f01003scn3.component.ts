@@ -161,7 +161,6 @@ export class F01003scn3Component implements OnInit {
     for (const data of this.actionTypeOption) {
       if (data.value == codeVal) {
         return data.viewValue;
-        break;
       }
     }
     return codeVal;

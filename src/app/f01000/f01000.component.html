@@ -1,12 +1,12 @@
 <div class="line_bank_bankground_color" style="padding-top: 70px;">
   <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56"
-    style="height: 40px; margin-left: 10px; margin-top: 10px;">
+    style="height: 60px; margin-left: 10px; margin-top: 10px;">
     <table>
       <tr>
         <th> 主管覆核 </th>
         <td>
-          <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="approve()">核准</button>
-          <button nz-button [nzSize]="'middle'" nzType="default" nzDanger style="margin:0px 5px"
+          <button nz-button [nzSize]="'large'" nzType="primary" style="margin:0px 5px" (click)="approve()">核准</button>
+          <button nz-button [nzSize]="'large'" nzType="default" nzDanger style="margin:0px 5px"
             (click)="notApprove()">不核准</button>
         </td>
       </tr>

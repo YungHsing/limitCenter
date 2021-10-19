@@ -12,7 +12,7 @@ interface ynCode {
 @Component({
   selector: 'app-f03004add',
   templateUrl: './f03004add.component.html',
-  styleUrls: ['./f03004add.component.css']
+  styleUrls: ['./f03004add.component.css', '../../../assets/css/child.css']
 })
 export class F03004addComponent {
   ynCode: ynCode[] = [{value: 'Y', viewValue: '是'}, {value: 'N', viewValue: '否'}];

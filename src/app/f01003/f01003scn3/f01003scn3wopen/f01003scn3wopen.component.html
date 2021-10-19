@@ -97,8 +97,9 @@
             </div>
           </div>
           <div class="form" [(hidden)]="unfrozen" style="padding:20px">
-            <div>
-              <mat-select placeholder="凍結編號" formControlName="FROZEN_NO" (ngModelChange)="changeSelect()">
+            <div><span class="form-title-actions">凍結編號</span>
+              <mat-select formControlName="FROZEN_NO" (ngModelChange)="changeSelect()"
+              style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
                 <mat-option *ngFor="let code of frozenNoOption" [value]="code.value">
                   {{code.viewValue}}
                 </mat-option>
@@ -108,8 +109,9 @@
         </div>
         <div nz-col nzSpan="12">
           <div class="form" [(hidden)]="frozen" style="padding:20px">
-            <div>
-              <mat-select placeholder="原因碼" class="form-control" formControlName="REASON_CODE" required>
+            <div><span class="form-title-actions">原因碼</span>
+              <mat-select class="form-control" formControlName="REASON_CODE" required
+              style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
                 <mat-option *ngFor="let code of reasonCodeOption" [value]="code.value">
                   {{code.viewValue}}
                 </mat-option>
@@ -118,7 +120,7 @@
           </div>
           <div class="form" [(hidden)]="unfrozen" style="padding:20px">
             <div><span class="form-title-actions">原因碼</span>
-              <input matInput #input class="form-control" placeholder="原因碼" formControlName="REASON_CODE" readonly>
+              <input matInput #input class="form-control" formControlName="REASON_CODE" readonly>
             </div>
           </div>
         </div>
@@ -127,13 +129,13 @@
         <div nz-col nzSpan="12">
           <div class="form" [(hidden)]="frozen" style="padding:20px">
             <div><span class="form-title-actions">原因</span>
-              <textarea  class="form-control" required style="border-radius:10px;border:none"
-                formControlName="REASON_DESC" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+              <textarea class="form-control" required formControlName="REASON_DESC" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+              style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6"></textarea>
             </div>
           </div>
-          <div class="form" [(hidden)]="unfrozen" style="padding:20px" >
+          <div class="form" [(hidden)]="unfrozen" style="padding:20px">
             <div><span class="form-title-actions">原因</span>
-              <input matInput #input class="form-control" placeholder="原因" formControlName="REASON_DESC" readonly>
+              <input matInput #input class="form-control" formControlName="REASON_DESC" readonly>
             </div>
           </div>
         </div>
@@ -145,6 +147,7 @@
             style="margin:0px 5px">取消</button>
         </div>
 
-        <!-- </form>
+      </div>
+    </form>
   </div>
-</div> -->
+</div>
