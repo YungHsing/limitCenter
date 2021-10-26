@@ -4,9 +4,12 @@ export class Menu {
 
   private dataMap: Map<string, string> = null;
 
-  constructor(key: string, val: Map<string, string>) {
+  private icon = '';
+
+  constructor(key: string, val: Map<string, string>, icon: string) {
     this.title = key;
     this.dataMap = val;
+    this.icon = icon;
   }
 
   getTitle(): string {
@@ -15,5 +18,9 @@ export class Menu {
 
   getMenuList(): Map<string, string> {
     return this.dataMap;
+  }
+
+  getIcon(): string {
+    return this.icon;
   }
 }

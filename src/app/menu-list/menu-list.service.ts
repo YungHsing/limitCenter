@@ -30,13 +30,14 @@ export class MenuListService extends BaseService {
       for (const jsonObj of data.rspBody) {
         const title = jsonObj['title'];                // 功能主標題
         const dataMap = jsonObj['dataMap'];
+        const icon = jsonObj['icon'];
         const keyArray = Object.keys(dataMap);         // 功能子標題
         const menuMap = new Map<string, string>();
         for (const menu of keyArray) {
           const path = dataMap[menu];                  // 功能/URL
           menuMap.set(menu, path);
         }
-        this.menuList.push(new Menu(title.toString(), menuMap));
+        this.menuList.push(new Menu(title.toString(), menuMap, icon));
       }
     });
   }
