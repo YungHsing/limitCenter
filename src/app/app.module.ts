@@ -42,6 +42,8 @@ import { F01003scn2wopenComponent } from './f01003/f01003scn2/f01003scn2wopen/f0
 import { F01003scn3wopenComponent } from './f01003/f01003scn3/f01003scn3wopen/f01003scn3wopen.component';
 import { F01000Component } from './f01000/f01000.component';
 import { F01000confirmComponent } from './f01000/f01000confirm/f01000confirm.component';
+import { registerLocaleData } from '@angular/common';
+import { NZ_I18N, zh_TW } from 'ng-zorro-antd/i18n';
 
 export const TW_FORMATS = {
   parse: {
@@ -104,7 +106,11 @@ export const TW_FORMATS = {
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
     { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
     { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} }
+    { provide: MatDialogRef, useValue: {} },
+    {
+      provide: NZ_I18N,
+      useFactory: () => zh_TW,
+    },
   ],
   bootstrap: [AppComponent]
 })
