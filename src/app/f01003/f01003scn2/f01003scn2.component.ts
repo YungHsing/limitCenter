@@ -115,8 +115,12 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
       let formData = new FormData();
       let jsonStr = JSON.stringify(this.drawdownReleaseForm.value);
       let jsonObj = JSON.parse(jsonStr);
-      for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
-
+      for (var key in jsonObj) {
+        formData.append(key, jsonObj[key]);
+        console.log(key)
+      }
+      console.log(formData)
+      console.log(this.drawdownReleaseForm.value)
       let baseUrl = 'f01/f01003ReserveSearch';
       await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
         this.totalCount = data.rspBody.size;
@@ -157,6 +161,7 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
       return false;
     } else {
       const dialogRef = this.dialog.open(F01003scn2wopenComponent, {
+
         data: {
           isActive: false,
           limitNo: this.drawdownReleaseForm.value.LIMIT_NO,
