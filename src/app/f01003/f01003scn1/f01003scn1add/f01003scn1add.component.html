@@ -174,7 +174,7 @@
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">額度類別代碼</span>
               <mat-select formControlName="LIMIT_TYPE_CODE"
-                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6" required>
                 <mat-option *ngFor="let yn of limitTypeOption" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -195,7 +195,7 @@
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">額度</span>
-              <input matInput #input class="form-control" name="codeTag" formControlName="CREDIT_LIMIT">
+              <input matInput #input class="form-control" name="codeTag" formControlName="CREDIT_LIMIT" required>
             </div>
           </div>
         </div>
@@ -228,7 +228,7 @@
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <mat-form-field color="accent" class="example-form-field" style="width: 150px;">
-              <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" placeholder="停用日期" disabled>
+              <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" placeholder="停用日期" disabled required>
               <mat-datepicker-toggle matSuffix [for]="stopDateValue" >
               </mat-datepicker-toggle>
               <mat-datepicker #stopDateValue disabled="false"></mat-datepicker>

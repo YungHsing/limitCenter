@@ -172,7 +172,7 @@ export class F01003scn1Component implements OnInit {
         data: {
           levelNo: row.levelNo,
           upLevel: row.upLevel,
-          nationalId: row.nationalId,
+          nationalId: this.NATIONAL_ID,
           customerId: row.customerId,
           creditLimit: row.creditLimit,
           currencyType: row.currencyType,
@@ -197,7 +197,7 @@ export class F01003scn1Component implements OnInit {
       data: {
         levelNo: Number(row.levelNo) + 1,
         upLevel: row.limitNo,
-        nationalId: row.nationalId,
+        nationalId: this.NATIONAL_ID,
         customerId: row.customerId,
         limitTypeCode: row.limitTypeCode
       }
