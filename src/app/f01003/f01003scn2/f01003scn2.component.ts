@@ -108,8 +108,8 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
 
   async onSubmit() {
     this.submitted = true;
-    if (this.drawdownReleaseForm.value.LIMIT_NO == undefined && this.drawdownReleaseForm.value.ACTION_TYPE == undefined) {
-      this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號或動用類別', display: true } });
+    if (this.drawdownReleaseForm.value.LIMIT_NO == undefined) {
+      this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號', display: true } });
       return false;
     } else {
       let formData = new FormData();

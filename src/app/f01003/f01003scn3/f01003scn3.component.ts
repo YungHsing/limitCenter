@@ -98,8 +98,8 @@ export class F01003scn3Component implements OnInit {
 
   async onSubmit() {
     this.submitted = true;
-    if (this.frozenForm.value.LIMIT_NO == undefined && this.frozenForm.value.ACTION_TYPE == undefined) {
-      this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號或功能', display: true } });
+    if (this.frozenForm.value.LIMIT_NO == undefined) {
+      this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號', display: true } });
       return false;
     } else {
       let formData = new FormData();
