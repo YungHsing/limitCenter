@@ -176,7 +176,7 @@ export class F01000Component implements OnInit {
     let jsonStr = JSON.stringify(rowIdArray);
     let jsonObj = JSON.parse(jsonStr);
     formData.append('rowIds', jsonObj);
-    formData.append('handleEmpNo', localStorage.getItem("empNo"));
+    formData.append('handleEmpNo', localStorage.getItem("limitEmpNo"));
     let baseUrl = 'f01/f01000Action';
     await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
       const childernDialogRef = this.dialog.open(F01000confirmComponent, {
@@ -201,7 +201,7 @@ export class F01000Component implements OnInit {
     let jsonStr = JSON.stringify(rowIdArray);
     let jsonObj = JSON.parse(jsonStr);
     formData.append('rowIds', jsonObj);
-    formData.append('handleEmpNo', localStorage.getItem("empNo"));
+    formData.append('handleEmpNo', localStorage.getItem("limitEmpNo"));
     let baseUrl = 'f01/f01000Delete';
     await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
       const childernDialogRef = this.dialog.open(F01000confirmComponent, {

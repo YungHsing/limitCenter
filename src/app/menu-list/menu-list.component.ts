@@ -9,7 +9,7 @@ import { Menu } from './menu.model';
   styleUrls: ['./menu-list.component.css']
 })
 export class MenuListComponent {
-  empNo: string = localStorage.getItem("empNo");
+  empNo: string = localStorage.getItem("limitEmpNo");
   constructor(private router: Router, private menuListService: MenuListService) { }
   getMenu(): Menu[] { return this.menuListService.getMap(); }
   returnZero() { return 0; }

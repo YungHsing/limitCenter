@@ -30,7 +30,7 @@ export class F01003scn3Component implements OnInit {
     ACTION_TYPE: [this.data.actionType, [Validators.maxLength(5)]],
     pageIndex: ['', [Validators.maxLength(3)]],
     pageSize: ['', [Validators.maxLength(3)]],
-    EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]]
+    EMPNO: [localStorage.getItem("limitEmpNo"), [Validators.maxLength(11)]]
   });
 
   formControl = new FormControl('', [

@@ -43,7 +43,7 @@ export class LoginComponent {
     //------------------------------------------------------------------
 
     if (await this.loginService.initData(this.no,this.pwd)) {
-      localStorage.setItem("empNo", this.no);
+      localStorage.setItem("limitEmpNo", this.no);
       this.router.navigate(['./home'], { queryParams: { empNo: this.no } });
       this.bnIdle.startWatching(60*10).subscribe((isTimedOut: boolean) => {
         if (isTimedOut) { this.routerGoUrl(); }

@@ -9,7 +9,7 @@ interface sysCode {
 }
 
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root'
 })
 export class LoginService extends BaseService {
   RuleCode: sysCode[] = null;
@@ -31,7 +31,7 @@ export class LoginService extends BaseService {
       if (data.rspCode == '0000') { tokenStr = data.rspBody.token; }
       isOk = data.rspCode == '0000';
     });
-    localStorage.setItem("token", tokenStr);
+    localStorage.setItem("limitToken", tokenStr);
     return isOk;
   }
 

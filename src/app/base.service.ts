@@ -11,7 +11,7 @@ export class BaseService {
   constructor(protected httpClient: HttpClient) { }
 
   public getToken(): string {
-    return localStorage.getItem('token');
+    return localStorage.getItem('limitToken');
   }
 
   protected postHttpClient(baseUrl: string) {
