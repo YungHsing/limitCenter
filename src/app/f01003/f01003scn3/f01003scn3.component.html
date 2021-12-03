@@ -157,7 +157,7 @@
     <!-- 表格 -->
     <nz-table nzShowSizeChanger [nzData]="frozenDataSource" [nzFrontPagination]="false" [nzSimple]="true"
        [nzLoading]="loading" [nzTotal]="total" [nzPageSize]="pageSize"
-      [nzPageIndex]="pageIndex" nzSize="small" [nzScroll]="{ x: '300px', y: '240;px' }" nzTitle="動用/釋放額度明細">
+      [nzPageIndex]="pageIndex" nzSize="small" [nzScroll]="{ x: '300px', y: '240;px' }" nzTitle="凍結/解凍額度明細">
       <thead>
         <tr>
           <th nzLeft class="table-header">額度號</th>
@@ -165,7 +165,7 @@
           <th class="table-header">原因代碼</th>
           <th class="table-header">原因說明</th>
           <th class="table-header">處理員編</th>
-          <th class="table-header">案件編號</th>
+          <th class="table-header">凍結編號</th>
           <th class="table-header">異動時間</th>
           <th class="table-header">是否已解凍</th>
           <th class="table-header">是否已核准</th>
@@ -178,7 +178,7 @@
           <td class="table-data">{{ data.reasonCode }}</td>
           <td class="table-data">{{ data.reasonDesc }}</td>
           <td class="table-data">{{ data.empno }}</td>
-          <td class="table-data">{{ data.applno }}</td>
+          <td class="table-data">{{ data.frozenNo }}</td>
           <td class="table-data">{{ data.manageDate |date :'yyyy-MM-dd' }}</td>
           <td class="table-data">{{ data.unfrozenFlag }}</td>
           <td class="table-data">{{ data.statusFlag }}</td>
