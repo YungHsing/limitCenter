@@ -67,22 +67,22 @@
 
         <ng-container matColumnDef="creditLimit">
           <th mat-header-cell *matHeaderCellDef> 核准額度 </th>
-          <td mat-cell *matCellDef="let element"> {{element.creditLimit}} </td>
+          <td mat-cell *matCellDef="let element" style="text-align: right;"> {{toCurrency(element.creditLimit)}} </td>
         </ng-container>
 
         <ng-container matColumnDef="usedLimit">
           <th mat-header-cell *matHeaderCellDef> 已動撥金額 </th>
-          <td mat-cell *matCellDef="let element"> {{element.usedLimit}} </td>
+          <td mat-cell *matCellDef="let element" style="text-align: right;"> {{toCurrency(element.usedLimit)}} </td>
         </ng-container>
 
         <ng-container matColumnDef="reserveLimit">
           <th mat-header-cell *matHeaderCellDef> 預佔額度 </th>
-          <td mat-cell *matCellDef="let element"> {{element.reserveLimit}} </td>
+          <td mat-cell *matCellDef="let element" style="text-align: right;"> {{toCurrency(element.reserveLimit)}} </td>
         </ng-container>
 
         <ng-container matColumnDef="activeLimit">
           <th mat-header-cell *matHeaderCellDef> 目前可動用額度 </th>
-          <td mat-cell *matCellDef="let element"> {{element.activeLimit}} </td>
+          <td mat-cell *matCellDef="let element" style="text-align: right;"> {{toCurrency(element.activeLimit)}} </td>
         </ng-container>
 
         <ng-container matColumnDef="currencyType">

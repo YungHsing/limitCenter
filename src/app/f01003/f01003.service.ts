@@ -12,4 +12,5 @@ export class F01003Service extends BaseService {
   async getLimitDataList(baseUrl: string, formData: FormData) {
     return await this.postFormData(baseUrl, formData).toPromise();
   }
+
 }

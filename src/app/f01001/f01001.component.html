@@ -71,7 +71,7 @@
             <td class="table-data">{{ data.CUSTOMER_ID }}</td>
             <td class="table-data">{{ data.LIMIT_TYPE_CODE }}</td>
             <td class="table-data">{{ data.STOP_FLAG }}</td>
-            <td class="table-data">{{ data.CREDIT_LIMIT }}</td>
+            <td class="table-data" style="text-align: right;">{{ toCurrency(data.CREDIT_LIMIT) }}</td>
             <td class="table-data">{{ data.LIMIT_START_DATE |date :'yyyy-MM-dd' }}</td>
             <td class="table-data">{{ data.LIMIT_END_DATE |date :'yyyy-MM-dd' }}</td>
           </tr>

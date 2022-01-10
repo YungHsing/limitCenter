@@ -152,6 +152,10 @@ export class F01001Component implements OnInit, AfterViewInit {
 
   }
 
+  toCurrency(amount: any) {
+    return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;
+  }
+
   getContent(nid: string, cid: string) {
 
   }

@@ -66,7 +66,7 @@
             <td class="table-data">{{ data.limitNo }}</td>
             <td class="table-data">{{ data.limitTypeCode }}</td>
             <td class="table-data">{{ data.stopFlag }}</td>
-            <td class="table-data">{{ data.creditLimit }}</td>
+            <td class="table-data" style="text-align: right;">{{ toCurrency(data.creditLimit) }}</td>
             <td class="table-data">{{ data.limitStartDate |date :'yyyy-MM-dd' }}</td>
             <td class="table-data">{{ data.limitEndDate |date :'yyyy-MM-dd' }}</td>
             <td class="table-data">{{ data.statusFlag }}</td>

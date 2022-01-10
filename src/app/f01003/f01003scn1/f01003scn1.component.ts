@@ -219,6 +219,10 @@ export class F01003scn1Component implements OnInit {
     this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
   }
 
+  toCurrency(amount: string) {
+    return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;
+  }
+
   checkButton(statusFlag: string) {
     return statusFlag === 'N'? true : false;
   }

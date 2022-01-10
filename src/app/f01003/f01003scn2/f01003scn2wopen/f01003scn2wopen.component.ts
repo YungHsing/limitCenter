@@ -125,9 +125,13 @@ export class F01003scn2wopenComponent implements OnInit {
         for (const jsonObj of data.rspBody.reserveNoOption) {
           if(jsonObj['reserveNo'] == this.reserveAddForm.value.RESERVE_NO) {
             const creditLimit = jsonObj['creditLimit'];
-          this.reserveAddForm.patchValue({ CREDIT_LIMIT: creditLimit });
+          this.reserveAddForm.patchValue({ CREDIT_LIMIT: this.toCurrency(creditLimit) });
           }
         }
       });
+  }
+
+  toCurrency(amount: any) {
+    return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;
   }
 }

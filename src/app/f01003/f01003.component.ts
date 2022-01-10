@@ -164,4 +164,7 @@ export class F01003Component implements OnInit, AfterViewInit {
     this.pageIndex = pageIndex;
     // this.getViewDataList(this.pageIndex, this.pageSize);
   }
+  toCurrency(amount: any) {
+    return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;
+  }
 }

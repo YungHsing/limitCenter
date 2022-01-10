@@ -20,7 +20,7 @@ export class F01003scn0Component implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.NATIONAL_ID = params['NATIONAL_ID'];
       this.CUSTOMER_ID = params['CUSTOMER_ID'];
-      this.CREDIT_LIMIT = params['CREDIT_LIMIT'];
+      this.CREDIT_LIMIT = this.toCurrency(params['CREDIT_LIMIT']);
       this.LIMIT_START_DATE = this.datePipe.transform(params['LIMIT_START_DATE'], "yyyy/MM/dd");
     });
   }
@@ -28,6 +28,10 @@ export class F01003scn0Component implements OnInit {
   ngAfterViewInit() {
     let element: HTMLElement = document.getElementById('firstBtn') as HTMLElement;
     element.click();
+  }
+
+  toCurrency(amount: any) {
+    return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;
   }
 
 }

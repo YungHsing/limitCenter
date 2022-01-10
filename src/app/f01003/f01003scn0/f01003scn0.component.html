@@ -1,39 +1,3 @@
-<!-- <div class="container" style="margin-left: 15px;">
-  <th class="f01_th">個人額度維護</th>
-  <table>
-    <br>
-    <mat-card class="matCard">
-      <mat-card-content>
-        <tr>
-          <th nowrap="nowrap">客戶編號 CID：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #input class="form-control" [(ngModel)]="this.CUSTOMER_ID" readonly>
-            </mat-form-field>
-          </td>
-          <th nowrap="nowrap">身分證字號 NID：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #input class="form-control" [(ngModel)]="this.NATIONAL_ID" readonly>
-            </mat-form-field>
-          </td>
-          <th nowrap="nowrap">額度建立日期：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #input class="form-control" [(ngModel)]="this.LIMIT_START_DATE" readonly>
-            </mat-form-field>
-          </td>
-          <th nowrap="nowrap">歸戶額度：</th>
-          <td>
-            <mat-form-field color="accent">
-              <input matInput #input class="form-control" [(ngModel)]="this.CREDIT_LIMIT" readonly>
-            </mat-form-field>
-          </td>
-        </tr>
-      </mat-card-content>
-    </mat-card>
-  </table>
-</div> -->
 <div class="line_bank_bankground_color" style="padding-top: 30px;">
   <div class="line_bank_card_no_padding">
     <div nz-row>
@@ -53,8 +17,8 @@
         </div>
       </div>
       <div nz-col nzSpan="6">
-        <div style="padding:10px"><span class="form-title">歸戶額度：</span>
-          <input style="display: block;" #input class="form-control" [(ngModel)]="this.CREDIT_LIMIT" readonly>
+        <div style="padding:10px; text-align: right;"><span class="form-title">歸戶額度：</span>
+          <input style="display: block; text-align: right;" #input class="form-control" [(ngModel)]="this.CREDIT_LIMIT" readonly>
         </div>
       </div>
     </div>
