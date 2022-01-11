@@ -32,7 +32,7 @@ export class F01003scn1addComponent implements OnInit {
     CUSTOMER_ID: [this.data.customerId, [Validators.maxLength(30)]],
     NATIONAL_ID: [this.data.nationalId, [Validators.maxLength(30)]],
     CREDIT_LIMIT: ['', [Validators.maxLength(10)]],
-    CURRENCY_TYPE: ['TWN', [Validators.maxLength(3)]],
+    CURRENCY_TYPE: ['TWD', [Validators.maxLength(3)]],
     STOP_FLAG: ['N', [Validators.maxLength(1)]],
     CANCEL_FLAG: ['Y', [Validators.maxLength(1)]],
     CYCLE_TYPE: ['Y', [Validators.maxLength(1)]],
@@ -97,6 +97,9 @@ export class F01003scn1addComponent implements OnInit {
         data: { msgStr: msgStr, display: true }
       });
     } else {
+      let creditLimit = this.addForm.value.CREDIT_LIMIT;
+      this.addForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replaceAll(',', '') });
+
       var formData = new FormData();
       let jsonStr = JSON.stringify(this.addForm.value);
       let jsonObj = JSON.parse(jsonStr);
@@ -113,5 +116,11 @@ export class F01003scn1addComponent implements OnInit {
       if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
     }
   }
+
+  onKey(event: KeyboardEvent) {
+    let value = (<HTMLInputElement>event.target).value;
+    this.addForm.patchValue({ CREDIT_LIMIT: value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') });
+  }
+
 
 }

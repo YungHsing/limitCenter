@@ -39,8 +39,8 @@ export class F01000Component implements OnInit {
     'REASON_CONTENT',
     'EMPNO',
     'MANAGE_DATE',
-    'REVIEW_EMPNO',
-    'ACTION_SORT'
+    'REVIEW_EMPNO'
+    // ,'ACTION_SORT'
   ];
 
   public dataSource = new MatTableDataSource<ManageRecordModule | Group>([]);
@@ -178,6 +178,8 @@ export class F01000Component implements OnInit {
     formData.append('rowIds', jsonObj);
     formData.append('handleEmpNo', localStorage.getItem("limitEmpNo"));
     let baseUrl = 'f01/f01000Action';
+    console.log(rowIdArray)
+    console.log(jsonStr)
     await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
       const childernDialogRef = this.dialog.open(F01000confirmComponent, {
         data: { msgStr: data.rspMsg }

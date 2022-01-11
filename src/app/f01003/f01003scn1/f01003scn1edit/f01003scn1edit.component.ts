@@ -60,6 +60,8 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
       this.addForm.controls['STOP_CODE'].enable();
       this.addForm.controls['STOP_DESC'].enable();
     }
+    let creditLimit = this.addForm.value.CREDIT_LIMIT;
+    this.addForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') });
   }
 
   ngAfterViewInit() {
@@ -125,6 +127,9 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
       });
       reasonDialogRef.afterClosed().subscribe(async result => {
         if (result != null && result.event == 'success' && result.value != null && result.value != '') {
+          let creditLimit = this.addForm.value.CREDIT_LIMIT;
+          this.addForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replaceAll(',', '') });
+
           this.addForm.patchValue({ REASON_CONTENT : result.value });
           this.addForm.controls['STOP_DATE'].enable();
           var formData = new FormData();
@@ -159,5 +164,10 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
+
+  onKey(event: KeyboardEvent) {
+    let value = (<HTMLInputElement>event.target).value;
+    this.addForm.patchValue({ CREDIT_LIMIT: value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') });
   }
 }
