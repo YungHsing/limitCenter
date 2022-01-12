@@ -54,6 +54,8 @@ export class F01003scn2wopenComponent implements OnInit {
           this.active = false;
           if (codeNo == 2) { this.actionTypeOption.push({ value: codeNo, viewValue: codeDesc }) }
         } else {
+          // let creditLimit = this.reserveAddForm.value.CREDIT_LIMIT;
+          // this.reserveAddForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') });
           if (codeNo == 3) { this.actionTypeOption.push({ value: codeNo, viewValue: codeDesc }) }
         }
       }
@@ -98,6 +100,10 @@ export class F01003scn2wopenComponent implements OnInit {
         data: { msgStr: msgStr, display: true }
       });
     } else {
+
+      let creditLimit = this.reserveAddForm.value.CREDIT_LIMIT;
+      this.reserveAddForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replaceAll(',', '') });
+
       var formData = new FormData();
       let jsonStr = JSON.stringify(this.reserveAddForm.value);
       let jsonObj = JSON.parse(jsonStr);
@@ -125,10 +131,15 @@ export class F01003scn2wopenComponent implements OnInit {
         for (const jsonObj of data.rspBody.reserveNoOption) {
           if(jsonObj['reserveNo'] == this.reserveAddForm.value.RESERVE_NO) {
             const creditLimit = jsonObj['creditLimit'];
-          this.reserveAddForm.patchValue({ CREDIT_LIMIT: this.toCurrency(creditLimit) });
+            this.reserveAddForm.patchValue({ CREDIT_LIMIT: this.toCurrency(creditLimit) });
           }
         }
       });
+  }
+
+  onKey(event: KeyboardEvent) {
+    let value = (<HTMLInputElement>event.target).value;
+    this.reserveAddForm.patchValue({ CREDIT_LIMIT: value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') });
   }
 
   toCurrency(amount: any) {

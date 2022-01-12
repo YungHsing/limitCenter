@@ -1,5 +1,4 @@
 <div class="line_bank_bankground_color">
-  <!-- <div class="container"> -->
   <form [formGroup]="manageRecordForm">
     <div class="line_bank_card_no_padding">
       <div nz-row>
@@ -44,50 +43,8 @@
         </div>
       </div>
 
-
-      <!-- <table>
-            <br>
-            <mat-card class="matCard">
-                <mat-card-content>
-                    <tr>
-                        <td>
-                        <th nowrap="nowrap">選擇額度號：</th>
-                        <td>
-                            <mat-form-field color="accent">
-                                <mat-select [(ngModel)]="limitNoSelectedValue" formControlName="LIMIT_NO" value=''>
-                                    <mat-option *ngFor="let code of limitNoOption" [value]="code.value">
-                                        {{code.viewValue}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </td>
-                        <th nowrap="nowrap">選擇異動時間：</th>
-                        <td>
-                            <mat-form-field>
-                                <mat-label>起-訖</mat-label>
-                                <mat-date-range-input [rangePicker]="rangePicker" [min]="minDate" [max]="maxDate">
-                                    <input matStartDate placeholder="起" formControlName="START_DATE" disabled>
-                                    <input matEndDate placeholder="訖" formControlName="END_DATE" disabled>
-                                </mat-date-range-input>
-                                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-                                <mat-date-range-picker #rangePicker disabled="false">
-                                    <mat-date-range-picker-actions>
-                                        <button mat-raised-button color="primary" matDateRangePickerApply>確認</button>
-                                        <button mat-button matDateRangePickerCancel>取消</button>
-                                    </mat-date-range-picker-actions>
-                                </mat-date-range-picker>
-                            </mat-form-field>
-                        </td>
-                        <td>
-                            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">查詢</button>
-                        </td>
-                    </tr>
-                </mat-card-content>
-            </mat-card>
-        </table> -->
     </div>
   </form>
-  <!-- </div> -->
 
 
   <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
@@ -98,16 +55,16 @@
         [nzScroll]="{ x: '300px', y: '240;px' }" nzTitle="額度欄位修改明細">
         <thead>
           <tr>
-            <th nzLeft class="table-header">額度號</th>
-            <th class="table-header">欄位代碼</th>
-            <th class="table-header">欄位說明</th>
-            <th class="table-header">修改前欄位值</th>
-            <th class="table-header">修改後欄位值</th>
-            <th class="table-header">原因說明</th>
-            <th class="table-header">處理員編</th>
-            <th class="table-header">異動時間</th>
-            <th class="table-header">覆核員編</th>
-            <th class="table-header">是否核准</th>
+            <th [nzWidth]="'80px'" nzLeft class="table-header">額度號</th>
+            <th [nzWidth]="'80px'" class="table-header">欄位代碼</th>
+            <th [nzWidth]="'150px'" class="table-header">欄位說明</th>
+            <th [nzWidth]="'80px'" class="table-header">修改前欄位值</th>
+            <th [nzWidth]="'80px'" class="table-header">修改後欄位值</th>
+            <th [nzWidth]="'150px'" class="table-header">原因說明</th>
+            <th [nzWidth]="'80px'" class="table-header">處理員編</th>
+            <th [nzWidth]="'80px'" class="table-header">異動時間</th>
+            <th [nzWidth]="'80px'" class="table-header">覆核員編</th>
+            <th [nzWidth]="'50px'" class="table-header">是否核准</th>
           </tr>
         </thead>
         <tbody>
@@ -129,77 +86,4 @@
   </cdk-virtual-scroll-viewport>
 
 
-  <!-- <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
-    <mat-dialog-content>
-      <mat-table [dataSource]="manageRecordDataSource" matSort (matSortChange)="changeSort($event)">
-
-        <ng-container matColumnDef="LIMIT_NO">
-          <mat-header-cell *matHeaderCellDef>額度號</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.limitNo }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="COLUMN_NAME">
-          <mat-header-cell *matHeaderCellDef>欄位代碼</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.ColumnName }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="COLUMN_DESC">
-          <mat-header-cell *matHeaderCellDef>欄位說明</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.columnDesc }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="BEFORE_VAL">
-          <mat-header-cell *matHeaderCellDef>修改前欄位值</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.beforeVal }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="AFTER_VAL">
-          <mat-header-cell *matHeaderCellDef>修改後欄位值</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.afterVal }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="REASON_CONTENT">
-          <mat-header-cell *matHeaderCellDef>原因說明</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.reasonContent }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="EMPNO">
-          <mat-header-cell *matHeaderCellDef>處理員編</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.empno }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="MANAGE_DATE">
-          <mat-header-cell *matHeaderCellDef>異動時間</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.manageDate |date :'yyyy-MM-dd' }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="REVIEW_EMPNO">
-          <mat-header-cell *matHeaderCellDef>覆核員編</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.reviewEmpno }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="AGREE_FLAG">
-          <mat-header-cell *matHeaderCellDef>是否核准</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.agreeFlag }}</mat-cell>
-        </ng-container>
-
-        <mat-header-row
-          *matHeaderRowDef="['LIMIT_NO', 'COLUMN_NAME', 'COLUMN_DESC', 'BEFORE_VAL', 'AFTER_VAL', 'REASON_CONTENT', 'EMPNO', 'MANAGE_DATE', 'REVIEW_EMPNO', 'AGREE_FLAG']; sticky: true">
-        </mat-header-row>
-
-        <mat-row
-          *matRowDef="let ruleParmRow; columns: ['LIMIT_NO', 'COLUMN_NAME', 'COLUMN_DESC', 'BEFORE_VAL', 'AFTER_VAL', 'REASON_CONTENT', 'EMPNO', 'MANAGE_DATE', 'REVIEW_EMPNO', 'AGREE_FLAG']">
-        </mat-row>
-
-      </mat-table>
-
-      <tr>
-        <td>
-          <mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 15, 50, 100]" [showFirstLastButtons]="true">
-          </mat-paginator>
-        </td>
-      </tr>
-    </mat-dialog-content>
-  </cdk-virtual-scroll-viewport> -->
 </div>
