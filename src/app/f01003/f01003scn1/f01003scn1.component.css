@@ -6,6 +6,7 @@ table {
 th {
   /* row border */
   border-bottom: 1px solid #ffa600;
+  color:black;
 }
 
 td.mat-cell {

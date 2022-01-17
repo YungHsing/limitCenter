@@ -18,7 +18,7 @@ export class F01003scn1addComponent implements OnInit {
 
   ynCode: sysCode[] = [{value: 'Y', viewValue: '是'}, {value: 'N', viewValue: '否'}];
   limitTypeOption: sysCode[] =  null;
-  CurrencyOption: sysCode[] =  [{value: 'TWN', viewValue: '台幣'}];
+  CurrencyOption: sysCode[] =  [{value: 'TWD', viewValue: '台幣'}];
   stopDateValue: Date;
   DateValue: Date = new Date();
   minDate: Date;
