@@ -103,7 +103,6 @@ export class F01003scn1addComponent implements OnInit {
       var formData = new FormData();
       let jsonStr = JSON.stringify(this.addForm.value);
       let jsonObj = JSON.parse(jsonStr);
-      let startDate = new Date(this.addForm.value.LIMIT_START_DATE);
       let endDate = new Date(this.addForm.value.LIMIT_END_DATE);
       jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
       for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }

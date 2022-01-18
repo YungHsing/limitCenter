@@ -26,14 +26,14 @@
 
   <div style="margin-top: 30px; margin-left: 30px;">
     <button nz-button [nzSize]="'large'" nzType="primary" style="margin:0px 5px" routerLinkActive="activeFirst" routerLink="./F01003SCN1"
-      [queryParams]="{ NATIONAL_ID: 'A123456789', CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }"
+      [queryParams]="{ NATIONAL_ID: this.NATIONAL_ID, CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }"
       id="firstBtn">額度資料</button>
     <button nz-button [nzSize]="'large'" nzType="primary" style="margin:0px 5px" routerLinkActive="activeFirst" routerLink="./F01003SCN2"
-      [queryParams]="{ NATIONAL_ID: 'A123456789', CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }">動用&釋放額度明細</button>
+      [queryParams]="{ NATIONAL_ID: this.NATIONAL_ID, CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }">動用&釋放額度明細</button>
     <button nz-button [nzSize]="'large'" nzType="primary" style="margin:0px 5px" routerLinkActive="activeFirst" routerLink="./F01003SCN3"
-      [queryParams]="{ NATIONAL_ID: 'A123456789', CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }">凍結&解凍額度明細</button>
+      [queryParams]="{ NATIONAL_ID: this.NATIONAL_ID, CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }">凍結&解凍額度明細</button>
     <button nz-button [nzSize]="'large'" nzType="primary" style="margin:0px 5px" routerLinkActive="activeFirst" routerLink="./F01003SCN4"
-      [queryParams]="{ NATIONAL_ID: 'A123456789', CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }">額度欄位修改明細</button>
+      [queryParams]="{ NATIONAL_ID: this.NATIONAL_ID, CUSTOMER_ID: this.CUSTOMER_ID, LIMIT_START_DATE: this.LIMIT_START_DATE, CREDIT_LIMIT: this.CREDIT_LIMIT }">額度欄位修改明細</button>
   </div>
   <router-outlet></router-outlet>
 </div>

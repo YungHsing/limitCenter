@@ -28,8 +28,6 @@ export class F01003Component implements OnInit, AfterViewInit {
     NATIONAL_ID: ['', [Validators.maxLength(30)]],
     LIMIT_START_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     LIMIT_END_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],
-    // pageIndex: ['', [Validators.maxLength(3)]],
-    // pageSize: ['', [Validators.maxLength(3)]]
   });
 
   formControl = new FormControl('', [
@@ -38,10 +36,6 @@ export class F01003Component implements OnInit, AfterViewInit {
 
   submitted = false;
   totalCount: any;
-  // @ViewChild('paginator', { static: true }) paginator: MatPaginator;
-  // @ViewChild('sortTable', { static: true }) sortTable: MatSort;
-  // currentPage: PageEvent;
-  // currentSort: Sort;
   limitDataSource: Data[] = [];
   isReadOnly = false;
   isDisabled = true;
@@ -55,15 +49,6 @@ export class F01003Component implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.currentPage = {
-    //   pageIndex: 0,
-    //   pageSize: 5,
-    //   length: null
-    // };
-    // this.currentSort = {
-    //   active: '',
-    //   direction: ''
-    // };
   }
 
   async getViewDataList(): Promise<void> {
@@ -83,6 +68,10 @@ export class F01003Component implements OnInit, AfterViewInit {
       this.totalCount = data.rspBody.size;
       this.limitDataSource = data.rspBody.items;
       this.isReadOnly = true;
+      // TODO 待取得後端ＮＩＤ
+      // if (this.limitDataSource.length > 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: data.rspBody.items.NATIONAL_ID }); }
+      if (this.limitDataSource.length > 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: 'A222222222' }); }
+      if (this.limitDataSource.length == 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: 'A111111111' }); }
     });
   }
 
@@ -104,11 +93,6 @@ export class F01003Component implements OnInit, AfterViewInit {
     this.limitSearchForm.patchValue({ NATIONAL_ID: '' });
     this.limitSearchForm.patchValue({ LIMIT_START_DATE: '' });
     this.limitSearchForm.patchValue({ LIMIT_END_DATE: '' });
-    // this.currentPage = {
-    //   pageIndex: 0,
-    //   pageSize: 10,
-    //   length: null
-    // };
     this.totalCount = 0;
     this.limitDataSource = null;
     this.isReadOnly = false;
@@ -138,7 +122,8 @@ export class F01003Component implements OnInit, AfterViewInit {
     } else {
       const dialogRef = this.dialog.open(F01003addComponent, {
         data: {
-          CUSTOMER_ID: this.limitSearchForm.value.CUSTOMER_ID
+          CUSTOMER_ID: this.limitSearchForm.value.CUSTOMER_ID,
+          NATIONAL_ID: this.limitSearchForm.value.NATIONAL_ID
         }
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -154,7 +139,8 @@ export class F01003Component implements OnInit, AfterViewInit {
     this.getViewDataList();
   }
 
-  async getContent(nid: string, cid: string, limitNum: string, startDate: string) {
+  async getContent(cid: string, limitNum: string, startDate: string) {
+    let nid = this.limitSearchForm.value.NATIONAL_ID;
     this.router.navigate(['./F01003SCN0'], { queryParams: { NATIONAL_ID: nid, CUSTOMER_ID: cid, CREDIT_LIMIT: limitNum, LIMIT_START_DATE: startDate } });
   }
 
@@ -162,7 +148,6 @@ export class F01003Component implements OnInit, AfterViewInit {
     const { pageSize, pageIndex } = params;
     this.pageSize = pageSize;
     this.pageIndex = pageIndex;
-    // this.getViewDataList(this.pageIndex, this.pageSize);
   }
   toCurrency(amount: any) {
     return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;

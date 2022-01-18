@@ -42,8 +42,9 @@
         </div>
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px;">
-            <mat-form-field color="accent" class="example-form-field" style="width: 150px;">
-              <input matInput [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE" value="" placeholder="額度訖日" disabled>
+            <span class="form-title-actions">額度訖日</span>
+            <mat-form-field color="accent" class="example-form-field" style="width: 150px; margin-top: -19px;">
+              <input matInput [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE" value="" disabled required>
               <mat-datepicker-toggle matSuffix [for]="endDateValue" >
               </mat-datepicker-toggle>
               <mat-datepicker #endDateValue disabled="false"></mat-datepicker>
@@ -87,8 +88,9 @@
         </div>
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
-            <mat-form-field color="accent" class="example-form-field" style="width: 150px;">
-              <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" placeholder="停用日期" disabled required>
+            <span class="form-title-actions">停用日期</span>
+            <mat-form-field color="accent" class="example-form-field" style="width: 150px; margin-top: -19px;">
+              <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value=""  disabled required>
               <mat-datepicker-toggle matSuffix [for]="stopDateValue" >
               </mat-datepicker-toggle>
               <mat-datepicker #stopDateValue disabled="false"></mat-datepicker>

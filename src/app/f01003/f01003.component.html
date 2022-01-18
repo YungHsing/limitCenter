@@ -61,7 +61,7 @@
         <tbody>
           <tr *ngFor="let data of limitDataSource">
             <td nzLeft><button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
-                (click)="getContent(data.nationalId, data.customerId, data.creditLimit, data.limitStartDate)">明細</button>
+                (click)="getContent(data.customerId, data.creditLimit, data.limitStartDate)">明細</button>
             </td>
             <td class="table-data">{{ data.limitNo }}</td>
             <td class="table-data">{{ data.limitTypeCode }}</td>

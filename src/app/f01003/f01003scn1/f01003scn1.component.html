@@ -115,6 +115,11 @@
           <td mat-cell *matCellDef="let element"> {{element.cancelFlag}} </td>
         </ng-container>
 
+        <!-- <ng-container matColumnDef="cancelFlag">
+          <th mat-header-cell *matHeaderCellDef> 是否已凍結 </th>
+          <td mat-cell *matCellDef="let element"> {{element.frozenFlag}} </td>
+        </ng-container> -->
+
         <ng-container matColumnDef="applno">
           <th mat-header-cell *matHeaderCellDef> 案件編號 </th>
           <td mat-cell *matCellDef="let element"> {{element.applno}} </td>

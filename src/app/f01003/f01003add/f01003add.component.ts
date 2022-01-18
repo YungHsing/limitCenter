@@ -17,7 +17,7 @@ interface sysCode {
 export class F01003addComponent implements OnInit {
   ynCode: sysCode[] = [{value: 'Y', viewValue: '是'}, {value: 'N', viewValue: '否'}];
   limitTypeOption: sysCode[] =  [{value: 'P0001000000', viewValue: '個人限額'}];
-  CurrencyOption: sysCode[] =  [{value: 'TWN', viewValue: '台幣'}];
+  CurrencyOption: sysCode[] =  [{value: 'TWD', viewValue: '台幣'}];
   stopDateValue: Date;
   minDate: Date;
   constructor(public dialogRef: MatDialogRef<F01003addComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) {
@@ -33,7 +33,7 @@ export class F01003addComponent implements OnInit {
     CUSTOMER_ID: [this.data.CUSTOMER_ID, [Validators.maxLength(30)]],
     NATIONAL_ID: [this.data.NATIONAL_ID, [Validators.maxLength(30)]],
     CREDIT_LIMIT: ['', [Validators.maxLength(10)]],
-    CURRENCY_TYPE: ['TWN', [Validators.maxLength(3)]],
+    CURRENCY_TYPE: ['TWD', [Validators.maxLength(3)]],
     STOP_FLAG: ['N', [Validators.maxLength(1)]],
     CANCEL_FLAG: ['N', [Validators.maxLength(1)]],
     CYCLE_TYPE: ['Y', [Validators.maxLength(1)]],
@@ -96,6 +96,11 @@ export class F01003addComponent implements OnInit {
       data: { msgStr: msgStr, display: true }
     });
     if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
+  }
+
+  onKey(event: KeyboardEvent) {
+    let value = (<HTMLInputElement>event.target).value;
+    this.addForm.patchValue({ CREDIT_LIMIT: value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') });
   }
 
 }

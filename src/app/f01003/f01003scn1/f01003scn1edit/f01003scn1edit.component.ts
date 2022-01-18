@@ -21,7 +21,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
   display = true;
   ynCode: sysCode[] = [{value: 'Y', viewValue: '是'}, {value: 'N', viewValue: '否'}];
   limitTypeOption: sysCode[] =  [{value: 'P0001000000', viewValue: '個人限額'},{value: 'P0001010000', viewValue: '個人有擔'}, {value: 'P0001020000', viewValue: '個人無擔'},{value: 'P0001020100', viewValue: '無擔分期型限額'}, {value: 'P0001020200', viewValue: '無擔循環型限額'}];
-  CurrencyOption: sysCode[] =  [{value: 'TWN', viewValue: '台幣'}];
+  CurrencyOption: sysCode[] =  [{value: 'TWD', viewValue: '台幣'}];
   StopCodeOption: sysCode[] =  [{value: 'CODE_1', viewValue: '原因代碼1'},{value: 'CODE_2', viewValue: '原因代碼2'},{value: 'CODE_3', viewValue: '原因代碼3'}];
   stopDateValue: Date;
   minDate: Date;
