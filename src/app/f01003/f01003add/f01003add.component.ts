@@ -82,12 +82,16 @@ export class F01003addComponent implements OnInit {
 
   public async confirmAdd(): Promise<void> {
     var formData = new FormData();
+    let creditLimit = this.addForm.value.CREDIT_LIMIT;
+    this.addForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replaceAll(',', '') });
     let jsonStr = JSON.stringify(this.addForm.value);
     let jsonObj = JSON.parse(jsonStr);
     let startDate = new Date(this.addForm.value.LIMIT_START_DATE);
     let endDate = new Date(this.addForm.value.LIMIT_END_DATE);
+
     jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
     jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
+
     for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }
     let msgStr: string = "";
     let baseUrl = 'f01/f01003level2add';
