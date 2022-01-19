@@ -53,7 +53,7 @@
               <mat-datepicker-toggle matSuffix [for]="endDateValue">
               </mat-datepicker-toggle>
               <mat-datepicker #endDateValue disabled="false"></mat-datepicker>
-              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_END_DATE')}}</mat-error> -->
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_END_DATE')}}</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -63,7 +63,7 @@
               <input matInput #input class="form-control" style="text-align: right;"
               onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
               (keyup)="onKey($event)" name="codeTag" formControlName="CREDIT_LIMIT">
-              <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error> -->
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage('CREDIT_LIMIT')}}</mat-error>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">停用註記</span>
-              <mat-select formControlName="STOP_FLAG"
+              <mat-select formControlName="STOP_FLAG" (ngModelChange)="changeSelect()"
                 style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
                 <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
                   {{yn.viewValue}}
@@ -102,7 +102,7 @@
               <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" disabled>
               <mat-datepicker-toggle matSuffix [for]="stopDateValue">
               </mat-datepicker-toggle>
-              <mat-datepicker #stopDateValue disabled="false"></mat-datepicker>
+              <mat-datepicker #stopDateValue ></mat-datepicker>
               <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('STOP_DATE')}}</mat-error> -->
             </mat-form-field>
           </div>

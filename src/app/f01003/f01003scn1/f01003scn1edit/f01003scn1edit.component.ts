@@ -59,6 +59,10 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
       this.addForm.controls['STOP_DATE'].enable();
       this.addForm.controls['STOP_CODE'].enable();
       this.addForm.controls['STOP_DESC'].enable();
+    } else {
+      this.addForm.controls['STOP_DATE'].disable();
+      this.addForm.controls['STOP_CODE'].disable();
+      this.addForm.controls['STOP_DESC'].disable();
     }
     let creditLimit = this.addForm.value.CREDIT_LIMIT;
     this.addForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') });
