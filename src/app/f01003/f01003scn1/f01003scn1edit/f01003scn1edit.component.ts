@@ -117,7 +117,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
         data: { msgStr: msgStr, display: true }
       });
     } else if(this.addForm.value.STOP_FLAG == 'Y' && (this.addForm.value.STOP_CODE == null || this.addForm.value.STOP_DESC == null)) {
-      msgStr = '請填寫停用代碼與停用原因!';
+      msgStr = '請填寫停用原因碼與停用說明!';
       const checkDialogRef = this.dialog.open(F01003confirmComponent, {
         data: { msgStr: msgStr, display: true }
       });

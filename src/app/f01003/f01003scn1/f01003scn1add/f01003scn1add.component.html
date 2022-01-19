@@ -40,14 +40,38 @@
             </div>
           </div>
         </div>
-        <div nz-col nzSpan="8">
+        <!-- <div nz-col nzSpan="8">
           <div class="form" style="padding:20px;">
-            <span class="form-title-actions">額度訖日</span>
+            <span class="form-title-actions">額度起訖日</span>
             <mat-form-field color="accent" class="example-form-field" style="width: 150px; margin-top: -19px;">
               <input matInput [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE" value="" disabled required>
               <mat-datepicker-toggle matSuffix [for]="endDateValue" >
               </mat-datepicker-toggle>
               <mat-datepicker #endDateValue disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div> -->
+        <div nz-col nzSpan="16">
+          <div class="form" style="padding:20px;">
+            <span class="form-title-actions">額度起日-額度訖日</span>
+            <mat-form-field color="accent" class="example-form-field" style="margin-top:-19px; width: 250px;">
+              <mat-date-range-input [rangePicker]="rangePicker" [min]="minDate">
+                <input matStartDate formControlName="LIMIT_START_DATE" required
+                  style="padding-bottom: 15px; background-color: white; border-color: white; width: 150px;">
+                <input matEndDate formControlName="LIMIT_END_DATE" required
+                  style="background-color: white; border-color: white; width: 130px">
+              </mat-date-range-input>
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_END_DATE')}}</mat-error>
+              <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_START_DATE')}}</mat-error>
+              <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+              <mat-date-range-picker #rangePicker>
+                <mat-date-range-picker-actions>
+                  <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" matDateRangePickerApply
+                    (click)="setTimes()">確定</button>
+                  <button nz-button [nzSize]="'middle'" nzType="defult" nzDanger style="margin:0px 5px"
+                    matDateRangePickerCancel>取消</button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
             </mat-form-field>
           </div>
         </div>
@@ -60,8 +84,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div nz-row>
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">幣別</span>
@@ -75,6 +97,16 @@
           </div>
         </div>
         <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">上層額度號</span>
+              <input matInput #input class="form-control" name="codeTag" formControlName="UP_LEVEL" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div nz-row>
+
+        <!-- <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">停用註記</span>
               <mat-select formControlName="STOP_FLAG"
@@ -96,16 +128,8 @@
               <mat-datepicker #stopDateValue disabled="false"></mat-datepicker>
             </mat-form-field>
           </div>
-        </div>
-      </div>
-      <div nz-row>
-        <div nz-col nzSpan="8">
-          <div class="form" style="padding:20px">
-            <div><span class="form-title-actions">上層額度號</span>
-              <input matInput #input class="form-control" name="codeTag" formControlName="UP_LEVEL" readonly>
-            </div>
-          </div>
-        </div>
+        </div> -->
+
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">是否可撤銷</span>
@@ -130,14 +154,13 @@
             </div>
           </div>
         </div>
+        <div mat-dialog-actions>
+          <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+            (click)="confirmAdd() ">儲存</button>
+          <button nz-button [nzSize]="'middle'" nzType="default" nzDanger (click)="onNoClick()" tabindex="-1"
+            style="margin:0px 5px">取消</button>
+        </div>
 
-      </div>
-
-      <div mat-dialog-actions>
-        <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
-          (click)="confirmAdd() ">儲存</button>
-        <button nz-button [nzSize]="'middle'" nzType="default" nzDanger (click)="onNoClick()" tabindex="-1"
-          style="margin:0px 5px">取消</button>
       </div>
       <br><br>
     </form>

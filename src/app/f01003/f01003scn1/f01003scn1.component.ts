@@ -42,9 +42,11 @@ export class F01003scn1Component implements OnInit {
     'currencyType',
     'stopFlag',
     'stopDate',
+    'stopDesc',
     'projectCode',
     'cycleType',
     'cancelFlag',
+    'frozenFlag',
     'applno',
     'productCode',
     'empno',
@@ -76,6 +78,7 @@ export class F01003scn1Component implements OnInit {
     let baseUrl = 'f01/f01003query';
     await this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
       this.LimitData = data.rspBody.items;
+      console.log(this.LimitData)
     });
 
     this.dataSource.data = this.addGroups(this.LimitData, this.groupByColumns);
@@ -180,6 +183,7 @@ export class F01003scn1Component implements OnInit {
           cancelFlag: row.cancelFlag,
           cycleType: row.cycleType,
           stopDate: row.stopDate,
+          stopDesc: row.stopDesc,
           limitStartDate: row.limitStartDate,
           limitEndDate: row.limitEndDate,
           limitTypeCode: row.limitTypeCode,

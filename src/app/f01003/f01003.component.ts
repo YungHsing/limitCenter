@@ -56,11 +56,11 @@ export class F01003Component implements OnInit, AfterViewInit {
     let jsonStr = JSON.stringify(this.limitSearchForm.value);
     let jsonObj = JSON.parse(jsonStr);
 
-    if (this.limitSearchForm.value.LIMIT_START_DATE != '' && this.limitSearchForm.value.LIMIT_END_DATE != '') {
+    if (this.limitSearchForm.value.LIMIT_START_DATE != '') {
       let startDate = new Date(this.limitSearchForm.value.LIMIT_START_DATE);
-      let endDate = new Date(this.limitSearchForm.value.LIMIT_END_DATE);
+      // let endDate = new Date(this.limitSearchForm.value.LIMIT_END_DATE);
       jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
-      jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
+      // jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
     } for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
 
     let baseUrl = 'f01/f01003level2query';
@@ -68,10 +68,11 @@ export class F01003Component implements OnInit, AfterViewInit {
       this.totalCount = data.rspBody.size;
       this.limitDataSource = data.rspBody.items;
       this.isReadOnly = true;
+
+      if (this.limitDataSource.length > 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: data.rspBody.items.NATIONAL_ID }); }
       // TODO 待取得後端ＮＩＤ
-      // if (this.limitDataSource.length > 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: data.rspBody.items.NATIONAL_ID }); }
-      if (this.limitDataSource.length > 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: 'A222222222' }); }
-      if (this.limitDataSource.length == 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: 'A111111111' }); }
+      // if (this.limitDataSource.length > 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: 'A222222222' }); }
+      // if (this.limitDataSource.length == 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: 'A111111111' }); }
     });
   }
 

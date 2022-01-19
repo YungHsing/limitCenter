@@ -17,6 +17,10 @@
   color: #fff;
 } */
 
+.table-header {
+  color:black;
+}
+
 .ant-btn-dangerous{
   color: #f80000;;
   background:white;

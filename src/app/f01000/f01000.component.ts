@@ -38,8 +38,8 @@ export class F01000Component implements OnInit {
     'AFTER_VAL',
     'REASON_CONTENT',
     'EMPNO',
-    'MANAGE_DATE',
-    'REVIEW_EMPNO'
+    'MANAGE_DATE'
+    //,'REVIEW_EMPNO'
     // ,'ACTION_SORT'
   ];
 

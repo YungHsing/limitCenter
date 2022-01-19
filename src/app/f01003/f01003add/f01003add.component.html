@@ -88,7 +88,7 @@
             </div>
           </div>
         </div>
-        <div nz-col nzSpan="8">
+        <!-- <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">停用註記</span>
               <mat-select formControlName="STOP_FLAG"
@@ -99,21 +99,7 @@
               </mat-select>
             </div>
           </div>
-        </div>
-      </div>
-      <div nz-row>
-        <div nz-col nzSpan="8">
-          <div class="form" style="padding:20px">
-            <span class="form-title-actions">停用日期</span>
-            <mat-form-field color="accent" class="example-form-field" style="width: 150px;  margin-top: -19px;">
-              <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value=""
-                disabled>
-              <mat-datepicker-toggle matSuffix [for]="stopDateValue">
-              </mat-datepicker-toggle>
-              <mat-datepicker #stopDateValue disabled="false"></mat-datepicker>
-            </mat-form-field>
-          </div>
-        </div>
+        </div> -->
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">是否可撤銷</span>
@@ -126,6 +112,21 @@
             </div>
           </div>
         </div>
+      </div>
+      <div nz-row>
+        <!-- <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <span class="form-title-actions">停用日期</span>
+            <mat-form-field color="accent" class="example-form-field" style="width: 150px;  margin-top: -19px;">
+              <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value=""
+                disabled>
+              <mat-datepicker-toggle matSuffix [for]="stopDateValue">
+              </mat-datepicker-toggle>
+              <mat-datepicker #stopDateValue disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div> -->
+
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">循環別</span>
@@ -138,15 +139,16 @@
             </div>
           </div>
         </div>
+        <div mat-dialog-actions>
+          <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+            (click)="confirmAdd() ">儲存</button>
+          <button nz-button [nzSize]="'middle'" nzType="default" nzDanger (click)="onNoClick()" tabindex="-1"
+            style="margin:0px 5px">取消</button>
+        </div>
 
       </div>
 
-      <div mat-dialog-actions>
-        <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
-          (click)="confirmAdd() ">儲存</button>
-        <button nz-button [nzSize]="'middle'" nzType="default" nzDanger (click)="onNoClick()" tabindex="-1"
-          style="margin:0px 5px">取消</button>
-      </div>
+
       <br><br>
     </form>
   </div>
