@@ -5,6 +5,7 @@ table {
 
   th {
     /* row border */
+    color: black;
     border-bottom: 1px solid #ffa600;
   }
 
