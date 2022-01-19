@@ -31,7 +31,7 @@ export class F01003scn1addComponent implements OnInit {
     UP_LEVEL: [this.data.upLevel, [Validators.maxLength(10)]],
     CUSTOMER_ID: [this.data.customerId, [Validators.maxLength(30)]],
     NATIONAL_ID: [this.data.nationalId, [Validators.maxLength(30)]],
-    CREDIT_LIMIT: ['', [Validators.maxLength(10)]],
+    CREDIT_LIMIT: ['', [Validators.maxLength(10),Validators.required]],
     CURRENCY_TYPE: ['TWD', [Validators.maxLength(3)]],
     STOP_FLAG: ['N', [Validators.maxLength(1)]],
     CANCEL_FLAG: ['Y', [Validators.maxLength(1)]],
