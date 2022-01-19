@@ -160,28 +160,28 @@
       [nzPageIndex]="pageIndex" nzSize="small" [nzScroll]="{ x: '300px', y: '240;px' }" nzTitle="凍結/解凍額度明細">
       <thead>
         <tr>
-          <th [nzWidth]="'100px'" nzLeft class="table-header">額度號</th>
-          <th [nzWidth]="'100px'" class="table-header">功能類別</th>
-          <th [nzWidth]="'100px'" class="table-header">原因代碼</th>
+          <th [nzWidth]="'80px'" nzLeft class="table-header">額度號</th>
+          <th [nzWidth]="'80px'" class="table-header">功能類別</th>
+          <th [nzWidth]="'90px'" class="table-header">凍結編號</th>
+          <th [nzWidth]="'90px'" class="table-header">原因代碼</th>
           <th [nzWidth]="'80px'" class="table-header">原因說明</th>
           <th [nzWidth]="'80px'" class="table-header">處理員編</th>
-          <th [nzWidth]="'100px'" class="table-header">凍結編號</th>
           <th [nzWidth]="'80px'" class="table-header">異動時間</th>
-          <th [nzWidth]="'60px'" class="table-header">是否已解凍</th>
-          <th [nzWidth]="'60px'" class="table-header">是否已核准</th>
+          <!-- <th [nzWidth]="'60px'" class="table-header">是否已解凍</th> -->
+          <th [nzWidth]="'80px'" class="table-header">是否已核准</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of frozenDataSource">
           <td class="table-data">{{ data.limitNo }}</td>
           <td class="table-data">{{ getOptionDesc(data.actionType) }}</td>
+          <td class="table-data">{{ data.frozenNo }}</td>
           <td class="table-data">{{ data.reasonCode }}</td>
           <td class="table-data">{{ data.reasonDesc }}</td>
           <td class="table-data">{{ data.empno }}</td>
-          <td class="table-data">{{ data.frozenNo }}</td>
           <td class="table-data">{{ data.manageDate |date :'yyyy-MM-dd' }}</td>
-          <td class="table-data">{{ data.unfrozenFlag }}</td>
-          <td class="table-data">{{ data.statusFlag }}</td>
+          <!-- <td class="table-data">{{ data.unfrozenFlag }}</td> -->
+          <td class="table-data">{{ data.statusFlag == 'Y' ? '主管已覆核並核准' : '主管尚未核准' }}</td>
         </tr>
       </tbody>
     </nz-table>

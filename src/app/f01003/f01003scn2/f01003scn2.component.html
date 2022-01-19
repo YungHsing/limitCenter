@@ -1,10 +1,6 @@
 <div class="line_bank_bankground_color">
   <div class="container">
     <form [formGroup]="drawdownReleaseForm">
-      <!-- <div style="padding-left: 20px; padding-top: 70px;">
-        <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="drawdown()">動用額度</button>
-        <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="release()">釋放額度</button>
-      </div> -->
 
       <div class="line_bank_card_no_padding">
         <div nz-row>
@@ -47,107 +43,8 @@
         </div>
       </div>
 
-      <!-- <table>
-      <br>
-      <mat-card class="matCard">
-        <mat-card-content>
-          <tr>
-            <td>
-              <button type="submit" mat-raised-button color="primary" (click)="drawdown()">動用額度</button>
-            </td>
-            <td>
-              <button type="clear" mat-raised-button color="warn" (click)="release()">釋放額度</button>
-            </td>
-            <th nowrap="nowrap">選擇額度號：</th>
-            <td>
-              <mat-form-field color="accent">
-                <mat-select [(ngModel)]="limitNoSelectedValue" formControlName="LIMIT_NO" value=''>
-                  <mat-option *ngFor="let code of limitNoOption" [value]="code.value">
-                    {{code.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-            <th nowrap="nowrap">選擇動用類別：</th>
-            <td>
-              <mat-form-field color="accent">
-                <mat-select [(ngModel)]="actionTypeSelectedValue" formControlName="ACTION_TYPE" value=''>
-                  <mat-option *ngFor="let code of actionTypeOption" [value]="code.value">
-                    {{code.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-            <td>
-              <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">查詢</button>
-            </td>
-          </tr>
-        </mat-card-content>
-      </mat-card>
-    </table> -->
     </form>
   </div>
-
-  <!-- <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;"> -->
-    <!-- <mat-dialog-content>
-      <mat-table [dataSource]="drawdownReleaseDataSource" matSort (matSortChange)="changeSort($event)">
-
-        <ng-container matColumnDef="LIMIT_NO">
-          <mat-header-cell *matHeaderCellDef>額度號</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.limitNo }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="CURRENCY_TYPE">
-          <mat-header-cell *matHeaderCellDef>幣別</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.currencyType }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="CREDIT_LIMIT">
-          <mat-header-cell *matHeaderCellDef>額度</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.creditLimit }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="ACTION_TYPE">
-          <mat-header-cell *matHeaderCellDef>動用類別</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ getOptionDesc(row.actionType) }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="EMPNO">
-          <mat-header-cell *matHeaderCellDef>處理員編</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.empno }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="APPLNO">
-          <mat-header-cell *matHeaderCellDef>案件編號</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.applno }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="MANAGE_DATE">
-          <mat-header-cell *matHeaderCellDef>異動時間</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.manageDate |date :'yyyy-MM-dd'}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="RESERVE_NO">
-          <mat-header-cell *matHeaderCellDef>預佔編號</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.reserveNo }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="UNRESERVE_FLAG">
-          <mat-header-cell *matHeaderCellDef>是否已釋放</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.unreserveFlag }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="STATUS_FLAG">
-          <mat-header-cell *matHeaderCellDef>是否已核准</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.statusFlag }}</mat-cell>
-        </ng-container>
-
-
-      </mat-table>
-
-    </mat-dialog-content> -->
-
-
 
     <cdk-virtual-scroll-viewport itemSize="48" headerHeight="56" style="height: 400px;">
       <div class="line_bank_card_no_padding">
@@ -157,35 +54,34 @@
           [nzPageIndex]="pageIndex" nzSize="small" [nzScroll]="{ x: '300px', y: '240;px' }" nzTitle="動用/釋放額度明細">
           <thead>
             <tr>
-              <th [nzWidth]="'100px'" nzLeft class="table-header">額度號</th>
-              <th [nzWidth]="'50px'" class="table-header">幣別</th>
-              <th [nzWidth]="'100px'" class="table-header">額度</th>
+              <th [nzWidth]="'80px'" nzLeft class="table-header">額度號</th>
+              <th [nzWidth]="'80px'" class="table-header">預佔編號</th>
               <th [nzWidth]="'80px'" class="table-header">動用類別</th>
+              <th [nzWidth]="'80px'" class="table-header">額度</th>
+              <th [nzWidth]="'50px'" class="table-header">幣別</th>
               <th [nzWidth]="'80px'" class="table-header">處理員編</th>
               <th [nzWidth]="'100px'" class="table-header">案件編號</th>
               <th [nzWidth]="'80px'" class="table-header">異動時間</th>
-              <th [nzWidth]="'100px'" class="table-header">預佔編號</th>
-              <th [nzWidth]="'60px'" class="table-header">是否已釋放</th>
-              <th [nzWidth]="'60px'" class="table-header">是否已核准</th>
+              <!-- <th [nzWidth]="'60px'" class="table-header">是否已釋放</th> -->
+              <th [nzWidth]="'80px'" class="table-header">是否已核准</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let data of drawdownReleaseDataSource">
               <td class="table-data">{{ data.limitNo }}</td>
-              <td class="table-data">{{ data.currencyType }}</td>
-              <td class="table-data">{{ data.creditLimit }}</td>
+              <td class="table-data">{{ data.reserveNo }}</td>
               <td class="table-data">{{ getOptionDesc(data.actionType) }}</td>
+              <td class="table-data">{{ data.creditLimit }}</td>
+              <td class="table-data">{{ data.currencyType }}</td>
               <td class="table-data">{{ data.empno }}</td>
               <td class="table-data">{{ data.applno }}</td>
               <td class="table-data">{{ data.manageDate |date :'yyyy-MM-dd' }}</td>
-              <td class="table-data">{{ data.reserveNo }}</td>
-              <td class="table-data">{{ data.unreserveFlag }}</td>
-              <td class="table-data">{{ data.statusFlag }}</td>
+              <!-- <td class="table-data">{{ data.unreserveFlag }}</td> -->
+              <td class="table-data">{{ data.statusFlag == 'Y' ? '主管已覆核並核准' : '主管尚未核准' }}</td>
             </tr>
           </tbody>
         </nz-table>
       </div>
     </cdk-virtual-scroll-viewport>
 
-  <!-- </cdk-virtual-scroll-viewport> -->
 </div>
