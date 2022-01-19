@@ -102,7 +102,7 @@
               <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" disabled>
               <mat-datepicker-toggle matSuffix [for]="stopDateValue">
               </mat-datepicker-toggle>
-              <mat-datepicker #stopDateValue></mat-datepicker>
+              <mat-datepicker #stopDateValue disabled="false"></mat-datepicker>
               <!-- <mat-error *ngIf="formControl.invalid">{{getErrorMessage('STOP_DATE')}}</mat-error> -->
             </mat-form-field>
           </div>
