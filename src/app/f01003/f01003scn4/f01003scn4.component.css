@@ -2,7 +2,9 @@
     background-color: green;
     color: #fff;
   } */
-
+  :host::ng-deep.ant-table-small .ant-table-thead>tr>th{
+    color:black ;
+  }
   .ant-btn-dangerous{
     color: #f80000;;
     background:white;
