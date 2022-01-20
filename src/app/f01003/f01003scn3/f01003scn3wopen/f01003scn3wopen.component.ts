@@ -46,28 +46,25 @@ export class F01003scn3wopenComponent implements OnInit {
     let formData: FormData = new FormData();
     let limitNo = this.data.limitNo;
     let isFrozen = this.data.isFrozen;
-
+    let actionType = isFrozen == true? '4' : '5';
+    this.frozenAddForm.patchValue({ ACTION_TYPE: actionType });
     this.frozenAddForm.patchValue({ LIMIT_NO: limitNo });
     let jsonStr = JSON.stringify(this.frozenAddForm.value);
     let jsonObj = JSON.parse(jsonStr);
     for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
-
+    let baseUrl = 'f01/f01003FrozenNoOption';
+    this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
+      for (const jsonObj of data.rspBody.frozenNoOption) {
+        const frozenNo = jsonObj['codeNo'];
+        const frozenDesc = jsonObj['codeDesc'];
+        this.reasonCodeOption.push({ value: frozenNo, viewValue: frozenDesc })
+      }
+    });
     if (isFrozen == true) {
       this.frozen = false;
-      let actionType = '4'
-      this.frozenAddForm.patchValue({ ACTION_TYPE: actionType });
-      let baseUrl = 'f01/f01003FrozenNoOption';
-      this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
-        for (const jsonObj of data.rspBody.frozenNoOption) {
-          const frozenNo = jsonObj['codeNo'];
-          const frozenDesc = jsonObj['codeDesc'];
-          this.reasonCodeOption.push({ value: frozenNo, viewValue: frozenDesc })
-        }
-      });
+
     } else {
       this.unfrozen = false;
-      let actionType = '5'
-      this.frozenAddForm.patchValue({ ACTION_TYPE: actionType });
       let baseUrl = 'f01/f01003UnfrozenNoOption';
       this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
 
@@ -103,7 +100,6 @@ export class F01003scn3wopenComponent implements OnInit {
         }
       }
     } else {
-      console.log("tst")
       var formData = new FormData();
       let jsonStr = JSON.stringify(this.frozenAddForm.value);
       let jsonObj = JSON.parse(jsonStr);
