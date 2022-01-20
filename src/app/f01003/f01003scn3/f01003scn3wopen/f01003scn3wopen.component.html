@@ -1,89 +1,3 @@
-<!-- <div class="container">
-    <div [(hidden)]="frozen">
-        <h2 mat-dialog-title>凍結</h2>
-    </div>
-    <div [(hidden)]="unfrozen">
-        <h2 mat-dialog-title>解凍</h2>
-    </div>
-
-    <form [formGroup]="frozenAddForm" class="mat-dialog-content" (ngSubmit)="submit()">
-        <table>
-            <tr>
-                <td [(hidden)]="frozen">
-                    <div class="form">
-                        <mat-form-field color="accent">
-                            <input matInput #input class="form-control" placeholder="額度號" formControlName="LIMIT_NO"
-                                readonly>
-                            <mat-error *ngIf="formControl.invalid">{{getErrorMessage('LIMIT_NO')}}</mat-error>
-                        </mat-form-field>
-                    </div>
-                </td>
-                <td [(hidden)]="unfrozen">
-                    <div class="form">
-                        <mat-form-field color="accent">
-                            <mat-select placeholder="凍結編號" formControlName="FROZEN_NO" (ngModelChange)="changeSelect()">
-                                <mat-option *ngFor="let code of frozenNoOption" [value]="code.value">
-                                    {{code.viewValue}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </td>
-                <td [(hidden)]="frozen">
-                    <div class="form">
-                        <mat-form-field color="accent">
-                            <mat-select placeholder="原因碼" class="form-control" formControlName="REASON_CODE" required>
-                                <mat-option *ngFor="let code of reasonCodeOption" [value]="code.value">
-                                    {{code.viewValue}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </td>
-                <td [(hidden)]="unfrozen">
-                    <div class="form">
-                        <mat-form-field color="accent">
-                            <input matInput #input class="form-control" placeholder="原因碼" formControlName="REASON_CODE"
-                                readonly>
-                            <mat-error *ngIf="formControl.invalid">{{getErrorMessage('REASON_CODE')}}</mat-error>
-                        </mat-form-field>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td [(hidden)]="frozen">
-                    <div class="form">
-                        <mat-form-field color="accent" appearance="fill">
-                            <mat-label>原因</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" class="form-control"
-                                required formControlName="REASON_DESC" cdkAutosizeMinRows="1"
-                                cdkAutosizeMaxRows="5"></textarea>
-                            <mat-error *ngIf="formControl.invalid">{{getErrorMessage('REASON_DESC')}}</mat-error>
-                        </mat-form-field>
-                    </div>
-                </td>
-                <td [(hidden)]="unfrozen">
-                    <div class="form">
-                        <mat-form-field color="accent">
-                            <input matInput #input class="form-control" placeholder="原因" formControlName="REASON_DESC"
-                                readonly>
-                            <mat-error *ngIf="formControl.invalid">{{getErrorMessage('REASON_DESC')}}</mat-error>
-                        </mat-form-field>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="form" mat-dialog-actions>
-                        <button mat-raised-button color="primary" [type]="submit" (click)="confirmAdd()">儲存</button>
-                        <button mat-button (click)="onNoClick()" tabindex="-1">取消</button>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div> -->
-
 <div class="line_bank_card_no_padding" style="min-height:170px">
   <div class="line_bank_form_header_title" [(hidden)]="frozen">凍結</div>
   <div class="line_bank_form_header_title" [(hidden)]="unfrozen">解凍</div>
@@ -99,7 +13,7 @@
           <div class="form" [(hidden)]="unfrozen" style="padding:20px">
             <div><span class="form-title-actions">凍結編號</span>
               <mat-select formControlName="FROZEN_NO" (ngModelChange)="changeSelect()"
-              style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
                 <mat-option *ngFor="let code of frozenNoOption" [value]="code.value">
                   {{code.viewValue}}
                 </mat-option>
@@ -109,14 +23,16 @@
         </div>
         <div nz-col nzSpan="12">
           <div class="form" [(hidden)]="frozen" style="padding:20px">
-            <div><span class="form-title-actions">原因碼</span>
+            <nz-form-label nzFor="website" nzRequired style="margin-top: -8px; height: 27px;"><span
+                class="form-title-actions">原因碼</span></nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
               <mat-select class="form-control" formControlName="REASON_CODE" required
-              style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
                 <mat-option *ngFor="let code of reasonCodeOption" [value]="code.value">
                   {{code.viewValue}}
                 </mat-option>
               </mat-select>
-            </div>
+            </nz-form-control>
           </div>
           <div class="form" [(hidden)]="unfrozen" style="padding:20px">
             <div><span class="form-title-actions">原因碼</span>
@@ -128,10 +44,13 @@
       <div nz-row>
         <div nz-col nzSpan="12">
           <div class="form" [(hidden)]="frozen" style="padding:20px">
-            <div><span class="form-title-actions">原因</span>
-              <textarea class="form-control" required formControlName="REASON_DESC" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
-              style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6"></textarea>
-            </div>
+            <nz-form-label nzFor="website" nzRequired style="margin-top: -8px; height: 27px;"><span
+                class="form-title-actions">原因</span></nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
+              <textarea class="form-control" required formControlName="REASON_DESC" cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6"></textarea>
+            </nz-form-control>
           </div>
           <div class="form" [(hidden)]="unfrozen" style="padding:20px">
             <div><span class="form-title-actions">原因</span>

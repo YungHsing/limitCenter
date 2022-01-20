@@ -37,9 +37,9 @@ export class F01003scn1addComponent implements OnInit {
     CANCEL_FLAG: ['Y', [Validators.maxLength(1)]],
     CYCLE_TYPE: ['Y', [Validators.maxLength(1)]],
     STOP_DATE: [ {value: '', disabled: true}, [Validators.maxLength(10), Validators.minLength(10)]],
-    LIMIT_START_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],
-    LIMIT_END_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],
-    LIMIT_TYPE_CODE: ['', [Validators.maxLength(11)]],
+    LIMIT_START_DATE: ['', [Validators.maxLength(10), Validators.minLength(10),Validators.required]],
+    LIMIT_END_DATE: ['', [Validators.maxLength(10), Validators.minLength(10),Validators.required]],
+    LIMIT_TYPE_CODE: ['', [Validators.required]],
     EMPNO: [localStorage.getItem("limitEmpNo"), [Validators.maxLength(11)]]
   });
 
@@ -60,11 +60,11 @@ export class F01003scn1addComponent implements OnInit {
     Validators.required
   ]);
 
-  getErrorMessage(cloumnName: string) {
-    let obj = this.addForm.get(cloumnName);
-    return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
-           obj.hasError('minlength') ? '長度過短' : '';
-  }
+  // getErrorMessage(cloumnName: string) {
+  //   let obj = this.addForm.get(cloumnName);
+  //   return obj.hasError('required')  ? '此為必填欄位!' : obj.hasError('maxlength') ? '長度過長' :
+  //          obj.hasError('minlength') ? '長度過短' : '';
+  // }
 
   changeSelect() {
     this.addForm.patchValue({ STOP_DATE: '' });
@@ -92,10 +92,12 @@ export class F01003scn1addComponent implements OnInit {
   public async confirmAdd(): Promise<void> {
     let msgStr: string = "";
     if(!this.addForm.valid) {
-      msgStr = '資料格式有誤，請修正!';
-      const childernDialogRef = this.dialog.open(F01003confirmComponent, {
-        data: { msgStr: msgStr, display: true }
-      });
+      for (const i in this.addForm.controls) {
+        if (this.addForm.controls.hasOwnProperty(i)) {
+          this.addForm.controls[i].markAsDirty();
+          this.addForm.controls[i].updateValueAndValidity();
+        }
+      }
     } else {
       let creditLimit = this.addForm.value.CREDIT_LIMIT;
       this.addForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replaceAll(',', '') });

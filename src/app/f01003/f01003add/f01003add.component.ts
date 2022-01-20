@@ -15,9 +15,9 @@ interface sysCode {
   styleUrls: ['./f01003add.component.css', '../../../assets/css/child.css']
 })
 export class F01003addComponent implements OnInit {
-  ynCode: sysCode[] = [{value: 'Y', viewValue: '是'}, {value: 'N', viewValue: '否'}];
-  limitTypeOption: sysCode[] =  [{value: 'P0001000000', viewValue: '個人限額'}];
-  CurrencyOption: sysCode[] =  [{value: 'TWD', viewValue: '台幣'}];
+  ynCode: sysCode[] = [{ value: 'Y', viewValue: '是' }, { value: 'N', viewValue: '否' }];
+  limitTypeOption: sysCode[] = [{ value: 'P0001000000', viewValue: '個人限額' }];
+  CurrencyOption: sysCode[] = [{ value: 'TWD', viewValue: '台幣' }];
   stopDateValue: Date;
   minDate: Date;
   constructor(public dialogRef: MatDialogRef<F01003addComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) {
@@ -81,25 +81,34 @@ export class F01003addComponent implements OnInit {
   }
 
   public async confirmAdd(): Promise<void> {
-    var formData = new FormData();
-    let creditLimit = this.addForm.value.CREDIT_LIMIT;
-    this.addForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replaceAll(',', '') });
-    let jsonStr = JSON.stringify(this.addForm.value);
-    let jsonObj = JSON.parse(jsonStr);
-    let startDate = new Date(this.addForm.value.LIMIT_START_DATE);
-    let endDate = new Date(this.addForm.value.LIMIT_END_DATE);
+    if (!this.addForm.valid) {
+      for (const i in this.addForm.controls) {
+        if (this.addForm.controls.hasOwnProperty(i)) {
+          this.addForm.controls[i].markAsDirty();
+          this.addForm.controls[i].updateValueAndValidity();
+        }
+      }
+    } else {
+      var formData = new FormData();
+      let creditLimit = this.addForm.value.CREDIT_LIMIT;
+      this.addForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replaceAll(',', '') });
+      let jsonStr = JSON.stringify(this.addForm.value);
+      let jsonObj = JSON.parse(jsonStr);
+      let startDate = new Date(this.addForm.value.LIMIT_START_DATE);
+      let endDate = new Date(this.addForm.value.LIMIT_END_DATE);
 
-    jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
-    jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
+      jsonObj.LIMIT_START_DATE = this.datePipe.transform(startDate, "yyyy/MM/dd");
+      jsonObj.LIMIT_END_DATE = this.datePipe.transform(endDate, "yyyy/MM/dd");
 
-    for (var key in jsonObj ) { formData.append(key, jsonObj[key]); }
-    let msgStr: string = "";
-    let baseUrl = 'f01/f01003level2add';
-    msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
-    const childernDialogRef = this.dialog.open(F01003confirmComponent, {
-      data: { msgStr: msgStr, display: true }
-    });
-    if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
+      for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
+      let msgStr: string = "";
+      let baseUrl = 'f01/f01003level2add';
+      msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
+      const childernDialogRef = this.dialog.open(F01003confirmComponent, {
+        data: { msgStr: msgStr, display: true }
+      });
+      if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
+    }
   }
 
   onKey(event: KeyboardEvent) {

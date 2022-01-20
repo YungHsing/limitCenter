@@ -25,6 +25,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
   StopCodeOption: sysCode[] =  [{value: 'CODE_1', viewValue: '原因代碼1'},{value: 'CODE_2', viewValue: '原因代碼2'},{value: 'CODE_3', viewValue: '原因代碼3'}];
   stopDateValue: Date;
   minDate: Date;
+  isDisabled: boolean;
   constructor(public dialogRef: MatDialogRef<F01003scn1editComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, public f01003Service: F01003Service, public dialog: MatDialog, private datePipe: DatePipe) {
     this.minDate = new Date();
   }
@@ -53,14 +54,15 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
   });
 
   ngOnInit(): void {
-    console.log('test=' + new Date(this.data.limitEndDate));
     if (this.addForm.value.STOP_FLAG != 'N') {
       this.addForm.patchValue({ STOP_DATE: new Date(this.data.stopDate) });
-      this.addForm.controls['STOP_DATE'].enable();
+      this.isDisabled = false;
+      // this.addForm.controls['STOP_DATE'].enable();
       this.addForm.controls['STOP_CODE'].enable();
       this.addForm.controls['STOP_DESC'].enable();
     } else {
-      this.addForm.controls['STOP_DATE'].disable();
+      this.isDisabled = true;
+      // this.addForm.controls['STOP_DATE'].disable();
       this.addForm.controls['STOP_CODE'].disable();
       this.addForm.controls['STOP_DESC'].disable();
     }
@@ -86,11 +88,13 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
   changeSelect() {
     this.addForm.patchValue({ STOP_DATE: '' });
     if (this.addForm.value.STOP_FLAG == 'N') {
-      this.addForm.controls['STOP_DATE'].disable();
+      this.isDisabled = true;
+      // this.addForm.controls['STOP_DATE'].disable();
       this.addForm.controls['STOP_CODE'].disable();
       this.addForm.controls['STOP_DESC'].disable();
     } else {
-      this.addForm.controls['STOP_DATE'].enable();
+      this.isDisabled = false;
+      // this.addForm.controls['STOP_DATE'].enable();
       this.addForm.controls['STOP_CODE'].enable();
       this.addForm.controls['STOP_DESC'].enable();
       this.addForm.patchValue({ STOP_DATE: new Date() });
@@ -116,10 +120,12 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
   public async confirmAdd(): Promise<void> {
     let msgStr: string = "";
     if(!this.addForm.valid) {
-      msgStr = '資料格式有誤，請修正!';
-      const checkDialogRef = this.dialog.open(F01003confirmComponent, {
-        data: { msgStr: msgStr, display: true }
-      });
+      for (const i in this.addForm.controls) {
+        if (this.addForm.controls.hasOwnProperty(i)) {
+          this.addForm.controls[i].markAsDirty();
+          this.addForm.controls[i].updateValueAndValidity();
+        }
+      }
     } else if(this.addForm.value.STOP_FLAG == 'Y' && (this.addForm.value.STOP_CODE == null || this.addForm.value.STOP_DESC == null)) {
       msgStr = '請填寫停用原因碼與停用說明!';
       const checkDialogRef = this.dialog.open(F01003confirmComponent, {

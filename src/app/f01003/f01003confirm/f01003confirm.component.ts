@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 
 interface sysCode {
   value: string;
@@ -9,7 +9,7 @@ interface sysCode {
 }
 @Component({
   templateUrl: './f01003confirm.component.html',
-  styleUrls: ['./f01003confirm.component.css']
+  styleUrls: ['./f01003confirm.component.css', '../../../assets/css/child.css']
 })
 export class F01003confirmComponent {
   [x: string]: any;

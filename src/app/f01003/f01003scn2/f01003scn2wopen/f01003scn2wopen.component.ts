@@ -89,18 +89,19 @@ export class F01003scn2wopenComponent implements OnInit {
   public async confirmAdd(): Promise<void> {
     let isActive = this.data.isActive;
     let msgStr: string = "";
-    if (!this.reserveAddForm.valid) {
-      msgStr = '資料格式有誤，請修正!';
-      const childernDialogRef = this.dialog.open(F01003confirmComponent, {
-        data: { msgStr: msgStr, display: true }
-      });
-    } else if(isActive == false && this.reserveAddForm.value.RESERVE_NO == null) {
+    if(isActive == false && this.reserveAddForm.value.RESERVE_NO == null) {
       msgStr = '請選擇預佔編號!';
       const childernDialogRef = this.dialog.open(F01003confirmComponent, {
         data: { msgStr: msgStr, display: true }
       });
+    } else if (!this.reserveAddForm.valid) {
+      for (const i in this.reserveAddForm.controls) {
+        if (this.reserveAddForm.controls.hasOwnProperty(i)) {
+          this.reserveAddForm.controls[i].markAsDirty();
+          this.reserveAddForm.controls[i].updateValueAndValidity();
+        }
+      }
     } else {
-
       let creditLimit = this.reserveAddForm.value.CREDIT_LIMIT;
       this.reserveAddForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replaceAll(',', '') });
 

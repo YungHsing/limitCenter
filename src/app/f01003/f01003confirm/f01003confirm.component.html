@@ -1,29 +1,22 @@
 <p *ngIf="data.display; else reasonContent">{{ data.msgStr }}</p>
 <ng-template #reasonContent>
-<div class="container">
-  <form [formGroup]="confirmForm" style="padding-left: 20px;">
-    <table>
-      <mat-card class="matCard">
-        <mat-card-content>
-          <tr>
-            <td>
-                請輸入修改原因：
-            </td>
-          <tr>
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <input type="text" matInput [formControl]="formControl" formControlName="REASON_CONTENT">
-                </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <th>
-              <button type="submit" mat-raised-button color="primary" (click)="goBack()">確定</button>
-            </th>
-          </tr>
-        </mat-card-content>
-      </mat-card>
-    </table>
-  </form>
-</div>
+  <div class="line_bank_card_no_padding" style="min-height:200px">
+    <div class="container" style="padding:20px">
+      <form class="mat-dialog-content" #formControl="ngForm" [formGroup]="confirmForm" style="height: 200px;">
+        <div nz-row>
+          <div nz-col nzSpan="32">
+            <div class="form" [(hidden)]="active" style="padding:20px; height: 100px;">
+              <div><span class="form-title-actions">請輸入修改原因：</span>
+                <textarea nz-input #input class="form-control" name="codeTag" formControlName="REASON_CONTENT"
+                  style="width:100%;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div mat-dialog-actions>
+          <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="goBack() ">確定</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </ng-template>

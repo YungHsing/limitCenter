@@ -8,13 +8,13 @@
           <div class="form" [(hidden)]="active" style="padding:20px">
             <div><span class="form-title-actions">額度號</span>
               <input matInput #input class="form-control" name="codeTag" formControlName="LIMIT_NO" readonly
-              style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
             </div>
           </div>
           <div class="form" [(hidden)]="reserve" style="padding:20px">
             <div><span class="form-title-actions">預佔編號</span>
               <mat-select formControlName="RESERVE_NO" (ngModelChange)="changeSelect()"
-              style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
                 <mat-option *ngFor="let code of reserveNoOption" [value]="code.value">
                   {{code.viewValue}}
                 </mat-option>
@@ -33,28 +33,32 @@
       <div nz-row>
         <div nz-col nzSpan="12">
           <div class="form" style="padding:20px">
-            <div><span class="form-title-actions">動用類別</span>
+            <nz-form-label nzFor="website" nzRequired style="margin-top: -8px; height: 27px;"><span
+                class="form-title-actions">動用類別</span></nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
               <mat-select formControlName="ACTION_TYPE" required
-              style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
                 <mat-option *ngFor="let code of actionTypeOption" [value]="code.value">
                   {{code.viewValue}}
                 </mat-option>
               </mat-select>
-            </div>
+            </nz-form-control>
           </div>
         </div>
         <div nz-col nzSpan="12">
           <div class="form" style="padding:20px" [(hidden)]="active">
-            <div><span class="form-title-actions">金額</span>
-              <input matInput #input class="form-control"
-              onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
-              (keyup)="onKey($event)" name="codeTag" formControlName="CREDIT_LIMIT" required>
-            </div>
+            <nz-form-label nzFor="website" nzRequired style="margin-top: -8px; height: 27px;"><span
+                class="form-title-actions">金額</span></nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
+              <input matInput #input class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                onafterpaste="this.value=this.value.replace(/\D/g,'')" (keyup)="onKey($event)" name="codeTag"
+                formControlName="CREDIT_LIMIT" required>
+            </nz-form-control>
           </div>
           <div class="form" style="padding:20px" [(hidden)]="reserve">
             <div><span class="form-title-actions">金額</span>
-              <input matInput #input class="form-control" name="codeTag" formControlName="CREDIT_LIMIT"
-                required readonly>
+              <input matInput #input class="form-control" name="codeTag" formControlName="CREDIT_LIMIT" required
+                readonly>
             </div>
           </div>
         </div>

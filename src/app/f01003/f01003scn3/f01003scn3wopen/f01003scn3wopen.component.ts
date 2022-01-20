@@ -90,12 +90,20 @@ export class F01003scn3wopenComponent implements OnInit {
 
   public async confirmAdd(): Promise<void> {
     let msgStr: string = "";
-    if (!this.frozenAddForm.valid) {
-      msgStr = '資料格式有誤，請修正!';
+    if(!this.unfrozen && this.frozenAddForm.value.FROZEN_NO == null) {
+      msgStr = '請選擇凍結編號!';
       const childernDialogRef = this.dialog.open(F01003confirmComponent, {
         data: { msgStr: msgStr, display: true }
       });
+    } else if(!this.frozenAddForm.valid) {
+      for (const i in this.frozenAddForm.controls) {
+        if (this.frozenAddForm.controls.hasOwnProperty(i)) {
+          this.frozenAddForm.controls[i].markAsDirty();
+          this.frozenAddForm.controls[i].updateValueAndValidity();
+        }
+      }
     } else {
+      console.log("tst")
       var formData = new FormData();
       let jsonStr = JSON.stringify(this.frozenAddForm.value);
       let jsonObj = JSON.parse(jsonStr);
