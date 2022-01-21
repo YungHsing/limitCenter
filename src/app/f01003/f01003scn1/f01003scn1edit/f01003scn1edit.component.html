@@ -168,10 +168,10 @@
             <nz-form-label nzFor="website" nzRequired={{!isDisabled}} style="margin-top: -8px; height: 27px;"><span
                 class="form-title-actions">停用原因碼</span></nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
-              <mat-select formControlName="STOP_CODE" required={{!isDisabled}}
+              <mat-select formControlName="STOP_CODE" required={{!isDisabled}} (ngModelChange)="changStopCode()"
                 style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
                 <mat-option *ngFor="let yn of StopCodeOption" [value]="yn.value">
-                  {{yn.viewValue}}
+                  {{yn.value}}
                 </mat-option>
               </mat-select>
             </nz-form-control>
@@ -184,7 +184,7 @@
             <nz-form-label nzFor="website" nzRequired={{!isDisabled}}><span class="form-title-actions">停用說明</span>
             </nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
-              <input nz-input #input class="form-control" formControlName="STOP_DESC" required={{!isDisabled}}>
+              <input matInput #input class="form-control" formControlName="STOP_DESC" required={{!isDisabled}} readonly={{isReadOnly}}>
             </nz-form-control>
           </div>
         </div>

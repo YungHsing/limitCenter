@@ -1,7 +1,7 @@
-<div class="line_bank_card_no_padding" style="min-height:170px">
+<div class="line_bank_card_no_padding" style="min-height:150px">
   <div class="line_bank_form_header_title" [(hidden)]="frozen">凍結</div>
   <div class="line_bank_form_header_title" [(hidden)]="unfrozen">解凍</div>
-  <div class="container" style="padding:20px">
+  <div class="container" style="padding:10px">
     <form class="mat-dialog-content" #formControl="ngForm" [formGroup]="frozenAddForm">
       <div nz-row>
         <div nz-col nzSpan="12">
@@ -12,7 +12,7 @@
           </div>
           <div class="form" [(hidden)]="unfrozen" style="padding:20px">
             <div><span class="form-title-actions">凍結編號</span>
-              <mat-select formControlName="FROZEN_NO" (ngModelChange)="changeSelect()"
+              <mat-select formControlName="FROZEN_NO"
                 style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
                 <mat-option *ngFor="let code of frozenNoOption" [value]="code.value">
                   {{code.viewValue}}
@@ -26,47 +26,32 @@
             <nz-form-label nzFor="website" nzRequired style="margin-top: -8px; height: 27px;"><span
                 class="form-title-actions">原因碼</span></nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
-              <mat-select class="form-control" formControlName="REASON_CODE" required
-                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+              <mat-select class="form-control" formControlName="REASON_CODE" required (ngModelChange)="changeSelect()"
+                style="width:100%;height:25px;border-radius:10px;border:none;padding:x;background-color:#E6E6E6">
                 <mat-option *ngFor="let code of reasonCodeOption" [value]="code.value">
-                  {{code.viewValue}}
+                  {{code.value}}
                 </mat-option>
               </mat-select>
             </nz-form-control>
           </div>
-          <!-- <div class="form" [(hidden)]="unfrozen" style="padding:20px">
-            <div><span class="form-title-actions">原因碼</span>
-              <input matInput #input class="form-control" formControlName="REASON_CODE" readonly>
-            </div>
-          </div> -->
         </div>
       </div>
       <div nz-row>
-        <div nz-col nzSpan="12">
+        <div nz-col nzSpan="48">
           <div class="form" style="padding:20px">
             <nz-form-label nzFor="website" nzRequired style="margin-top: -8px; height: 27px;"><span
                 class="form-title-actions">原因</span></nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
-              <textarea class="form-control" required formControlName="REASON_DESC" cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5"
-                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6"></textarea>
+              <input matInput #input class="form-control" required formControlName="REASON_DESC" readonly={{isReadOnly}}
+                style="width:250px;height:25px;border-radius:10px;border:none;margin-top:-10px;padding:4px;background-color:#E6E6E6">
             </nz-form-control>
           </div>
-          <!-- <div class="form" [(hidden)]="unfrozen" style="padding:20px">
-            <div><span class="form-title-actions">原因</span>
-              <input matInput #input class="form-control" formControlName="REASON_DESC" readonly>
-            </div>
-          </div> -->
         </div>
-
-        <div mat-dialog-actions>
-          <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
-            (click)="confirmAdd() ">儲存</button>
-          <button nz-button [nzSize]="'middle'" nzType="default" nzDanger (click)="onNoClick()" tabindex="-1"
-            style="margin:0px 5px">取消</button>
-        </div>
-
       </div>
+      <button nz-button [nzSize]="'middle'" nzType="primary" style="margin-left:20px"
+        (click)="confirmAdd() ">儲存</button>
+      <button nz-button [nzSize]="'middle'" nzType="default" nzDanger (click)="onNoClick()" tabindex="-1"
+        style="margin:0px 5px">取消</button>
     </form>
   </div>
 </div>

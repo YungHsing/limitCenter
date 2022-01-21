@@ -35,7 +35,7 @@ export class F01003addComponent implements OnInit {
     CREDIT_LIMIT: ['', [Validators.maxLength(10)]],
     CURRENCY_TYPE: ['TWD', [Validators.maxLength(3)]],
     // STOP_FLAG: ['N', [Validators.maxLength(1)]],
-    CANCEL_FLAG: ['N', [Validators.maxLength(1)]],
+    CANCEL_FLAG: ['Y', [Validators.maxLength(1)]],
     CYCLE_TYPE: ['Y', [Validators.maxLength(1)]],
     // STOP_DATE: [ {value: '', disabled: true}, [Validators.maxLength(10), Validators.minLength(10)]],
     LIMIT_START_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],

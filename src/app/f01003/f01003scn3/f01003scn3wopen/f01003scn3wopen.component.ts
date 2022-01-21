@@ -25,7 +25,7 @@ export class F01003scn3wopenComponent implements OnInit {
   frozenNoSelectedValue: string; //凍結編號
   frozen = true; //隱藏額度號
   unfrozen = true;  //隱藏預佔編號
-
+  isReadOnly: boolean;
   frozenAddForm: FormGroup = this.fb.group({
     LIMIT_NO: [this.data.limitNo, [Validators.maxLength(10)]],
     FROZEN_NO: [this.data.frozenNo, [Validators.maxLength(10)]],
@@ -108,29 +108,25 @@ export class F01003scn3wopenComponent implements OnInit {
       let baseUrl = 'f01/f01003FrozenAdd';
       msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
       const reserveDialogRef = this.dialog.open(F01003confirmComponent, {
+      
         data: { msgStr: msgStr, display: true }
       });
       if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
     }
   }
   changeSelect() {
-    let formData: FormData = new FormData();
-    let limitNo = this.data.limitNo;
-    this.frozenAddForm.patchValue({ LIMIT_NO: limitNo });
-    let jsonStr = JSON.stringify(this.frozenAddForm.value);
-    let jsonObj = JSON.parse(jsonStr);
-    for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
-
-    let baseUrl = 'f01/f01003UnfrozenNoOption';
-    this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
-      for (const jsonObj of data.rspBody.unfrozenNoOption) {
-        if (jsonObj['frozenNo'] == this.frozenAddForm.value.FROZEN_NO) {
-          const reasonCode = jsonObj['reasonCode'];
-          const reasonDesc = jsonObj['reasonDesc'];
-          this.frozenAddForm.patchValue({ REASON_CODE: reasonCode });
-          this.frozenAddForm.patchValue({ REASON_DESC: reasonDesc });
+    for (const jsonObj of this.reasonCodeOption) {
+      const codeNo = jsonObj['value'];
+      const codeDesc = jsonObj['viewValue'];
+      if (codeNo == this.frozenAddForm.value.REASON_CODE) {
+        this.frozenAddForm.patchValue({ REASON_DESC: codeDesc });
+        if (codeNo == 'C003' || codeNo == 'B004') {
+          this.isReadOnly = false;
+        } else {
+          this.isReadOnly = true;
         }
       }
-    });
+
+    }
   }
 }

@@ -142,6 +142,7 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
       return false;
     } else {
       const dialogRef = this.dialog.open(F01003scn2wopenComponent, {
+        panelClass:'mat-dialog-transparent',
         data: {
           cid: this.CUSTOMER_ID,
           isActive: true,
@@ -161,7 +162,7 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
       return false;
     } else {
       const dialogRef = this.dialog.open(F01003scn2wopenComponent, {
-
+        panelClass:'mat-dialog-transparent',
         data: {
           isActive: false,
           limitNo: this.drawdownReleaseForm.value.LIMIT_NO,
