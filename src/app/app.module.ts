@@ -44,6 +44,7 @@ import { F01000Component } from './f01000/f01000.component';
 import { F01000confirmComponent } from './f01000/f01000confirm/f01000confirm.component';
 import { registerLocaleData } from '@angular/common';
 import { NZ_I18N, zh_TW } from 'ng-zorro-antd/i18n';
+import { TokenInterceptor } from './token.interceptor';
 
 export const TW_FORMATS = {
   parse: {
@@ -107,6 +108,11 @@ export const TW_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     {
       provide: NZ_I18N,
       useFactory: () => zh_TW,
