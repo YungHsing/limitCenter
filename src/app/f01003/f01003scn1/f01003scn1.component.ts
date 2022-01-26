@@ -8,6 +8,8 @@ import { F01003Service } from '../f01003.service';
 import { F01003scn1addComponent } from './f01003scn1add/f01003scn1add.component';
 import { F01003scn1editComponent } from './f01003scn1edit/f01003scn1edit.component';
 import { LimitDataModule } from './limit-data.module';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
 export class Group {
   level: number = 0;
@@ -57,13 +59,21 @@ export class F01003scn1Component implements OnInit {
 
   groupByColumns: string[] = ['levelNo'];
 
-  constructor(private route: ActivatedRoute, public f01003Service: F01003Service, private datePipe: DatePipe, public dialog: MatDialog,) { }
+  constructor(
+    private route: ActivatedRoute,
+    public f01003Service: F01003Service,
+    private datePipe: DatePipe,
+    public dialog: MatDialog
+  ) { }
 
   NATIONAL_ID: string;
   CUSTOMER_ID: string;
   CREDIT_LIMIT: string;
   LIMIT_START_DATE: string;
   LimitData: LimitDataModule[];
+
+  faAngleUp = faAngleUp;
+  faAngleDown = faAngleDown;
 
   async ngOnInit(): Promise<void> {
     this.route.queryParams.subscribe(params => {

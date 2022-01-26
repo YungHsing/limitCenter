@@ -37,7 +37,7 @@ export class F01003scn4Component implements OnInit {
     END_DATE: [this.data.endDate, [Validators.maxLength(5)]],
     pageIndex: ['', [Validators.maxLength(3)]],
     pageSize: ['', [Validators.maxLength(3)]],
-    EMPNO: [localStorage.getItem("limitEmpNo"), [Validators.maxLength(11)]]
+    EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]]
   });
 
   formControl = new FormControl('', [

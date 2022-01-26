@@ -9,6 +9,10 @@ import { forkJoin } from 'rxjs';
 import { F01000Service } from './f01000.service';
 import { F01000confirmComponent } from './f01000confirm/f01000confirm.component';
 import { ManageRecordModule } from './manage-record.module';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
+
+
 // checkBox框架
 interface checkBox {
   value: string;
@@ -47,7 +51,14 @@ export class F01000Component implements OnInit {
 
   groupByColumns: string[] = ['ACTION_SORT'];
 
-  constructor(public dialogRef: MatDialogRef<F01000Component>, @Inject(MAT_DIALOG_DATA) public data: any, private route: ActivatedRoute, public f01000Service: F01000Service, private datePipe: DatePipe, public dialog: MatDialog,) { }
+  constructor(
+    public dialogRef: MatDialogRef<F01000Component>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private route: ActivatedRoute,
+    public f01000Service: F01000Service,
+    private datePipe: DatePipe,
+    public dialog: MatDialog
+  ) { }
 
   isChecked: boolean;
   CREDIT_LIMIT: string;
@@ -58,6 +69,9 @@ export class F01000Component implements OnInit {
   loading = false;
   pageSize = 10;
   pageIndex = 1;
+
+  faAngleUp = faAngleUp;
+  faAngleDown = faAngleDown;
 
   async ngOnInit(): Promise<void> {
     var formData = new FormData();
@@ -176,7 +190,7 @@ export class F01000Component implements OnInit {
     let jsonStr = JSON.stringify(rowIdArray);
     let jsonObj = JSON.parse(jsonStr);
     formData.append('rowIds', jsonObj);
-    formData.append('handleEmpNo', localStorage.getItem("limitEmpNo"));
+    formData.append('handleEmpNo', localStorage.getItem("empNo"));
     let baseUrl = 'f01/f01000Action';
     console.log(rowIdArray)
     console.log(jsonStr)
@@ -203,7 +217,7 @@ export class F01000Component implements OnInit {
     let jsonStr = JSON.stringify(rowIdArray);
     let jsonObj = JSON.parse(jsonStr);
     formData.append('rowIds', jsonObj);
-    formData.append('handleEmpNo', localStorage.getItem("limitEmpNo"));
+    formData.append('handleEmpNo', localStorage.getItem("empNo"));
     let baseUrl = 'f01/f01000Delete';
     await this.f01000Service.getLimitDataList(baseUrl, formData).then(data => {
       const childernDialogRef = this.dialog.open(F01000confirmComponent, {
