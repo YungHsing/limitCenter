@@ -78,8 +78,10 @@
         <!-- Group header -->
         <ng-container matColumnDef="groupHeader">
           <td colspan="999" mat-cell *matCellDef="let group">
-            <mat-icon *ngIf="group.expanded">expand_less</mat-icon>
-            <mat-icon *ngIf="!group.expanded">expand_more</mat-icon>
+            <!-- <mat-icon *ngIf="group.expanded">expand_less</mat-icon>
+            <mat-icon *ngIf="!group.expanded">expand_more</mat-icon> -->
+            <fa-icon class="icon_size" *ngIf="!group.expanded" [icon]="faAngleDown"></fa-icon>
+            <fa-icon class="icon_size" *ngIf="group.expanded" [icon]="faAngleUp"></fa-icon>
             <strong>{{ group.ACTION_SORT == 1 ? '新增額度設定' : group.ACTION_SORT == 2 ? '修改額度資料' : '預佔/釋放/凍結/解凍' }}</strong>
           </td>
         </ng-container>

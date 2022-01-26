@@ -5,6 +5,7 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { JSEncrypt } from 'jsencrypt/lib';
 import { sha256 } from 'js-sha256';
 import { environment } from 'src/environments/environment';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -21,6 +22,7 @@ export class LoginComponent {
   SrcEyeOff = "outline_visibility_off_black_48dp";
   SrcEye = "outline_remove_red_eye_black_48dp";
   imgSrc = this.SrcEyeOff;
+  faEyeSlash = faEyeSlash;
 
   no = '';
   pwd = '';

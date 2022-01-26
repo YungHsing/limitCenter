@@ -45,6 +45,8 @@ import { F01000confirmComponent } from './f01000/f01000confirm/f01000confirm.com
 import { registerLocaleData } from '@angular/common';
 import { NZ_I18N, zh_TW } from 'ng-zorro-antd/i18n';
 import { TokenInterceptor } from './token.interceptor';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
 export const TW_FORMATS = {
   parse: {
@@ -99,7 +101,8 @@ export const TW_FORMATS = {
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    FontAwesomeModule
   ],
   providers: [
     BnNgIdleService,
@@ -121,4 +124,8 @@ export const TW_FORMATS = {
   bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faFolderOpen);
+  }
+}
