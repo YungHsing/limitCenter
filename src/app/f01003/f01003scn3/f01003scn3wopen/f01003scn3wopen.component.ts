@@ -32,7 +32,7 @@ export class F01003scn3wopenComponent implements OnInit {
     REASON_CODE: [this.data.reasonCode, [Validators.maxLength(5)]],
     REASON_DESC: [this.data.customerId, [Validators.maxLength(500)]],
     ACTION_TYPE: [],
-    EMPNO: [localStorage.getItem("limitEmpNo"), [Validators.maxLength(11)]]
+    EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]]
   });
 
   formControl = new FormControl('', [
@@ -108,7 +108,7 @@ export class F01003scn3wopenComponent implements OnInit {
       let baseUrl = 'f01/f01003FrozenAdd';
       msgStr = await this.f01003Service.sendFormData(baseUrl, formData);
       const reserveDialogRef = this.dialog.open(F01003confirmComponent, {
-      
+
         data: { msgStr: msgStr, display: true }
       });
       if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }

@@ -49,7 +49,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
     LIMIT_END_DATE: [new Date(this.data.limitEndDate), []],
     LIMIT_TYPE_CODE: [{ value: this.data.limitTypeCode, disabled: true }, [Validators.maxLength(11)]],
     LIMIT_NO: [this.data.limitNo, [Validators.maxLength(10)]],
-    EMPNO: [localStorage.getItem("limitEmpNo"), [Validators.maxLength(11)]],
+    EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]],
     STOP_CODE: [this.data.stopCode, [Validators.maxLength(10)]],
     STOP_DESC: [this.data.stopDesc, [Validators.maxLength(50)]],
     REASON_CONTENT: []

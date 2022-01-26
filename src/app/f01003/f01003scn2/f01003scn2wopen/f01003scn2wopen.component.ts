@@ -30,7 +30,7 @@ export class F01003scn2wopenComponent implements OnInit {
     ACTION_TYPE: [this.data.customerId, [Validators.maxLength(5)]],
     CREDIT_LIMIT: [this.data.creditLimit, [Validators.maxLength(10)]],
     RESERVE_NO: [this.data.reserveNo, [Validators.maxLength(10)]],
-    EMPNO: [localStorage.getItem("limitEmpNo"), [Validators.maxLength(11)]]
+    EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]]
   });
 
   formControl = new FormControl('', [
