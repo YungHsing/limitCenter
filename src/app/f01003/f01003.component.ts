@@ -68,8 +68,8 @@ export class F01003Component implements OnInit, AfterViewInit {
       this.totalCount = data.rspBody.size;
       this.limitDataSource = data.rspBody.items;
       this.isReadOnly = true;
-
-      if (this.limitDataSource.length > 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: data.rspBody.items.NATIONAL_ID }); }
+      let nationalId = data.rspBody.nationalId;
+      if (nationalId != null) { this.limitSearchForm.patchValue({ NATIONAL_ID: nationalId }); }
       // TODO 待取得後端ＮＩＤ
       // if (this.limitDataSource.length > 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: 'A222222222' }); }
       // if (this.limitDataSource.length == 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: 'A111111111' }); }
