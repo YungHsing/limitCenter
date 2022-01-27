@@ -69,7 +69,7 @@ export class F01003Component implements OnInit, AfterViewInit {
       this.limitDataSource = data.rspBody.items;
       this.isReadOnly = true;
       let nationalId = data.rspBody.nationalId;
-      if (nationalId != null) { this.limitSearchForm.patchValue({ NATIONAL_ID: nationalId }); }
+      this.limitSearchForm.patchValue({ NATIONAL_ID: nationalId });
       // TODO 待取得後端ＮＩＤ
       // if (this.limitDataSource.length > 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: 'A222222222' }); }
       // if (this.limitDataSource.length == 0) { this.limitSearchForm.patchValue({ NATIONAL_ID: 'A111111111' }); }
