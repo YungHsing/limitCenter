@@ -190,4 +190,8 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
         this.drawdownReleaseDataSource = data.rspBody.items;
       });
   }
+
+  toCurrency(amount: string) {
+    return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;
+  }
 }

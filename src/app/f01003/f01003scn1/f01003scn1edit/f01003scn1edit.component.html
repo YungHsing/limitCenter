@@ -29,9 +29,9 @@
       <div nz-row>
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
-            <div><span class="form-title-actions">額度類別代碼</span>
+            <div><span class="form-title-actions">額度類別</span>
               <mat-select formControlName="LIMIT_TYPE_CODE" readonly
-                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6;">
+                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6;">
                 <mat-option *ngFor="let yn of limitTypeOption" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -48,7 +48,7 @@
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
               <mat-form-field color="accent" class="example-form-field"
                 style="width: 150px; margin-top: -19px; color: black;">
-                <input matInput [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE"
+                <input matInput style="padding-left: 11px;" [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE"
                   disabled>
                 <mat-datepicker-toggle matSuffix [for]="endDateValue">
                 </mat-datepicker-toggle>
@@ -75,7 +75,7 @@
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">幣別</span>
               <mat-select formControlName="CURRENCY_TYPE"
-                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
                 <mat-option *ngFor="let type of CurrencyOption" [value]="type.value">
                   {{type.viewValue}}
                 </mat-option>
@@ -87,7 +87,7 @@
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">停用註記</span>
               <mat-select formControlName="STOP_FLAG" (ngModelChange)="changeSelect()"
-                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
                 <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -123,7 +123,7 @@
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">是否可撤銷</span>
               <mat-select formControlName="CANCEL_FLAG"
-                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
                 <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -135,7 +135,7 @@
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">循環別</span>
               <mat-select formControlName="CYCLE_TYPE"
-                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
                 <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -169,7 +169,7 @@
                 class="form-title-actions">停用原因碼</span></nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
               <mat-select formControlName="STOP_CODE" required={{!isDisabled}} (ngModelChange)="changStopCode()"
-                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px;background-color:#E6E6E6">
+                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
                 <mat-option *ngFor="let yn of StopCodeOption" [value]="yn.value">
                   {{yn.value}}
                 </mat-option>

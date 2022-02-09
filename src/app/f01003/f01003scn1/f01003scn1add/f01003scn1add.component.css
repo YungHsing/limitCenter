@@ -19,3 +19,9 @@
   border-color:#f80000;
   border-radius:5px;
 }
+
+/* :host::ng-deep.mat-date-range-input-container{
+align-items: unset;
+} */
+
+

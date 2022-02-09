@@ -22,3 +22,7 @@
 :host::ng-deep.mat-select-value-text, :host::ng-deep.mat-input-element:disabled{
   color:black;
 }
+
+:host::ng-deep.element.style{
+  height: 30px;
+}

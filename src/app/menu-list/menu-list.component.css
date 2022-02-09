@@ -67,4 +67,5 @@
 
 ::ng-deep.ant-card-meta-description, .ant-comment-content-author-name, .ant-comment-content-author-name>*, .ant-comment-content-author-name>:hover{
   color: #000000;
+  font-weight: normal;
 }
