@@ -8,11 +8,11 @@
       <form class="example-form">
         <mat-card-content>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="員工編號" [(ngModel)]="no" name="account">
+            <input nz-input placeholder="員工編號" [(ngModel)]="no" name="account">
           </mat-form-field>
           <br>
           <mat-form-field class="example-full-width">
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="員工密碼" [(ngModel)]="pwd"  name="password">
+            <input nz-input [type]="hide ? 'password' : 'text'" placeholder="員工密碼" [(ngModel)]="pwd"  name="password">
             <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
             <fa-icon class="icon_size" matSuffix (click)="hide = !hide" [icon]="faEyeSlash"></fa-icon>
           </mat-form-field>

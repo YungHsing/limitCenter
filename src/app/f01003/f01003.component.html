@@ -10,14 +10,14 @@
       <div nz-row>
         <div nz-col nzSpan="6">
           <div style="padding:10px"><span class="form-title">客戶編號 CID：</span>
-            <input style="display: block;" formControlName="CUSTOMER_ID" value="">
+            <input style="display: block; padding: 4px 11px;" formControlName="CUSTOMER_ID" value="">
           </div>
         </div>
         <!-- <div nz-col nzSpan="6">
           <div class="form" style="padding:20px;">
             <span class="form-title-actions">額度起日</span>
             <mat-form-field color="accent" class="example-form-field" style="width: 150px; margin-top: -19px; color: black;">
-              <input matInput [matDatepicker]="startDateValue" formControlName="LIMIT_START_DATE"
+              <input nz-input [matDatepicker]="startDateValue" formControlName="LIMIT_START_DATE"
                  disabled>
               <mat-datepicker-toggle matSuffix [for]="startDateValue">
               </mat-datepicker-toggle>

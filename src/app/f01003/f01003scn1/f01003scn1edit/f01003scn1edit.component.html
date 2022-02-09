@@ -48,7 +48,7 @@
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
               <mat-form-field color="accent" class="example-form-field"
                 style="width: 150px; margin-top: -19px; color: black;">
-                <input matInput style="padding-left: 11px;" [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE"
+                <input nz-input style="padding-left: 11px;" [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE"
                   disabled>
                 <mat-datepicker-toggle matSuffix [for]="endDateValue">
                 </mat-datepicker-toggle>
@@ -101,7 +101,7 @@
                 class="form-title-actions">停用日期</span></nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
               <mat-form-field color="accent" class="example-form-field" style="width: 150px; margin-top: -19px;">
-                <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" disabled required={{!isDisabled}}>
+                <input nz-input [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" disabled required={{!isDisabled}}>
                 <mat-datepicker-toggle matSuffix [for]="stopDateValue">
                 </mat-datepicker-toggle>
                 <mat-datepicker #stopDateValue disabled="{{isDisabled}}">
@@ -184,7 +184,7 @@
             <nz-form-label nzFor="website" nzRequired={{!isDisabled}}><span class="form-title-actions">停用說明</span>
             </nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
-              <input matInput #input class="form-control" formControlName="STOP_DESC" required={{!isDisabled}} readonly={{isReadOnly}}>
+              <input nz-input #input class="form-control" formControlName="STOP_DESC" required={{!isDisabled}} readonly={{isReadOnly}}>
             </nz-form-control>
           </div>
         </div>

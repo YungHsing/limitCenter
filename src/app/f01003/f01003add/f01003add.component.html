@@ -6,21 +6,21 @@
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">身分證字號</span>
-              <input matInput #input class="form-control" name="codeTag" formControlName="NATIONAL_ID" readonly>
+              <input nz-input #input class="form-control" name="codeTag" formControlName="NATIONAL_ID" readonly>
             </div>
           </div>
         </div>
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">客戶編號</span>
-              <input matInput #input class="form-control" name="codeTag" formControlName="CUSTOMER_ID" readonly>
+              <input nz-input #input class="form-control" name="codeTag" formControlName="CUSTOMER_ID" readonly>
             </div>
           </div>
         </div>
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">層級</span>
-              <input matInput #input class="form-control" name="codeTag" formControlName="LEVEL_NO" readonly>
+              <input nz-input #input class="form-control" name="codeTag" formControlName="LEVEL_NO" readonly>
             </div>
           </div>
         </div>
@@ -44,10 +44,10 @@
             <nz-form-label nzFor="website" nzRequired style="height: 23px;margin-top: -10px;"><span
                 class="form-title-actions">額度起日-額度訖日</span></nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
-              <mat-form-field color="accent" class="example-form-field" style="margin-top:-19px; width: 250px;">
+              <mat-form-field color="accent" class="example-form-field" style="margin-top:-19px; margin-left: 11px; width: 250px;">
                 <mat-date-range-input [rangePicker]="rangePicker" [min]="minDate">
                   <input matStartDate formControlName="LIMIT_START_DATE" required
-                    style="padding-bottom: 15px; background-color: white; border-color: white; width: 150px;">
+                    style="padding-left: 2px; padding-bottom: 13px; background-color: white; border-color: white; width: 150px;">
                   <input matEndDate formControlName="LIMIT_END_DATE" required
                     style="background-color: white; border-color: white; width: 130px">
                 </mat-date-range-input>
@@ -73,7 +73,7 @@
                 class="form-title-actions">額度</span>
             </nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
-              <input matInput style="text-align: right;" #input class="form-control" formControlName="CREDIT_LIMIT" required
+              <input nz-input style="text-align: right;" #input class="form-control" formControlName="CREDIT_LIMIT" required
                 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
                 (keyup)="onKey($event)">
             </nz-form-control>
@@ -83,7 +83,7 @@
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">幣別</span>
               <mat-select formControlName="CURRENCY_TYPE" readonly
-                style="width:100%;height:25px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
+                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
                 <mat-option *ngFor="let type of CurrencyOption" [value]="type.value">
                   {{type.viewValue}}
                 </mat-option>

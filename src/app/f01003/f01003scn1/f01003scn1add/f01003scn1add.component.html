@@ -42,7 +42,7 @@
 
           </div>
         </div>
-        <div nz-col nzSpan="16">
+        <!-- <div nz-col nzSpan="16">
           <div class="form" style="padding:20px;">
             <nz-form-label nzFor="website" nzRequired style="height: 23px;"><span
                 class="form-title-actions">額度起日-額度訖日</span></nz-form-label>
@@ -51,6 +51,31 @@
                 <mat-date-range-input [rangePicker]="rangePicker" [min]="minDate">
                   <input matStartDate formControlName="LIMIT_START_DATE" required
                     style="padding-bottom: 15px; padding-left: 11px; background-color: white; border-color: white; width: 150px;">
+                  <input matEndDate formControlName="LIMIT_END_DATE" required
+                    style="background-color: white; border-color: white; width: 130px">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #rangePicker>
+                  <mat-date-range-picker-actions>
+                    <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+                      matDateRangePickerApply (click)="setTimes()">確定</button>
+                    <button nz-button [nzSize]="'middle'" nzType="defult" nzDanger style="margin:0px 5px"
+                      matDateRangePickerCancel>取消</button>
+                  </mat-date-range-picker-actions>
+                </mat-date-range-picker>
+              </mat-form-field>
+            </nz-form-control>
+          </div>
+        </div> -->
+        <div nz-col nzSpan="16">
+          <div class="form" style="padding:20px;">
+            <nz-form-label nzFor="website" nzRequired style="height: 23px;margin-top: -10px;"><span
+                class="form-title-actions">額度起日-額度訖日</span></nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
+              <mat-form-field color="accent" class="example-form-field" style="margin-top:-19px; width: 250px;">
+                <mat-date-range-input [rangePicker]="rangePicker" [min]="minDate">
+                  <input matStartDate formControlName="LIMIT_START_DATE" required
+                    style="padding-left: 1px; padding-bottom: 14px; background-color: white; border-color: white; width: 150px;">
                   <input matEndDate formControlName="LIMIT_END_DATE" required
                     style="background-color: white; border-color: white; width: 130px">
                 </mat-date-range-input>
