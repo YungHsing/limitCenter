@@ -91,15 +91,6 @@ export class F01003scn4Component implements OnInit {
   manageRecordDataSource: Data[] = [];
 
   ngAfterViewInit(): void {
-    // this.currentPage = {
-    //   pageIndex: 0,
-    //   pageSize: 5,
-    //   length: null
-    // };
-    // this.currentSort = {
-    //   active: '',
-    //   direction: ''
-    // };
   }
 
   async onSubmit() {
@@ -109,6 +100,8 @@ export class F01003scn4Component implements OnInit {
       return false;
     } else {
       let formData = new FormData();
+      formData.append('CUSTOMER_ID', this.CUSTOMER_ID);
+      formData.append('NATIONAL_ID', this.NATIONAL_ID);
       let jsonStr = JSON.stringify(this.manageRecordForm.value);
       let jsonObj = JSON.parse(jsonStr);
 
