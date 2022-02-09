@@ -7,6 +7,8 @@ th {
   /* row border */
   border-bottom: 1px solid #ffa600;
   color:black;
+  font-size:14px;
+  font-weight: normal;
 }
 
 td.mat-cell {

@@ -5,6 +5,10 @@
   :host::ng-deep.ant-table-small .ant-table-thead>tr>th{
     color:black ;
   }
+
+  :host::ng-deep.mat-date-range-input-inner {
+    color:black ;
+  }
   .ant-btn-dangerous{
     color: #f80000;;
     background:white;
