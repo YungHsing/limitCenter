@@ -57,6 +57,9 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     let formData: FormData = new FormData();
+    let jsonStr = JSON.stringify(this.addForm.value);
+    let jsonObj = JSON.parse(jsonStr);
+    for (var key in jsonObj) { formData.append(key, jsonObj[key]); }
     let baseUrl = 'f01/f01003FrozenNoOption';
     this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
       console.log(data.rspBody.frozenNoOption)
