@@ -24,9 +24,10 @@
 }
 
 
-/* :host::ng-deep.mat-date-range-input-container{
-align-items: unset;
-} */
+:host::ng-deep.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 1.5em;
+  padding-top: 0.7em;
+}
 
 
 /* 格線切版背景 */
