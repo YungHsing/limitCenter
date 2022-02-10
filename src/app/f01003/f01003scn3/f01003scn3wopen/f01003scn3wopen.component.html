@@ -42,7 +42,7 @@
             <nz-form-label nzFor="website" nzRequired style="margin-top: -8px; height: 27px;"><span
                 class="form-title-actions">原因</span></nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
-              <input nz-input #input class="form-control" required formControlName="REASON_DESC" readonly={{isReadOnly}}
+              <input nz-input #input class="form-control" required formControlName="REASON_DESC" [readonly]=isReadOnly
                 style="width:250px;height:30px;border-radius:10px;border:none;margin-top:4px;padding:4px 11px;background-color:#E6E6E6">
             </nz-form-control>
           </div>
