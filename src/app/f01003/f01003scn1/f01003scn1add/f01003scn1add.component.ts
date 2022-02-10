@@ -12,7 +12,7 @@ interface sysCode {
 
 @Component({
   templateUrl: './f01003scn1add.component.html',
-  styleUrls: ['./f01003scn1add.component.css']
+  styleUrls: ['./f01003scn1add.component.css', '../../../../assets/css/child.css']
 })
 export class F01003scn1addComponent implements OnInit {
 
