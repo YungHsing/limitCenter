@@ -32,7 +32,7 @@ export class F01003scn3wopenComponent implements OnInit {
     REASON_CODE: [this.data.reasonCode, [Validators.maxLength(5)]],
     REASON_DESC: [this.data.customerId, [Validators.maxLength(500)]],
     ACTION_TYPE: [],
-    EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]]
+    EMPNO: [localStorage.getItem("liEmpNo"), [Validators.maxLength(11)]]
   });
 
   formControl = new FormControl('', [

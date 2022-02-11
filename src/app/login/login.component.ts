@@ -90,7 +90,7 @@ export class LoginComponent {
       this.loginService.setBnIdle();
       localStorage.setItem("loginKey", 'change');
       localStorage.removeItem('loginKey');
-      localStorage.setItem("empNo", this.no);
+      localStorage.setItem("liEmpNo", this.no);
     } else {
       alert('帳號有誤!');
       if ('stg' == this.from || 'uat' == this.from || 'prod' == this.from) {

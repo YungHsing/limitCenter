@@ -41,7 +41,7 @@ export class F01003addComponent implements OnInit {
     LIMIT_START_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     LIMIT_END_DATE: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     LIMIT_TYPE_CODE: ['P0001000000', [Validators.maxLength(11)]],
-    EMPNO: [localStorage.getItem("empNo"), [Validators.maxLength(11)]]
+    EMPNO: [localStorage.getItem("liEmpNo"), [Validators.maxLength(11)]]
   });
 
   ngOnInit(): void {

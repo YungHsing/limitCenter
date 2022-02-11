@@ -33,7 +33,7 @@ export class BaseService {
   }
 
   public getEmpNO(): string {
-    return localStorage.getItem('empNo');
+    return localStorage.getItem('liEmpNo');
   }
 
   protected postHttpClient(baseUrl: string) {
