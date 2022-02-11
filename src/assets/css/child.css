@@ -98,6 +98,10 @@ input{
   padding:10px;
   background-color:#E6E6E6
 }
+.mat-select:hover {
+  border: 1px solid #40a9ff !important;
+}
+
 /* disabled 欄位背景色 */
 :host::ng-deep#disable {
   color: black;

@@ -48,7 +48,7 @@
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
               <mat-form-field color="accent" class="example-form-field"
                 style="width: 150px; margin-top: -19px; color: black;">
-                <input matInput style="padding-left: 11px; background-color:#f5f5f5;border: 1px solid #E6E6E6" [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE"
+                <input matInput style="padding-left: 11px; background-color:white;border: 1px solid white" [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE"
                   disabled>
                 <mat-datepicker-toggle matSuffix [for]="endDateValue">
                 </mat-datepicker-toggle>
@@ -101,7 +101,7 @@
                 class="form-title-actions">停用日期</span></nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
               <mat-form-field color="accent" class="example-form-field" style="width: 150px; margin-top: -19px; ">
-                <input matInput style="background-color:#f5f5f5;border: 1px solid #E6E6E6" [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" disabled required={{!isDisabled}}>
+                <input matInput style="background-color:white;border: 1px solid white" [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" disabled required={{!isDisabled}}>
                 <mat-datepicker-toggle matSuffix [for]="stopDateValue">
                 </mat-datepicker-toggle>
                 <mat-datepicker #stopDateValue disabled="{{isDisabled}}">
