@@ -86,6 +86,7 @@ export class F01003Component implements OnInit, AfterViewInit {
       let msgStr: string = this.limitDataSource.length == 0 ? '查無資料!' : '查詢成功!';
       this.dialog.open(F01003confirmComponent, { data: { msgStr: msgStr, display: true } });
       if (this.limitDataSource.length == 0) { this.isDisabled = false; }
+      this.limitSearchForm.controls['CUSTOMER_ID'].disable();
     }
   }
 
@@ -98,6 +99,7 @@ export class F01003Component implements OnInit, AfterViewInit {
     this.limitDataSource = null;
     this.isReadOnly = false;
     this.isDisabled = true;
+    this.limitSearchForm.controls['CUSTOMER_ID'].enable();
   }
 
   setTimes() {
@@ -117,6 +119,8 @@ export class F01003Component implements OnInit, AfterViewInit {
   }
 
   addNew() {
+    this.limitSearchForm.controls['CUSTOMER_ID'].enable();
+    console.log(this.limitSearchForm.value.CUSTOMER_ID)
     if (this.limitSearchForm.value.CUSTOMER_ID == '') {
       this.dialog.open(F01003confirmComponent, { data: { msgStr: 'CID必填!', display: true } });
       return false;
@@ -132,6 +136,7 @@ export class F01003Component implements OnInit, AfterViewInit {
           this.refreshTable();
           this.isDisabled = true;
         }
+        this.limitSearchForm.controls['CUSTOMER_ID'].disable();
       });
     }
   }
