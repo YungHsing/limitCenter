@@ -7,18 +7,21 @@
         <div nz-col nzSpan="12">
           <div class="form" [(hidden)]="frozen" style="padding:20px">
             <div><span class="form-title-actions">額度號</span>
-              <input nz-input #input class="form-control" name="codeTag" formControlName="LIMIT_NO" readonly>
+              <input nz-input id="disable" #input class="form-control" name="codeTag" formControlName="LIMIT_NO"
+                readonly>
             </div>
           </div>
           <div class="form" [(hidden)]="unfrozen" style="padding:20px">
-            <div><span class="form-title-actions">凍結編號</span>
+            <nz-form-label nzFor="website" nzRequired style="margin-top: -8px; height: 27px;"><span
+                class="form-title-actions">凍結編號</span></nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
               <mat-select formControlName="FROZEN_NO"
-                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
+                style="width:100%;height:30px;margin-top:4px; border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
                 <mat-option *ngFor="let code of frozenNoOption" [value]="code.value">
                   {{code.viewValue}}
                 </mat-option>
               </mat-select>
-            </div>
+            </nz-form-control>
           </div>
         </div>
         <div nz-col nzSpan="12">

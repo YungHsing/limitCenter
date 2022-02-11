@@ -38,7 +38,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
     CUSTOMER_ID: [this.data.customerId, [Validators.maxLength(30)]],
     NATIONAL_ID: [this.data.nationalId, [Validators.maxLength(30)]],
     CREDIT_LIMIT: [this.data.creditLimit, [Validators.maxLength(17)]],
-    CURRENCY_TYPE: [{ value: this.data.currencyType, disabled: true }, [Validators.maxLength(3)]],
+    CURRENCY_TYPE: [this.data.currencyType, [Validators.maxLength(3)]],
     STOP_FLAG: [this.data.stopFlag, [Validators.maxLength(1)]],
     CANCEL_FLAG: [this.data.cancelFlag, [Validators.maxLength(1)]],
     ENABLE_FLAG: [this.data.enableFlag, [Validators.maxLength(1)]],

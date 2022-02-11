@@ -6,21 +6,21 @@
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">身分證字號</span>
-              <input nz-input #input class="form-control" name="codeTag" formControlName="NATIONAL_ID" readonly>
+              <input nz-input id="disable" #input class="form-control" name="codeTag" formControlName="NATIONAL_ID" readonly>
             </div>
           </div>
         </div>
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">客戶編號</span>
-              <input nz-input #input class="form-control" name="codeTag" formControlName="CUSTOMER_ID" readonly>
+              <input nz-input id="disable" #input class="form-control" name="codeTag" formControlName="CUSTOMER_ID" readonly>
             </div>
           </div>
         </div>
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">層級</span>
-              <input nz-input #input class="form-control" name="codeTag" formControlName="LEVEL_NO" readonly>
+              <input nz-input id="disable" #input class="form-control" name="codeTag" formControlName="LEVEL_NO" readonly>
             </div>
           </div>
         </div>
@@ -30,8 +30,8 @@
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">額度類別</span>
-              <mat-select formControlName="LIMIT_TYPE_CODE" readonly
-                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6;">
+              <mat-select formControlName="LIMIT_TYPE_CODE" readonly id="disable"
+                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#f5f5f5;border: 1px solid #E6E6E6">
                 <mat-option *ngFor="let yn of limitTypeOption" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -48,7 +48,7 @@
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
               <mat-form-field color="accent" class="example-form-field"
                 style="width: 150px; margin-top: -19px; color: black;">
-                <input matInput style="padding-left: 11px;" [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE"
+                <input matInput style="padding-left: 11px; background-color:#f5f5f5;border: 1px solid #E6E6E6" [matDatepicker]="endDateValue" [min]="minDate" formControlName="LIMIT_END_DATE"
                   disabled>
                 <mat-datepicker-toggle matSuffix [for]="endDateValue">
                 </mat-datepicker-toggle>
@@ -75,7 +75,7 @@
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">幣別</span>
               <mat-select formControlName="CURRENCY_TYPE"
-                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
+                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#f5f5f5;border: 1px solid #E6E6E6">
                 <mat-option *ngFor="let type of CurrencyOption" [value]="type.value">
                   {{type.viewValue}}
                 </mat-option>
@@ -100,8 +100,8 @@
             <nz-form-label nzFor="website" nzRequired={{!isDisabled}} style="margin-top: -8px; height: 27px;"><span
                 class="form-title-actions">停用日期</span></nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
-              <mat-form-field color="accent" class="example-form-field" style="width: 150px; margin-top: -19px;">
-                <input matInput [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" disabled required={{!isDisabled}}>
+              <mat-form-field color="accent" class="example-form-field" style="width: 150px; margin-top: -19px; ">
+                <input matInput style="background-color:#f5f5f5;border: 1px solid #E6E6E6" [matDatepicker]="stopDateValue" formControlName="STOP_DATE" value="" disabled required={{!isDisabled}}>
                 <mat-datepicker-toggle matSuffix [for]="stopDateValue">
                 </mat-datepicker-toggle>
                 <mat-datepicker #stopDateValue disabled="{{isDisabled}}">
@@ -115,7 +115,7 @@
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">上層額度號</span>
-              <input nz-input #input class="form-control" name="codeTag" formControlName="UP_LEVEL" readonly>
+              <input nz-input id="disable" #input class="form-control" name="codeTag" formControlName="UP_LEVEL" readonly>
             </div>
           </div>
         </div>
@@ -135,7 +135,7 @@
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">循環別</span>
               <mat-select formControlName="CYCLE_TYPE"
-                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#E6E6E6">
+                style="width:100%;height:30px;border-radius:10px;border:none;padding:4px 11px;background-color:#f5f5f5;border: 1px solid #E6E6E6">
                 <mat-option *ngFor="let yn of ynCode" [value]="yn.value">
                   {{yn.viewValue}}
                 </mat-option>
@@ -150,7 +150,7 @@
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">額度號</span>
-              <input nz-input #input class="form-control" formControlName="LIMIT_NO" readonly>
+              <input nz-input id="disable" #input class="form-control" formControlName="LIMIT_NO" readonly>
             </div>
           </div>
         </div>

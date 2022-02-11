@@ -1,7 +1,4 @@
-/* .mat-success {
-    background-color: green;
-    color: #fff;
-  } */
+
   :host::ng-deep.ant-table-small .ant-table-thead>tr>th{
     color:black ;
   }
@@ -9,24 +6,4 @@
   :host::ng-deep.mat-date-range-input-inner {
     color:black ;
   }
-  .ant-btn-dangerous{
-    color: #f80000;;
-    background:white;
-    border-color:#f80000;
-    border-radius:5px;
-    text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
-    box-shadow:0 2px 0 rgb(0 0 0 / 5%);
-  }
-  .ant-btn-dangerous:hover{
-    color:#ffffff;
-    background:#f80000;
-    border-color:#f80000;
-    border-radius:5px;
-    box-shadow:0 2px 0 rgb(0 0 0 / 5%);
-  }
-  .ant-btn-dangerous:active{
-    color:#ffffff;
-    background:#f80000;
-    border-color:#f80000;
-    border-radius:5px;
-  }
+
