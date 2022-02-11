@@ -78,7 +78,7 @@
             <td class="table-data">{{ data.empno }}</td>
             <td class="table-data">{{ data.manageDate |date :'yyyy-MM-dd' }}</td>
             <td class="table-data">{{ data.reviewEmpno }}</td>
-            <td class="table-data">{{ data.agreeFlag }}</td>
+            <td class="table-data">{{ data.agreeFlag == 'Y' ? '核准' : '不核准' }}</td>
           </tr>
         </tbody>
       </nz-table>
