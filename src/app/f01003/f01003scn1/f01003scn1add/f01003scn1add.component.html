@@ -6,7 +6,7 @@
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
             <div><span class="form-title-actions">身分證字號</span>
-              <input nz-input #input class="form-control" name="codeTag" formControlName="NATIONAL_ID" readonly>
+              <input nz-input #input class="form-control" name="codeTag" formControlName="NATIONAL_ID" readonly disabled>
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@
       <div nz-row>
         <div nz-col nzSpan="8">
           <div class="form" style="padding:20px">
-            <div><span class="form-title-actions">層級</span>
+            <div><span class="form-title-actions">額度</span>
               <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
                 <input nz-input #input style="text-align: right;" class="form-control"
                   onkeyup="this.value=this.value.replace(/\D/g,'')"
