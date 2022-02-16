@@ -49,14 +49,14 @@
             <nz-form-label nzFor="website" nzRequired style="margin-top: -8px; height: 27px;"><span
                 class="form-title-actions">金額</span></nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
-              <input nz-input #input class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')"
+              <input nz-input #input class="form-control" style="text-align: right;" onkeyup="this.value=this.value.replace(/\D/g,'')"
                 onafterpaste="this.value=this.value.replace(/\D/g,'')" (keyup)="onKey($event)" name="codeTag"
                 formControlName="CREDIT_LIMIT" required>
             </nz-form-control>
           </div>
           <div class="form" style="padding:20px" [(hidden)]="reserve">
             <div><span class="form-title-actions">金額</span>
-              <input nz-input id="disable" #input class="form-control" name="codeTag" formControlName="CREDIT_LIMIT" required
+              <input nz-input id="disable" #input class="form-control" style="text-align: right;" name="codeTag" formControlName="CREDIT_LIMIT" required
                 readonly>
             </div>
           </div>
