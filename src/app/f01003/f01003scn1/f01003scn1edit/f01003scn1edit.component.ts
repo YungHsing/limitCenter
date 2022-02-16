@@ -52,7 +52,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
     EMPNO: [localStorage.getItem("liEmpNo"), [Validators.maxLength(11)]],
     STOP_CODE: [this.data.stopCode, [Validators.maxLength(10)]],
     STOP_DESC: [this.data.stopDesc, [Validators.maxLength(50)]],
-    REASON_CONTENT: []
+    REASON_CONTENT: ['', [Validators.maxLength(100)]]
   });
 
   ngOnInit(): void {
@@ -158,16 +158,20 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
       const checkDialogRef = this.dialog.open(F01003confirmComponent, {
         data: { msgStr: msgStr, display: true }
       });
-    } else {
-      const reasonDialogRef = this.dialog.open(F01003confirmComponent, {
-        data: { display: false }
+    } else if (this.addForm.value.REASON_CONTENT == null) {
+      msgStr = '請填寫此次異動修改原因!';
+      const checkDialogRef = this.dialog.open(F01003confirmComponent, {
+        data: { msgStr: msgStr, display: true }
       });
-      reasonDialogRef.afterClosed().subscribe(async result => {
-        if (result != null && result.event == 'success' && result.value != null && result.value != '') {
+    } else {
+      // const reasonDialogRef = this.dialog.open(F01003confirmComponent, {
+      //   data: { display: false }
+      // });
+      // reasonDialogRef.afterClosed().subscribe(async result => {
+        // if (result != null && result.event == 'success' && result.value != null && result.value != '') {
           let creditLimit = this.addForm.value.CREDIT_LIMIT;
           this.addForm.patchValue({ CREDIT_LIMIT: creditLimit.toString().replaceAll(',', '') });
-
-          this.addForm.patchValue({ REASON_CONTENT: result.value });
+          // this.addForm.patchValue({ REASON_CONTENT: result.value });
           this.addForm.controls['STOP_DATE'].enable();
           var formData = new FormData();
           if (this.addForm.value.STOP_CODE == null) { this.addForm.value.STOP_CODE = ''; }
@@ -193,13 +197,13 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
           });
           if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
 
-        } else {
-          msgStr = '請填寫修改原因'
-          const checkDialogRef = this.dialog.open(F01003confirmComponent, {
-            data: { msgStr: msgStr, display: true }
-          });
-        }
-      });
+        // } else {
+        //   msgStr = '請填寫修改原因'
+        //   const checkDialogRef = this.dialog.open(F01003confirmComponent, {
+        //     data: { msgStr: msgStr, display: true }
+        //   });
+        // }
+      // });
     }
   }
 

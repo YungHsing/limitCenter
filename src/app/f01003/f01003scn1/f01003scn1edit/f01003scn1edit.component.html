@@ -188,6 +188,16 @@
             </nz-form-control>
           </div>
         </div>
+
+        <div nz-col nzSpan="24">
+          <div class="form" style="padding:20px">
+            <nz-form-label nzFor="website" nzRequired><span class="form-title-actions">此次異動修改原因</span>
+            </nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="此欄位必填">
+              <input nz-input #input class="form-control" formControlName="REASON_CONTENT" required>
+            </nz-form-control>
+          </div>
+        </div>
       </div>
       <div mat-dialog-actions>
         <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
