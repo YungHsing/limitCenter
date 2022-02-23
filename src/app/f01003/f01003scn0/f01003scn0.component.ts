@@ -30,6 +30,7 @@ export class F01003scn0Component implements OnInit {
     element.click();
   }
 
+  // 金額加上","
   toCurrency(amount: any) {
     return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;
   }

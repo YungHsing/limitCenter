@@ -101,6 +101,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
       obj.hasError('minlength') ? '長度過短' : '';
   }
 
+  // 是否停用下拉更改事件
   changeSelect() {
     this.addForm.patchValue({ STOP_DATE: '' });
     if (this.addForm.value.STOP_FLAG == 'N') {
@@ -129,6 +130,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
   submit() {
   }
 
+  //停用原因下拉更改事件
   changStopCode() {
     for (const jsonObj of this.StopCodeOption) {
       const stopNo = jsonObj['value'];
@@ -207,6 +209,7 @@ export class F01003scn1editComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // 金額加上","
   onKey(event: KeyboardEvent) {
     let value = (<HTMLInputElement>event.target).value;
     this.addForm.patchValue({ CREDIT_LIMIT: value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') });

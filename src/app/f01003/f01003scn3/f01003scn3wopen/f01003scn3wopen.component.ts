@@ -114,6 +114,8 @@ export class F01003scn3wopenComponent implements OnInit {
       if (msgStr === 'success') { this.dialogRef.close({ event: 'success' }); }
     }
   }
+
+  // 停用原因下拉事件
   changeSelect() {
     for (const jsonObj of this.reasonCodeOption) {
       const codeNo = jsonObj['value'];

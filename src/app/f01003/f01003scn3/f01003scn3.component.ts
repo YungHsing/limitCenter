@@ -122,6 +122,7 @@ export class F01003scn3Component implements OnInit {
     return this.formControl.hasError('required') ? 'Required field' : '';
   }
 
+  // 凍結解凍視窗
   frozen(frozen: boolean) {
     if (this.frozenForm.value.LIMIT_NO == undefined) {
       this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號', display: true } });
@@ -147,6 +148,7 @@ export class F01003scn3Component implements OnInit {
     this.currentSort = sortInfo;
   }
 
+  // 重整
   private async refreshTable() {
     let formData = new FormData();
       let jsonStr = JSON.stringify(this.frozenForm.value);
@@ -169,23 +171,4 @@ export class F01003scn3Component implements OnInit {
     return codeVal;
   }
 
-  // getDesc(codeVal: string): string {
-  //   console.log(codeVal);
-  //   let formData: FormData = new FormData();
-  //   formData.append("ACTION_TYPE", '4');
-
-  //   let baseUrl = 'f01/f01003FrozenNoOption';
-  //     this.f01003Service.getLimitDataList(baseUrl, formData).then(data => {
-  //       console.log("test" +data.rspBody.frozenNoOption)
-  //       // for (const jsonObj of data.rspBody.frozenNoOption) {
-  //       //   const frozenNo = jsonObj['codeNo'];
-  //       //   const frozenDesc = jsonObj['codeDesc'];
-  //       //   if (frozenNo == codeVal) {
-  //       //     return data.viewValue;
-  //       //     break;
-  //       //   }
-  //       // }
-  //     });
-  //     return codeVal;
-  // }
 }

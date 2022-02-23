@@ -119,6 +119,7 @@ export class F01003scn2wopenComponent implements OnInit {
     }
   }
 
+  // 取該額度號預佔額度
   changeSelect() {
     let formData: FormData = new FormData();
     let limitNo = this.data.limitNo;
@@ -138,11 +139,13 @@ export class F01003scn2wopenComponent implements OnInit {
       });
   }
 
+  // 金額加上","
   onKey(event: KeyboardEvent) {
     let value = (<HTMLInputElement>event.target).value;
     this.reserveAddForm.patchValue({ CREDIT_LIMIT: value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') });
   }
 
+  // 金額加上","
   toCurrency(amount: any) {
     return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;
   }

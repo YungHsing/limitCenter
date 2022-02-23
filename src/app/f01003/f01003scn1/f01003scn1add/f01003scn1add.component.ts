@@ -120,6 +120,7 @@ export class F01003scn1addComponent implements OnInit {
     }
   }
 
+  // 金額加上","
   onKey(event: KeyboardEvent) {
     let value = (<HTMLInputElement>event.target).value;
     this.addForm.patchValue({ CREDIT_LIMIT: value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') });

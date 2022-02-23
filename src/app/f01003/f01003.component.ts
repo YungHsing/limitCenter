@@ -155,6 +155,8 @@ export class F01003Component implements OnInit, AfterViewInit {
     this.pageSize = pageSize;
     this.pageIndex = pageIndex;
   }
+
+  //金額加上","
   toCurrency(amount: any) {
     return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;
   }

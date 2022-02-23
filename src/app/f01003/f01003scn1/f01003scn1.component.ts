@@ -221,6 +221,7 @@ export class F01003scn1Component implements OnInit {
     });
   }
 
+  // 重整
   private async refreshTable() {
     var formData = new FormData();
     formData.append('CUSTOMER_ID', this.CUSTOMER_ID);
@@ -233,6 +234,7 @@ export class F01003scn1Component implements OnInit {
     this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
   }
 
+  // 金額加上","
   toCurrency(amount: string) {
     return amount != null ? amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : amount;
   }

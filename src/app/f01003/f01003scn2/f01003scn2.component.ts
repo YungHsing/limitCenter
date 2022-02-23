@@ -136,6 +136,7 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
     return this.formControl.hasError('required') ? 'Required field' : '';
   }
 
+  // 動用額度視窗
   drawdown() {
     if (this.drawdownReleaseForm.value.LIMIT_NO == undefined) {
       this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號', display: true } });
@@ -156,6 +157,7 @@ export class F01003scn2Component implements OnInit, AfterViewInit {
 
   }
 
+  // 釋放額度視窗
   release() {
     if (this.drawdownReleaseForm.value.LIMIT_NO == undefined) {
       this.dialog.open(F01003confirmComponent, { data: { msgStr: '請選擇額度號', display: true } });
