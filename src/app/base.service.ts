@@ -57,10 +57,6 @@ export class BaseService {
     return this.postHttpClient(url);
   }
 
-  protected formDataApiFor_NET(baseUrl: string, formdata: FormData) {
-    return this.httpClient.post<any>(baseUrl, formdata);
-  }
-
   //================下方是提供新增或編輯用的function========================================
 
   private async commonFunction(baseUrl: string, formdata: FormData) {
@@ -77,9 +73,6 @@ export class BaseService {
     await this.commonFunction(baseUrl, formdata).then((data) => {
       rspCode = data.rspCode;
       rspMsg = data.rspMsg;
-    })
-    .catch((error) => {
-      console.log("Promise rejected with " + JSON.stringify(error));
     });
     return await this.getMsgStr(rspCode, rspMsg);
   }

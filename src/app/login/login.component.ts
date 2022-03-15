@@ -25,7 +25,7 @@ export class LoginComponent {
   faEyeSlash = faEyeSlash;
 
   no = '';
-  pwd = '';
+  limitWord = '';
   private from: string = environment.from;
   public key: string;
   public iv: string;
@@ -50,42 +50,9 @@ export class LoginComponent {
   }
 
   async onClickMe(): Promise<void> {
-    // this.bnIdle = new BnNgIdleService();
-
-    //------------------------------------------------------------------
-    // let publicKey = this.jsEncrypt.getKey().getPublicBaseKeyB64();
-    // let privateKey = this.jsEncrypt.getKey().getPrivateBaseKeyB64();
-    // console.log("pub=====>"+publicKey);
-    // console.log("pri=====>"+privateKey);
-    // this.jsEncrypt.setPublicKey(publicKey);
-    // this.hash = sha256('19830330');
-    // const enc = this.jsEncrypt.encrypt("19830330");
-    // console.log("enc=====>"+enc);
-    // this.jsEncrypt.setPrivateKey(privateKey);
-    // const dec = this.jsEncrypt.decrypt(enc.toString());
-    // console.log("dec=====>"+dec);
-    //------------------------------------------------------------------
-
-    // if (await this.loginService.initData(this.no, this.pwd)) {
-    //   localStorage.setItem("empNo", this.no);
-    //   this.router.navigate(['./home'], { queryParams: { empNo: this.no } });
-    //   this.bnIdle.startWatching(60 * 10).subscribe((isTimedOut: boolean) => {
-    //     if (isTimedOut) { this.routerGoUrl(); }
-    //   });
-    //   sessionStorage.setItem('BusType', JSON.stringify(await this.loginService.getRuleCode('BUS_TYPE')));
-    //   sessionStorage.setItem('ParmType', JSON.stringify(await this.loginService.getRuleCode('PARM_TYPE')));
-    //   sessionStorage.setItem('ParmDim', JSON.stringify(await this.loginService.getRuleCode('PARM_DIM')));
-    //   sessionStorage.setItem('ParmClass', JSON.stringify(await this.loginService.getRuleCode('PARM_CLASS')));
-    //   sessionStorage.setItem('Condition', JSON.stringify(await this.loginService.getCondition()));
-    //   //sessionStorage.setItem('RuleStep', JSON.stringify(await this.loginService.getRuleStep()));
-    //   //sessionStorage.setItem('PolicyId', JSON.stringify(await this.loginService.getPolicyId()));
-    // } else {
-    //   alert('帳號有誤!');
-    // }
-
     let chkTicket: string = (this.ticket != null && this.ticket.length > 0) ? this.ticket : '';
     if ('local' == this.from || 'rstn' == this.from || 'dev' == this.from) { chkTicket = 'pass-ticket-validation'; }
-    if (await this.loginService.initData(this.no, this.pwd, chkTicket)) {
+    if (await this.loginService.initData(this.no, this.limitWord, chkTicket)) {
       this.router.navigate(['./home'], { queryParams: { empNo: this.no } });
       this.loginService.setBnIdle();
       localStorage.setItem("loginKey", 'change');
