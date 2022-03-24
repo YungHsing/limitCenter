@@ -47,6 +47,17 @@ import { NZ_I18N, zh_TW } from 'ng-zorro-antd/i18n';
 import { TokenInterceptor } from './token.interceptor';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
+import { F02001Component } from './f02001/f02001.component';
+import { F02002Component } from './f02002/f02002.component';
+import { F02003Component } from './f02003/f02003.component';
+import { F02001addComponent } from './f02001/f02001add/f02001add.component';
+import { F02001editComponent } from './f02001/f02001edit/f02001edit.component';
+import { F02002addComponent } from './f02002/f02002add/f02002add.component';
+import { F02002amtComponent } from './f02002/f02002amt/f02002amt.component';
+import { F02002editComponent } from './f02002/f02002edit/f02002edit.component';
+import { F02002prjComponent } from './f02002/f02002prj/f02002prj.component';
+import { F02002roleComponent } from './f02002/f02002role/f02002role.component';
+import { ConfirmComponent } from './common-lib/confirm/confirm.component';
 
 export const TW_FORMATS = {
   parse: {
@@ -88,7 +99,18 @@ export const TW_FORMATS = {
     F01003scn2wopenComponent,
     F01003scn3wopenComponent,
     F01000Component,
-    F01000confirmComponent
+    F01000confirmComponent,
+    F02001Component,
+    F02002Component,
+    F02003Component,
+    F02001addComponent,
+    F02001editComponent,
+    F02002addComponent,
+    F02002amtComponent,
+    F02002editComponent,
+    F02002prjComponent,
+    F02002roleComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,

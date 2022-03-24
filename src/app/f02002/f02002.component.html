@@ -1,0 +1,197 @@
+<!-- 頁面背景 -->
+<div class="line_bank_bankground_color">
+  <br>
+  <div class="line_bank_card_no_padding">
+    <div nz-row>
+      <div nz-col nzSpan="4">
+        <div style="padding:10px"><span class="form-title">員工編號：</span><input style="display: block;"
+            [(ngModel)]="empNoValue" name="empNoValue"></div>
+      </div>
+      <div nz-col nzSpan="4">
+        <div style="padding:10px"><span class="form-title">員工姓名：</span><input style="display: block;"
+            [(ngModel)]="empNameValue" name="empNameValue"></div>
+      </div>
+      <div nz-col nzSpan="4">
+        <div style="padding:10px"><span class="form-title">員工ID：</span><input style="display: block;"
+            [(ngModel)]="empIDValue" name="empIDValue"></div>
+      </div>
+      <div nz-col nzSpan="4">
+        <div style="padding:10px"><span class="form-title">是否在職：</span>
+          <mat-select [(ngModel)]="on_jobValue" name="on_jobValue">
+            <mat-option *ngFor="let code of on_jobCode" [value]="code.value">
+              {{code.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div nz-col nzSpan="4">
+        <div style="padding:10px"><span class="form-title">代理人：</span>
+          <mat-select [(ngModel)]="agent_empValue" name="agent_empValue">
+            <mat-option *ngFor="let code of agent_empCode" [value]="code.value">
+              {{code.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <div nz-col nzSpan="4">
+        <div style="padding:10px"><span class="form-title">是否停派：</span>
+          <mat-select [(ngModel)]="assign_stopValue" name="assign_stopValue">
+            <mat-option *ngFor="let code of assign_stopCode" [value]="code.value">
+              {{code.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </div>
+
+    <div nz-row *ngIf="!this.Maintainer">
+      <div nz-col nzSpan="6">
+        <div style="padding:10px"><span class="form-title">請假迄日：</span>
+          <nz-date-picker style="display:block" [(ngModel)]="levelStartDateString" name="levelStartDateString">
+          </nz-date-picker>
+        </div>
+      </div>
+
+      <div nz-col nzSpan="6">
+        <div style="padding:10px"><span class="form-title">請假起日種類：</span>
+          <mat-select [(ngModel)]="levelStartDateTypeValue" name="levelStartDateTypeValue">
+            <mat-option *ngFor="let code of levelStartDateTypeCode" [value]="code.value">
+              {{code.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <div nz-col nzSpan="6">
+        <div style="padding:10px"><span class="form-title">請假迄日：</span>
+          <nz-date-picker style="display:block" [(ngModel)]="levelEndDateString" name="levelEndDateString">
+          </nz-date-picker>
+        </div>
+      </div>
+
+      <div nz-col nzSpan="6">
+        <div style="padding:10px"><span class="form-title">請假迄日種類：</span>
+          <mat-select [(ngModel)]="levelEndDateTypeValue" name="levelEndDateTypeValue">
+            <mat-option *ngFor="let code of levelEndDateTypeCode" [value]="code.value">
+              {{code.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </div>
+
+    <div nz-row *ngIf="this.Maintainer">
+      <div nz-col nzFlex="6">
+        <div style="padding:10px"><span class="form-title">請假迄日：</span>
+          <nz-date-picker style="display:block" [(ngModel)]="levelStartDateString" name="levelStartDateString">
+          </nz-date-picker>
+        </div>
+      </div>
+
+      <div nz-col nzFlex="6">
+        <div style="padding:10px"><span class="form-title">請假起日種類：</span>
+          <mat-select [(ngModel)]="levelStartDateTypeValue" name="levelStartDateTypeValue">
+            <mat-option *ngFor="let code of levelStartDateTypeCode" [value]="code.value">
+              {{code.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <div nz-col nzFlex="6">
+        <div style="padding:10px"><span class="form-title">請假迄日：</span>
+          <nz-date-picker style="display:block" [(ngModel)]="levelEndDateString" name="levelEndDateString">
+          </nz-date-picker>
+        </div>
+      </div>
+
+      <div nz-col nzFlex="6">
+        <div style="padding:10px"><span class="form-title">請假迄日種類：</span>
+          <mat-select [(ngModel)]="levelEndDateTypeValue" name="levelEndDateTypeValue">
+            <mat-option *ngFor="let code of levelEndDateTypeCode" [value]="code.value">
+              {{code.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+
+      <div nz-col nzFlex="4">
+        <div style="padding:10px"><span class="form-title">密碼</span><input [type]="hide ? 'password' : 'text'"
+            style="width: 80%;" [(ngModel)]="f03006word" name="password" maxlength="15">
+          <fa-icon style="padding:5px" class="icon_size" matSuffix (click)="hide = !hide"
+            [icon]="['fas', hide ?'eye-slash':'eye']"></fa-icon>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="padding-bottom: 20px; margin-top: 20px; z-index:90;text-align: center">
+      <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" [disabled]="this.Maintainer"
+        (click)="addNew()">新增</button>
+      <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="changeSelect()">查詢</button>
+      <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="Clear()">清除資料</button>
+      <button *ngIf="this.Maintainer" nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px"
+        (click)="editPassword()">修改密碼</button>
+    </div>
+  </div>
+
+
+  <!-- 最外層卡片包覆 -->
+  <div class="line_bank_card_no_padding">
+
+    <nz-table nzShowSizeChanger [nzData]="employeeSource.data" [nzFrontPagination]="false" [nzSimple]="true"
+      [nzLoading]="loading" [nzTotal]="total" [nzPageSize]="pageSize" [nzPageIndex]="pageIndex"
+      (nzQueryParams)="onQueryParamsChange($event)" nzSize="small" nzTitle="組織人員維護">
+      <thead>
+        <tr>
+          <th class="table-header">員工編號</th>
+          <th class="table-header">員工姓名</th>
+          <th class="table-header">員工ID</th>
+          <th class="table-header">是否在職</th>
+          <th class="table-header">代理人</th>
+          <th class="table-header">電子信箱</th>
+          <th class="table-header">請假設定</th>
+          <th class="table-header">是否停派</th>
+          <th class="table-header">角色</th>
+          <th class="table-header">編輯</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of employeeSource.data">
+          <td class="table-data">{{ data.EMP_NO }}</td>
+          <td class="table-data">{{ data.EMP_NAME }}</td>
+          <td class="table-data">{{ data.EMP_ID }}</td>
+          <td class="table-data">{{ getOptionDesc(on_jobCode, data.ON_JOB) }}</td>
+          <td class="table-data">{{ getOptionDesc(agent_empCode, data.AGENT_EMP) }}</td>
+          <td class="table-data">{{ data.EMAIL }}</td>
+          <td class="table-data">{{ getlevelDateData(data.LEAVE_STARTDATE|
+            date:"yyyy-MM-dd",data.LEAVE_STARTDATE_TYPE,data.LEAVE_ENDDATE| date:"yyyy-MM-dd",data.LEAVE_ENDDATE_TYPE)
+            }}</td>
+          <td class="table-data">{{ getOptionDesc(assign_stopCode, data.ASSIGN_STOP) }}</td>
+          <td class="table-data" style="text-align: center;">
+            <button nz-button [nzSize]="'small'" nzType="primary" [disabled]="this.Maintainer" (click)="setRoleNo
+            (data.EMP_NO, data.ROLE_NO)">角色</button>
+          </td>
+          <td class="table-data" style="text-align: center;">
+            <button [disabled]="this.Maintainer" nz-button nz-dropdown [nzSize]="'small'" nzType="primary"
+              [nzDropdownMenu]="menu4">
+              選項
+              <i nz-icon nzType="down"></i>
+            </button>
+            <nz-dropdown-menu #menu4="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item (click)="startEdit(
+                data.EMP_NO, data.EMP_NAME,data.EMP_ID, data.ON_JOB,data.AGENT_EMP, data.EMAIL,
+                data.LEAVE_STARTDATE,data.LEAVE_ENDDATE,data.LEAVE_STARTDATE_TYPE,
+                data.LEAVE_ENDDATE_TYPE, data.ASSIGN_STOP,data.ASSIGN_PROJECTNO)">編輯</li>
+                <li nz-menu-item (click)="startAmt(data.EMP_NO )">產品及授權額度</li>
+              </ul>
+            </nz-dropdown-menu>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

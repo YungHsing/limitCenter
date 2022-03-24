@@ -1,0 +1,74 @@
+<div class="line_bank_card_no_padding" style="min-height:170px">
+  <div class="line_bank_form_header_title">系統代碼維護-新增</div>
+  <div class="container" style="padding:20px">
+    <form class="mat-dialog-content" #formControl="ngForm">
+
+      <div nz-row>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">類別</span>
+              <input matInput #input class="form-control" [(ngModel)]="data.codeType" name="codeType" disabled>
+              <mat-error *ngIf="formControl.invalid && (data.codeType=='' || data.codeType== null) ">{{getErrorMessage()}}</mat-error>
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">代碼</span>
+              <input matInput #input class="form-control" [(ngModel)]="data.codeNo" name="codeNo" required>
+              <mat-error *ngIf="formControl.invalid && (data.codeNo=='' || data.codeNo== null) ">{{getErrorMessage()}}</mat-error>
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">描述</span>
+              <input matInput #input class="form-control" [(ngModel)]="data.codeDesc" name="codeDesc" required maxlength="200">
+              <mat-error *ngIf="formControl.invalid && (data.codeDesc=='' || data.codeDesc== null) ">{{getErrorMessage()}}</mat-error>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div nz-row>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">排序</span>
+              <input matInput #input class="form-control" [(ngModel)]="data.codeSort" name="codeSort" required maxlength="3">
+              <mat-error *ngIf="formControl.invalid && (data.codeSort=='' || data.codeSort== null) ">{{getErrorMessage()}}</mat-error>
+              <p style="color: red;" [hidden]="hidden">請輸入數字</p>
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">備註</span>
+              <input matInput #input class="form-control" [(ngModel)]="data.codeTag" name="codeTag" maxlength="500">
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <div class="form" style="padding:20px">
+            <div><span class="form-title-actions">暫停使用</span>
+              <mat-select [(ngModel)]="data.codeFlag" name="codeFlag">
+                <mat-option *ngFor="let code of ynCode" [value]="code.value">
+                  {{code.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formControl.invalid && (data.codeFlag=='' || data.codeFlag== null) ">{{getErrorMessage()}}</mat-error>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div mat-dialog-actions style="margin:0 auto;width:12vw;">
+        <button nz-button [nzSize]="'middle'" nzType="primary" [disabled]="!formControl.valid"
+          style="margin:0px 5px" (click)="confirmAdd()">儲存</button>
+        <button nz-button [nzSize]="'middle'" nzType="primary" (click)="onNoClick()" tabindex="-1"
+          style="margin:0px 5px">取消</button>
+      </div>
+      <br><br>
+    </form>
+  </div>
+</div>
+

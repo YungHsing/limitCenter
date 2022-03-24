@@ -1,0 +1,69 @@
+<div class="line_bank_card_no_padding">
+  <div class="line_bank_form_header_title">組織人員維護-派件專案</div>
+  <nz-table [nzData]="data.SOURCE" [nzFrontPagination]="false" [nzSimple]="true">
+    <thead>
+      <tr>
+        <th style="width:100px" class="table-header">
+          <div>
+            <mat-checkbox color="primary" (change)="setAll($event.checked)">全選</mat-checkbox>
+          </div>
+        </th>
+        <th style="width:200px" class="table-header">專案代碼</th>
+        <th style="width:200px" class="table-header">專案名稱</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="table-data">
+          <div nz-row>
+            <label nz-checkbox [(ngModel)]="data.CHECKBOX[0].completed" name={{data.CHECKBOX[0].completed}}></label>
+          </div>
+        </td>
+        <td class="table-data">90001</td>
+        <td class="table-data">循環型產品1</td>
+      </tr>
+      <tr>
+        <td class="table-data">
+          <div nz-row>
+            <label nz-checkbox [(ngModel)]="data.CHECKBOX[0].completed" name={{data.CHECKBOX[0].completed}}></label>
+          </div>
+        </td>
+        <td class="table-data">90002</td>
+        <td class="table-data">循環型產品2</td>
+      </tr>
+      <tr>
+        <td class="table-data">
+          <div nz-row>
+            <label nz-checkbox [(ngModel)]="data.CHECKBOX[0].completed" name={{data.CHECKBOX[0].completed}}></label>
+          </div>
+        </td>
+        <td class="table-data">90003</td>
+        <td class="table-data">循環型產品3</td>
+      </tr>
+      <tr>
+        <td class="table-data">
+          <div nz-row>
+            <label nz-checkbox [(ngModel)]="data.CHECKBOX[0].completed" name={{data.CHECKBOX[0].completed}}></label>
+          </div>
+        </td>
+        <td class="table-data">80001</td>
+        <td class="table-data">分期型產品1</td>
+      </tr>
+      <tr>
+        <td class="table-data">
+          <div nz-row>
+            <label nz-checkbox [(ngModel)]="data.CHECKBOX[0].completed" name={{data.CHECKBOX[0].completed}}></label>
+          </div>
+        </td>
+        <td class="table-data">80002</td>
+        <td class="table-data">分期型產品2</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <div mat-dialog-actions style="margin:0 auto;width:12vw;">
+    <button nz-button [nzSize]="'middle'" nzType="primary" [mat-dialog-close]="1" style="margin:0px 5px"
+      (click)="confirmAdd()">儲存</button>
+    <button nz-button [nzSize]="'middle'" nzType="primary" (click)="onNoClick()" tabindex="-1"
+      style="margin:0px 5px">取消</button>
+  </div>
+</div>

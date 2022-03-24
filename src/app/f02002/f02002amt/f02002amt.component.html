@@ -1,0 +1,26 @@
+<div class="line_bank_card_no_padding" style="max-height: 70vh;">
+  <div class="line_bank_form_header_title">組織人員維護-產品及授權額度 </div>
+  <nz-table [nzData]="data.SOURCE" [nzFrontPagination]="false" [nzSimple]="true">
+    <thead>
+      <tr>
+        <th style="width:200px" class="table-header">產品代碼</th>
+        <th style="width:600px" class="table-header">產品名稱</th>
+        <th style="width:600px" class="table-header">額度</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data.SOURCE; let i = index;">
+        <td class="table-data">{{ row.PROD_CODE }}</td>
+        <td class="table-data">{{ row.PROD_NAME }}</td>
+        <td class="table-data"><input style="display: block;  text-align: right;" placeholder="請輸入金額"
+            [(ngModel)]="row.MAX_APPROVE_AMT" [value]=" row.MAX_APPROVE_AMT" name="MAX_APPROVE_AMT" maxlength="10"
+            (keyup)="row.MAX_APPROVE_AMT=limit(row.MAX_APPROVE_AMT)"></td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <div style="text-align: center;padding:10px">
+    <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="confirmAdd()">儲存</button>
+    <button nz-button [nzSize]="'middle'" nzDanger (click)="onNoClick()" tabindex="-1"
+      style="margin:0px 5px">取消</button>
+  </div>
+</div>

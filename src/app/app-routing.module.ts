@@ -11,6 +11,9 @@ import { F01003scn3Component } from './f01003/f01003scn3/f01003scn3.component';
 import { F01003scn4Component } from './f01003/f01003scn4/f01003scn4.component';
 import { F01004Component } from './f01004/f01004.component';
 import { F01005Component } from './f01005/f01005.component';
+import { F02001Component } from './f02001/f02001.component';
+import { F02002Component } from './f02002/f02002.component';
+import { F02003Component } from './f02003/f02003.component';
 import { F03004Component } from './f03004/f03004.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -91,6 +94,18 @@ const routes: Routes = [
       },
       {
         path: 'F02001',
+        component: F02001Component
+      },
+      {
+        path: 'F02002',
+        component: F02002Component
+      },
+      {
+        path: 'F02003',
+        component: F02003Component
+      },
+      {
+        path: 'F03004',
         component: F03004Component
       }
     ]

@@ -1,24 +1,220 @@
-.f02_th{
-  font-size: 20px;
-  padding: 20px 20px;
+/* 格線切版背景 */
+mat-grid-tile {
+  background: white;
+}
+/* 表格標題樣式 */
+::ng-deep.ant-table.ant-table-small .ant-table-title{
+  color:#2E4765;
+  font-size:16px;
+  padding:5px 5px 5px 10px;
+  border-radius:5px 5px 0 0;
+  background-color:#BFECD0;
+  opacity: 1;
+  font-weight: bold;
+  text-align: left;
+  border: 1px solid #DBDBDB;
+}
+/* 表格表頭樣式 */
+.table-header{
+  background-color:#ededed;
+  color:#848E9C;
+  margin-bottom: 1px;
+  font-size: 14px;
+}
+/* 表格內容樣式 */
+.table-data{
+  background-color:white;
+  border: 1px solid #e8e8e8;
+  color:rgb(87, 87, 87);
+  margin-bottom: 0px;
+  font-size: 5px;
+}
+/* 表單輸入欄 */
+input{
+  background-color:white;
+  border-radius: 5px;
+  height:30px;
+  width:100%;
+  border: 1px solid #c9c9c9;
+}
+/* 表單標題 */
+.form-title{
+  color:#2E4765;
+  font-weight: bold;
+  margin-bottom:5px;
+  display:block;
 }
 
-th{
-  font-size: 15px;
+.form-title-actions{
+  color:#2E4765;
+  font-weight: 500;
+  display:block;
 }
 
-td{
-  font-size: 15px;
+/* 功能按鈕樣式 */
+.ant-btn-primary{
+  color:#24C875;
+  background:white;
+  border-color:#24C875;
+  border-radius:5px;
+
+}
+.ant-btn-primary:hover{
+  color:#ffffff;
+  background:#24C875;
+  border-color:#24C875;
+  border-radius:5px;
+  box-shadow:0 2px 0 rgb(0 0 0 / 5%);
+}
+.ant-btn-primary:active{
+  color:#ffffff;
+  background:#24C875;
+  border-color:#24C875;
+  border-radius:5px;
 }
 
-.matCard{
-  box-shadow: 5px 5px 5px 5px dimgray;
+.mat-dialog-actions{
+  padding-left:20px;
 }
 
-mat-card-content{
-  background-color: linen;
+/* title和input為一個form */
+.form{
+  padding:10px;
+}
+/* 隔線系統強制拓寬 */
+/* ::ng-deep.ant-row{
+  display:block;
+} */
+/* 輸入區樣式 */
+.input-textarea{
+  width: 100%;
+  height:200px;
+  background-color:white;
+  border-radius:5px;
+  border:1px solid #c9c9c9;
+}
+/* 下拉選單樣式 */
+.input-select{
+  width:100%;
+  height:35px;
+  border-radius:10px;
+  border:1px solid #c2c2c2;
+  padding:10px;
+  background-color:white
 }
 
-button{
-  margin-right: 5px;
+::ng-deep.ant-select:not(.ant-select-customize-input) .ant-select-selector{
+  width:100%;
+  border:none;
+  background-color:#e6e6e6;
+  border-radius: 10px;
+
+}
+.button-group{
+  padding:10px;
+}
+/* disabled樣式*/
+input:disabled{
+  color: darkgrey;
+  background-color:#E6E6E6
+}
+/* 11/10 update */
+#test{
+  color:#24C875;
+  font-size:12px;
+  background:white;
+  border-color:#24C875;
+  border-radius:5px;
+
+}
+
+#test:hover{
+  color:#ffffff;
+  background:#24C875;
+  border-color:#24C875;
+  border-radius:5px;
+  box-shadow:0 2px 0 rgb(0 0 0 / 5%);
+}
+#test:active{
+  color:#ffffff;
+  background:#24C875;
+  border-color:#24C875;
+  border-radius:5px;
+
+}
+#input{
+  background-color:#ffffff;
+  border-radius: 5px;
+  height:20px;
+  width:95%;
+  font-size:10px;
+  border: 1px solid #c2c2c2;
+}
+.mat-select{
+  width:100%;
+  display:inline-block;
+  height:30px;
+  font-size:14px;
+  border-radius:5px;
+  border:1px solid #c9c9c9;
+  padding:4px;
+  background-color:#ffffff;
+}
+.search_row_header{
+  width:95%;
+  position: relative;
+  top:10px;
+  z-index:10;
+  /* margin-bottom: 10px; */
+  text-align: center;
+  margin:0 auto;
+  color:#2E4765;
+  border-radius: 10px 10px 0px 0px;
+  box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
+  background-color: #BFECD0;
+  padding:10px 0;
+}
+.search_row{
+  width:100%;
+  margin:0 auto;
+}
+/* .tabs_row{
+  box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
+  background-color: #96CABC;
+  border-radius:10px
+} */
+.mat-select{
+  width:100%;
+  display:inline-block;
+  height:30px;
+  font-size:14px;
+  border-radius:5px;
+  border:1px solid #c9c9c9;
+  padding:4px;
+  background-color:#ffffff;
+}
+:host::ng-deep.mat-select-value{
+  color:gray;
+}
+.table-data{
+  font-size: 12px;
+  border:1px solid #e8e8e8;
+  background-color: white;
+  color: rgba(87,87,87);
+  margin-bottom: 0px;
+}
+:host::ng-deep.ant-table.ant-table-small .ant-table-tbody>tr>td{
+  padding:0px;
+}
+
+.form-title{
+  color:#2E4765;
+  font-weight: 500;
+  text-align:left;
+  width:88%;
+  margin:0 auto;
+  display:block;
+}
+:host::ng-deep.ant-table{
+  border-radius:10px;
 }

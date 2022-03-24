@@ -1,0 +1,59 @@
+<!-- 頁面背景 -->
+<div class="line_bank_bankground_color">
+  <!-- 最外層卡片包覆 -->
+  <br>
+  <div class="line_bank_card_no_padding">
+    <div nz-row >
+      <div nz-col nzSpan="3">
+        <div style="padding:10px"><span class="form-title">代碼類別</span>
+          <mat-select [(ngModel)]="selectedValue" name="sysCode" (ngModelChange)="changeSelect()">
+            <mat-option *ngFor="let code of sysCode" [value]="code.value">
+              {{code.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div nz-col nzSpan="3">
+        <div style="padding-left: 12px; margin-top: 28px;">
+          <button nz-button id="test" [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="addNew()">新增</button>
+          <button nz-button id="test" [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="Clear()">清除資料</button>
+        </div>
+      </div>
+      <div nz-col nzSpan="12"></div>
+    </div>
+  </div>
+  <!-- 最外層卡片包覆 -->
+  <div class="line_bank_card_no_padding">
+    <!-- 表格 -->
+    <nz-table nzShowSizeChanger [nzFrontPagination]="false" [nzPageSizeOptions]="true" [nzData]="newData" [nzSimple]="true"
+      [nzTotal]="total" [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" (nzQueryParams)="onQueryParamsChange($event)"
+      nzSize="small" nzTitle="系統代碼維護">
+      <thead style="max-height: 100vh;">
+        <tr>
+          <th class="table-header">類別</th>
+          <th class="table-header">代碼</th>
+          <th class="table-header">描述</th>
+          <th class="table-header">排序</th>
+          <th class="table-header">備註</th>
+          <th class="table-header">是否停用</th>
+          <th class="table-header">編輯</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of newData">
+          <td class="table-data">{{ data.codeType }}</td>
+          <td class="table-data">{{ data.codeNo }}</td>
+          <td class="table-data">{{ data.codeDesc }}</td>
+          <td class="table-data">{{ data.codeSort }}</td>
+          <td class="table-data">{{ data.codeTag }}</td>
+          <td class="table-data">{{ data.codeFlag }}</td>
+          <td class="table-data" style="text-align: center;">
+            <button id="test" nz-button [nzSize]="'small'" nzType="primary" (click)="startEdit(
+        data.codeType, data.codeNo, data.codeDesc, data.codeSort, data.codeTag, data.codeFlag)">編輯</button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+

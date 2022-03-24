@@ -1,0 +1,50 @@
+<!-- 頁面背景 -->
+<div class="line_bank_bankground_color">
+  <br>
+  <div class="line_bank_card_no_padding">
+    <!-- <div class="line_bank_form_header_title">角色功能維護</div> -->
+    <div nz-row>
+      <div nz-col nzSpan="3">
+        <div style="padding:10px"><span class="form-title">請選擇角色：</span>
+          <mat-select [(ngModel)]="selectedValue" name="sysCode" (ngModelChange)="changeSelect()">
+            <mat-option *ngFor="let code of sysCode" [value]="code.value">
+              {{code.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div nz-col nzSpan="3">
+        <div style="padding-left: 20px; margin-top: 28px;">
+          <button nz-button [nzSize]="'middle'" nzType="primary" style="margin:0px 5px" (click)="save()">儲存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 最外層卡片包覆 -->
+  <div class="line_bank_card_no_padding">
+    <nz-table nzShowSizeChanger [nzData]="roleFunctionSource.data" [nzFrontPagination]="false" [nzSimple]="true"
+      nzSize="small" nzTitle="角色功能維護">
+      <thead>
+        <tr>
+          <th class="table-header">
+            <mat-checkbox color="primary" [(ngModel)]="isAllCheck" (change)="setAll($event.checked)">全選</mat-checkbox>
+          </th>
+          <th class="table-header">功能名稱</th>
+          <th class="table-header">程式代碼</th>
+          <th class="table-header">程式名稱</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of roleFunctionSource.data; let i = index;">
+          <td class="table-data">
+            <mat-checkbox [(ngModel)]="chkArray[i].completed" color="primary"></mat-checkbox>
+          </td>
+          <td class="table-data">{{ data.CODE_DESC }}</td>
+          <td class="table-data">{{ data.FN_NO }}</td>
+          <td class="table-data">{{ data.FN_DESC }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
