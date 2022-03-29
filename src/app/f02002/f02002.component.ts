@@ -315,7 +315,7 @@ export class F02002Component implements OnInit {
   }
   //產品及授權額度
   async startAmt(empNo: string) {
-    const baseUrl = 'f03/f03006action8'
+    const baseUrl = 'f02/f02002action8'
     let jsonObject: any = {}
     jsonObject['empNo'] = empNo //員工編號
     console.log(empNo)

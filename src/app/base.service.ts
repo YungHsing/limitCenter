@@ -80,10 +80,12 @@ export class BaseService {
 
    //================下方是提供JSON使用========================================
    protected postJsonObject(baseUrl: string, json: JSON) {
+     json['userId'] = this.getEmpNO();
     return this.httpClient.post<any>(environment.allowOrigin + '/' + baseUrl, json);
   }
 
   private async saveOrEditWithJson(baseUrl: string, json: JSON) {
+    json['userId'] = this.getEmpNO();
     return await this.postJsonObject(baseUrl, json).toPromise();
   }
 
